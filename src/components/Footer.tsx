@@ -7,31 +7,19 @@ export default function Footer(): JSX.Element {
         <section>
           <h2 className="font-display text-[2rem] text-ivory">Murray Legal</h2>
           <span className="mt-4 block h-[2px] w-6 bg-gold" aria-hidden="true" />
-          <p className="mt-4 text-[0.85rem] leading-7 text-stone/60">
-            Boutique legal counsel in Yonkers and New York for real estate, business matters, and high-stakes
-            litigation strategy.
+          <p className="mt-4 text-[0.85rem] leading-7 text-stone/70">
+            Boutique legal counsel in Yonkers and New York for real estate, business law, corporate governance, civil
+            litigation, and personal injury matters.
           </p>
           <p className="mt-4 text-[0.85rem] text-stone/70">
             Phone:{' '}
             <a href="tel:+19145550199" aria-label="Call Murray Legal" className="text-stone/80 hover:text-gold">
-              (914) 555-0199 (UPDATE THIS)
+              (914) 555-0199
             </a>
           </p>
           <p className="text-[0.85rem] text-stone/70">
             Email:{' '}
             <a href="mailto:info@murraylegal.com" aria-label="Email Murray Legal" className="text-stone/80 hover:text-gold">
-              info@murraylegal.com
-            </a>
-          </p>
-          <p className="mt-4 text-sm">
-            Phone:{' '}
-            <a aria-label="Call Murray Legal" href="tel:+19145550199">
-              (914) 555-0199
-            </a>
-          </p>
-          <p className="text-sm">
-            Email:{' '}
-            <a aria-label="Email Murray Legal" href="mailto:info@murraylegal.com">
               info@murraylegal.com
             </a>
           </p>
@@ -56,13 +44,8 @@ export default function Footer(): JSX.Element {
               </Link>
             </li>
             <li>
-              <Link ariaLabel="Entertainment Law" to="/entertainment-law">
-                Entertainment Law
-              </Link>
-            </li>
-            <li>
-              <Link ariaLabel="Sports Transactions" to="/sports-transactions">
-                Sports Transactions
+              <Link ariaLabel="Personal Injury" to="/civil-litigation">
+                Personal Injury
               </Link>
             </li>
           </ul>
@@ -71,6 +54,11 @@ export default function Footer(): JSX.Element {
         <section>
           <h3 className="text-lg font-semibold text-ivory">Quick Links</h3>
           <ul className="mt-3 space-y-2 text-sm">
+            <li>
+              <Link ariaLabel="About Murray Legal" to="/about">
+                About
+              </Link>
+            </li>
             <li>
               <Link ariaLabel="Frequently asked questions" to="/faq">
                 FAQ
@@ -82,14 +70,9 @@ export default function Footer(): JSX.Element {
               </Link>
             </li>
             <li>
-              <a
-                aria-label="Disclaimer"
-                href="https://murraylegal.com/disclaimer"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link ariaLabel="Disclaimer" to="/disclaimer">
                 Disclaimer
-              </a>
+              </Link>
             </li>
           </ul>
         </section>
@@ -102,7 +85,7 @@ export default function Footer(): JSX.Element {
             <li>Greater New York</li>
           </ul>
           <div className="mt-5 border border-[rgba(184,151,42,0.25)] p-4 text-[0.8rem] italic text-stone/50">
-            Licensed to practice law in the State of New York
+            Licensed to practice law in the State of New York.
           </div>
         </section>
       </div>

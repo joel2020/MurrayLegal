@@ -42,26 +42,17 @@ export default function Contact(): JSX.Element {
     <main className="bg-ivory px-4 py-14 md:px-6">
       <SEOHead
         title="Contact Murray Legal | Schedule a Consultation"
-        description="Contact Murray Legal to schedule a consultation for real estate, corporate law, civil litigation, entertainment law, or sports transactions in New York."
+        description="Contact Murray Legal to request a consultation for real estate, business law, corporate governance, civil litigation, or personal injury matters in New York."
         canonical="https://murraylegal.com/contact"
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
-          name: 'Murray Legal',
-          address: {
-            '@type': 'PostalAddress',
-            streetAddress: '45 Main Street, Suite 800',
-            addressLocality: 'Yonkers',
-            addressRegion: 'NY',
-            postalCode: '10701',
-            addressCountry: 'US',
-          },
-          telephone: '+1-914-555-0199',
-          email: 'info@murraylegal.com',
-        }}
       />
       <section className="mx-auto max-w-6xl">
         <h1 className="font-display text-5xl text-navy">Schedule a Consultation</h1>
+        <p className="mt-4 max-w-3xl text-text-muted">
+          Use the form below to describe your legal matter and request a consultation. All inquiries are confidential.
+          Submitting this form does not create an attorney-client relationship. Murray Legal will respond within one
+          business day — sooner for matters marked urgent.
+        </p>
+
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <section className="rounded-md bg-white p-8 shadow-soft">
             <h2 className="font-display text-3xl text-navy">Contact Form</h2>
@@ -75,12 +66,7 @@ export default function Contact(): JSX.Element {
                 {errorMessage}
               </p>
             )}
-            <form
-              action={FORMSPREE_ENDPOINT}
-              method="POST"
-              onSubmit={handleSubmit}
-              className="mt-5 space-y-4"
-            >
+            <form action={FORMSPREE_ENDPOINT} method="POST" onSubmit={handleSubmit} className="mt-5 space-y-4">
               <label className="block text-sm font-medium text-text-dark">
                 Name
                 <input
@@ -120,10 +106,21 @@ export default function Contact(): JSX.Element {
                   required
                 >
                   <option>Real Estate</option>
-                  <option>Corporate Law</option>
+                  <option>Business Law</option>
                   <option>Civil Litigation</option>
-                  <option>Entertainment/Sports</option>
+                  <option>Personal Injury</option>
                   <option>Other</option>
+                </select>
+              </label>
+              <label className="block text-sm font-medium text-text-dark">
+                Urgency
+                <select
+                  aria-label="Urgency"
+                  className="mt-1 min-h-11 w-full rounded-sm border border-stone px-3"
+                  name="urgency"
+                >
+                  <option>Standard</option>
+                  <option>Urgent - Deadline Within 72 Hours</option>
                 </select>
               </label>
               <label className="block text-sm font-medium text-text-dark">
@@ -145,7 +142,14 @@ export default function Contact(): JSX.Element {
                 {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
             </form>
+
+            <div className="mt-8 grid gap-3 text-sm text-text-muted">
+              <p>✓ Confidential — Your inquiry is protected</p>
+              <p>✓ No obligation — A consultation is not a commitment</p>
+              <p>✓ Direct response — You hear from the attorney, not staff</p>
+            </div>
           </section>
+
           <section className="space-y-6">
             <article className="rounded-md bg-white p-8 shadow-soft">
               <h2 className="font-display text-3xl text-navy">Office Information</h2>
@@ -167,18 +171,6 @@ export default function Contact(): JSX.Element {
                 </a>
               </p>
               <p className="mt-2 text-text-muted">Hours: Monday–Friday, 8:30 AM–6:00 PM</p>
-            </article>
-            <p className="rounded-md bg-stone p-4 text-sm font-semibold text-navy">We respond within 24 hours.</p>
-            <article className="overflow-hidden rounded-md bg-white shadow-soft">
-              <iframe
-                title="Murray Legal Office Map"
-                aria-label="Map to Murray Legal office"
-                src="https://maps.google.com/maps?q=Yonkers%20NY&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="320"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
             </article>
           </section>
         </div>

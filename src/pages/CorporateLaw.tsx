@@ -1,81 +1,47 @@
 import ConsultationCTA from '../components/ConsultationCTA';
-import FAQAccordion from '../components/FAQAccordion';
 import SEOHead from '../components/SEOHead';
-import { Link } from '../lib/router';
 
-const faqItems = [
-  {
-    question: 'Should I form an LLC or corporation in New York?',
-    answer: 'Entity choice depends on governance, tax treatment, investment goals, and liability planning.',
-  },
-  {
-    question: 'Do you review operating agreements?',
-    answer:
-      'Yes. We draft and revise operating, shareholder, and partnership agreements for clarity and enforceability.',
-  },
-  {
-    question: 'Can you support acquisitions?',
-    answer: 'Yes. Murray Legal handles transaction structure, diligence, and acquisition documentation.',
-  },
-  {
-    question: 'What is corporate governance?',
-    answer:
-      'Governance is the system of decision-making, oversight, and fiduciary obligations for owners, boards, and officers.',
-  },
-  {
-    question: 'Do you provide ongoing general counsel support?',
-    answer:
-      'Yes. The firm provides outside counsel guidance for day-to-day contracts and strategic decisions.',
-  },
+const services = [
+  'LLC and corporation formation, NY filing and compliance',
+  'Operating agreements and shareholder agreements drafted for your specific ownership structure',
+  'Commercial contract drafting, review, and negotiation',
+  'Board governance frameworks and fiduciary duty guidance',
+  'Mergers, acquisitions, and asset purchase agreements',
+  'Officer and director liability analysis',
+  'Business succession planning',
 ];
 
 export default function CorporateLaw(): JSX.Element {
   return (
     <main className="bg-ivory px-4 py-14 md:px-6">
       <SEOHead
-        title="Corporate Law Attorney New York | Business Law | Murray Legal"
-        description="Murray Legal provides corporate and business law services in New York including formation, contracts, governance, and transactions."
+        title="Business Law Attorney Yonkers NY | Murray Legal"
+        description="Murray Legal advises businesses in Yonkers and New York on formation, governance, contracts, and corporate transactions. Contact us for a consultation."
         canonical="https://murraylegal.com/corporate-law"
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'LegalService',
-          name: 'Murray Legal',
-          serviceType: 'Corporate Law',
-        }}
       />
+
       <section className="mx-auto max-w-6xl">
-        <h1 className="font-display text-5xl text-navy">Corporate Law Attorney in New York</h1>
+        <h1 className="font-display text-5xl text-navy">Business Law &amp; Corporate Governance Attorney in New York</h1>
+        <p className="mt-4 max-w-4xl leading-8 text-text-muted">
+          Every business — from a newly formed LLC to an established corporation — faces legal inflection points where
+          the right structure and documentation either protect the owners or expose them. Murray Legal advises
+          businesses across Yonkers, Westchester County, and New York on entity formation, governance, contract
+          negotiation, and transactional matters. The firm works closely with founders, officers, and shareholders to
+          build the legal frameworks that support growth, reduce conflict, and document ownership clearly. Whether you
+          are starting a new business, negotiating a commercial agreement, or managing a governance dispute, Murray
+          Legal provides direct senior counsel rather than handing matters to junior staff.
+        </p>
       </section>
-      <section className="mx-auto mt-10 max-w-6xl rounded-md bg-white p-8 shadow-soft">
-        <h2 className="font-display text-4xl text-navy">Services</h2>
-        <ul className="mt-4 list-disc space-y-2 pl-6 text-text-muted">
-          <li>Business formation (LLC, corporation, partnership)</li>
-          <li>Contract drafting, review, negotiation</li>
-          <li>Business acquisitions and mergers</li>
-          <li>Shareholder and operating agreements</li>
-          <li>Regulatory compliance</li>
-          <li>Corporate governance</li>
+
+      <section className="mx-auto mt-12 max-w-6xl rounded-md bg-white p-8 shadow-soft">
+        <h2 className="font-display text-4xl text-navy">Business Law &amp; Corporate Governance Services</h2>
+        <ul className="mt-6 list-disc space-y-3 pl-5 text-text-muted">
+          {services.map((service) => (
+            <li key={service}>{service}</li>
+          ))}
         </ul>
       </section>
-      <section className="mx-auto mt-10 max-w-6xl rounded-md bg-white p-8 shadow-soft">
-        <h2 className="font-display text-3xl text-navy">Related Services</h2>
-        <p className="mt-3 text-text-muted">
-          Looking for deeper support with board procedures, fiduciary obligations, and governance controls?
-        </p>
-        <Link
-          to="/corporate-law/corporate-governance"
-          ariaLabel="Corporate governance services"
-          className="mt-4 inline-block min-h-11 py-3 font-semibold text-navy"
-        >
-          Explore Corporate Governance →
-        </Link>
-      </section>
-      <section className="mx-auto mt-10 max-w-4xl">
-        <h2 className="font-display text-4xl text-navy">Corporate Law FAQ</h2>
-        <div className="mt-6">
-          <FAQAccordion items={faqItems} />
-        </div>
-      </section>
+
       <div className="mt-14">
         <ConsultationCTA />
       </div>

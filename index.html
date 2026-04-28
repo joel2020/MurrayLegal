@@ -1,34 +1,30 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!--
-      Structural notes:
-      - Places all crawler-facing metadata and structured data in the head for reliable SEO and AI parsing.
-      - Includes LegalService, FAQPage, and BreadcrumbList JSON-LD aligned to visible page content.
-    -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Murray Legal | Business Law, Real Estate & Civil Litigation Attorneys</title>
+    <title>Murray Legal | Real Estate Attorney, Corporate Law & Civil Litigation</title>
     <meta
       name="description"
-      content="Murray Legal provides expert legal services in business law, corporate governance, real estate including land use, commercial and residential transactions, and civil litigation including business disputes and personal injury."
+      content="Murray Legal is led by a Real Estate Attorney practice focused on land use, transactions, and commercial property matters, with additional services in corporate law, civil litigation, entertainment transactions, and sports transactions."
     />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://murraylegal.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://www.example.com/" />
 
-    <meta property="og:title" content="Murray Legal | Business Law, Real Estate & Civil Litigation Attorneys" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Murray Legal" />
+    <meta property="og:title" content="Murray Legal | Real Estate Attorney, Corporate Law & Civil Litigation" />
     <meta
       property="og:description"
-      content="Murray Legal provides expert legal services in business law, corporate governance, real estate including land use, commercial and residential transactions, and civil litigation including business disputes and personal injury."
+      content="Real Estate Attorney services for land use, transactions, commercial and residential property matters, with corporate law and civil litigation counsel."
     />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://murraylegal.com/" />
+    <meta property="og:url" content="https://www.example.com/" />
 
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Murray Legal | Business Law, Real Estate & Civil Litigation Attorneys" />
+    <meta name="twitter:title" content="Murray Legal | Real Estate Attorney, Corporate Law & Civil Litigation" />
     <meta
       name="twitter:description"
-      content="Murray Legal provides expert legal services in business law, corporate governance, real estate including land use, commercial and residential transactions, and civil litigation including business disputes and personal injury."
+      content="Murray Legal provides real estate, corporate law, civil litigation, entertainment transaction, and sports transaction legal services."
     />
 
     <script type="application/ld+json">
@@ -36,21 +32,45 @@
         "@context": "https://schema.org",
         "@type": "LegalService",
         "name": "Murray Legal",
-        "url": "https://murraylegal.com",
-        "description": "Murray Legal is a law firm focused on business law, corporate governance, real estate transactions and land use matters, and civil litigation including business disputes and personal injury.",
+        "url": "https://www.example.com/",
+        "description": "Murray Legal provides Real Estate Attorney services with emphasis on land use, zoning, commercial real estate, and transactions, plus corporate law, civil litigation, and entertainment and sports transactions.",
         "areaServed": "United States",
+        "telephone": "[INSERT PHONE]",
+        "email": "[INSERT EMAIL]",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "[INSERT ADDRESS]",
+          "addressLocality": "[INSERT CITY]",
+          "addressRegion": "[INSERT STATE]",
+          "postalCode": "[INSERT ZIP]",
+          "addressCountry": "US"
+        },
         "serviceType": [
-          "Business Law",
-          "Corporate Governance",
-          "Real Estate Law",
+          "Real Estate Attorney",
           "Land Use and Zoning",
           "Commercial Real Estate",
+          "Real Estate Transactions",
           "Residential Real Estate",
+          "Corporate Law",
+          "Business Law",
+          "Corporate Governance",
           "Civil Litigation",
-          "Business Dispute Resolution",
-          "Personal Injury Law"
-        ],
+          "Business Disputes",
+          "Personal Injury",
+          "Entertainment Transactions",
+          "Sports Transactions"
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Murray Legal",
+        "url": "https://www.example.com/",
         "telephone": "[INSERT PHONE]",
+        "email": "[INSERT EMAIL]",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "[INSERT ADDRESS]",
@@ -71,13 +91,31 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://murraylegal.com/"
+            "item": "https://www.example.com/#home"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Practice Areas",
-            "item": "https://murraylegal.com/#business-law"
+            "name": "Real Estate Attorney",
+            "item": "https://www.example.com/#real-estate-attorney"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Corporate Law",
+            "item": "https://www.example.com/#corporate-law"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Civil Litigation",
+            "item": "https://www.example.com/#civil-litigation"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Contact",
+            "item": "https://www.example.com/#contact"
           }
         ]
       }
@@ -90,42 +128,66 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What areas of business law does Murray Legal handle?",
+            "name": "What types of real estate matters does Murray Legal handle?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Murray Legal handles business formation, contract drafting and negotiation, business transactions, and M&A matters. The firm also provides compliance and regulatory guidance for operating businesses across multiple industries."
+              "text": "Murray Legal handles land use and zoning, commercial and residential purchase and sale transactions, leasing matters, title and due diligence review, and related property agreements."
             }
           },
           {
             "@type": "Question",
-            "name": "Does Murray Legal handle residential real estate closings?",
+            "name": "Can Murray Legal help with land use and zoning matters?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Murray Legal represents clients in residential purchase and sale transactions, including contract review and closing coordination. The firm also reviews title and due diligence materials to identify and address legal issues before closing."
+              "text": "Yes. The firm advises on permits, variances, zoning review, administrative process strategy, and project-related land use compliance issues."
             }
           },
           {
             "@type": "Question",
-            "name": "What types of civil litigation does Murray Legal take?",
+            "name": "Does Murray Legal handle commercial real estate transactions?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Murray Legal handles business disputes and personal injury litigation. Business matters include breach of contract, partnership disputes, shareholder litigation, and enforcement matters, while personal injury matters include negligence-based claims."
+              "text": "Yes. Murray Legal supports commercial acquisitions, dispositions, leasing, contract negotiation, and due diligence review for business-focused property transactions."
             }
           },
           {
             "@type": "Question",
-            "name": "Can Murray Legal help with land use permits and zoning variances?",
+            "name": "Does Murray Legal assist with residential real estate matters?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Murray Legal advises on land use and zoning matters, including permits, variances, appeals, and entitlement strategy. The firm supports clients through administrative review and project-specific compliance requirements."
+              "text": "Yes. The firm handles residential contract review, transaction support, and closing coordination as a supporting part of the real estate practice."
             }
           },
           {
             "@type": "Question",
-            "name": "Does Murray Legal handle personal injury cases?",
+            "name": "What corporate law services does Murray Legal provide?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Murray Legal handles personal injury claims involving motor vehicle accidents, premises liability, wrongful death, and other negligence claims. Representation includes liability analysis, damages development, and litigation support through resolution."
+              "text": "Murray Legal advises on business law, entity structuring, contract matters, governance documents, board process issues, and ongoing corporate governance obligations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What kinds of civil litigation does Murray Legal handle?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The civil litigation practice includes business disputes such as contract and ownership conflicts, as well as personal injury claims involving negligence-based losses."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Murray Legal handle entertainment and sports transactions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Murray Legal handles entertainment and sports transaction matters, including agreement drafting, negotiation support, and deal-structure review."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When should I contact an attorney during a real estate transaction?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Contact an attorney early, ideally before signing a letter of intent or contract, so legal issues can be identified and negotiated before commitments become difficult to change."
             }
           }
         ]

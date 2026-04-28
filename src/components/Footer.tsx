@@ -23,26 +23,74 @@ export default function Footer(): JSX.Element {
               info@murraylegal.com
             </a>
           </p>
+          <p className="mt-4 text-sm">
+            Phone:{' '}
+            <a aria-label="Call Murray Legal" href="tel:+19145550199">
+              (914) 555-0199
+            </a>
+          </p>
+          <p className="text-sm">
+            Email:{' '}
+            <a aria-label="Email Murray Legal" href="mailto:info@murraylegal.com">
+              info@murraylegal.com
+            </a>
+          </p>
         </section>
 
         <section>
-          <span className="section-label">Practice Areas</span>
-          <ul className="space-y-3 text-[0.85rem] text-stone/70">
-            <li><Link ariaLabel="Real Estate Attorney" to="/real-estate-attorney">Real Estate Attorney</Link></li>
-            <li><Link ariaLabel="Corporate Law" to="/corporate-law">Corporate Law</Link></li>
-            <li><Link ariaLabel="Civil Litigation" to="/civil-litigation">Civil Litigation</Link></li>
-            <li><Link ariaLabel="Entertainment Law" to="/entertainment-law">Entertainment Law</Link></li>
-            <li><Link ariaLabel="Sports Transactions" to="/sports-transactions">Sports Transactions</Link></li>
+          <h3 className="text-lg font-semibold text-ivory">Practice Areas</h3>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>
+              <Link ariaLabel="Real Estate Attorney" to="/real-estate-attorney">
+                Real Estate Attorney
+              </Link>
+            </li>
+            <li>
+              <Link ariaLabel="Corporate Law" to="/corporate-law">
+                Corporate Law
+              </Link>
+            </li>
+            <li>
+              <Link ariaLabel="Civil Litigation" to="/civil-litigation">
+                Civil Litigation
+              </Link>
+            </li>
+            <li>
+              <Link ariaLabel="Entertainment Law" to="/entertainment-law">
+                Entertainment Law
+              </Link>
+            </li>
+            <li>
+              <Link ariaLabel="Sports Transactions" to="/sports-transactions">
+                Sports Transactions
+              </Link>
+            </li>
           </ul>
         </section>
 
         <section>
-          <span className="section-label">Navigation</span>
-          <ul className="space-y-3 text-[0.85rem] text-stone/70">
-            <li><Link ariaLabel="Frequently asked questions" to="/faq">FAQ</Link></li>
-            <li><Link ariaLabel="Contact Murray Legal" to="/contact">Contact</Link></li>
-            <li><Link ariaLabel="Attorney Advertising Disclaimer" to="/disclaimer">Disclaimer</Link></li>
-            <li><Link ariaLabel="Privacy policy" to="/privacy-policy">Privacy Policy</Link></li>
+          <h3 className="text-lg font-semibold text-ivory">Quick Links</h3>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li>
+              <Link ariaLabel="Frequently asked questions" to="/faq">
+                FAQ
+              </Link>
+            </li>
+            <li>
+              <Link ariaLabel="Contact Murray Legal" to="/contact">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <a
+                aria-label="Disclaimer"
+                href="https://murraylegal.com/disclaimer"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Disclaimer
+              </a>
+            </li>
           </ul>
         </section>
 
@@ -58,12 +106,9 @@ export default function Footer(): JSX.Element {
           </div>
         </section>
       </div>
-
-      <div className="border-t-2 border-[rgba(184,151,42,0.2)] px-4 py-5 md:px-6">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 text-center text-[0.7rem] text-stone/50 md:flex-row md:text-left">
-          <p>© 2026 Murray Legal. All Rights Reserved.</p>
-          <p>Attorney Advertising. Prior results do not guarantee a similar outcome.</p>
-        </div>
+      <div className="border-t border-ivory/20 px-4 py-4 text-center text-xs text-stone">
+        Attorney Advertising. Prior results do not guarantee a similar outcome. © 2026 Murray Legal. All rights
+        reserved.
       </div>
     </footer>
   );

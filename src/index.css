@@ -1,16 +1,6 @@
-/*
-  Structural notes:
-  - Retains required Tailwind layers and sets restrained law-firm brand tokens.
-  - Adds base styles for smooth anchor scrolling, readable typography, and visible focus states.
-*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --color-brand-navy: #0f1f3d;
-  --color-brand-gold: #b8972a;
-}
 
 @layer base {
   html {
@@ -18,17 +8,38 @@
   }
 
   body {
-    @apply m-0 bg-stone-50 text-slate-900 antialiased;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
-      sans-serif;
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background-color: #f8f6f1;
+    color: #1a1a1a;
+    min-font-size: 16px;
   }
 
-  a {
-    @apply no-underline;
+  h1,
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  li,
+  a,
+  input,
+  textarea,
+  select,
+  button {
+    font-family: Inter, sans-serif;
   }
 
   a:focus-visible,
-  button:focus-visible {
-    @apply outline-none ring-2 ring-brand-gold ring-offset-2 ring-offset-white;
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #b8972a;
+    outline-offset: 2px;
   }
 }

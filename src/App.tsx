@@ -15,6 +15,7 @@ import EntertainmentLaw from './pages/EntertainmentLaw';
 import SportsTransactions from './pages/SportsTransactions';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
+import Disclaimer from './pages/Disclaimer';
 
 function NotFound(): JSX.Element {
   return (
@@ -46,6 +47,7 @@ export default function App(): JSX.Element {
     '/sports-transactions': <SportsTransactions />,
     '/faq': <FAQ />,
     '/contact': <Contact />,
+    '/disclaimer': <Disclaimer />,
   };
 
   return (

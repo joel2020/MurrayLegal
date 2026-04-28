@@ -4,7 +4,7 @@ import SEOHead from '../components/SEOHead';
 const sections = [
   {
     title: 'Attorney Advertising Notice',
-    body: 'Murray Legal is a law firm licensed to practice in the State of New York. This website constitutes attorney advertising under the New York Rules of Professional Conduct.',
+    body: 'Murray Legal is a law firm licensed to practice in the States of New York and Pennsylvania. This website constitutes attorney advertising under applicable Rules of Professional Conduct.',
   },
   {
     title: 'No Legal Advice',
@@ -16,7 +16,7 @@ const sections = [
   },
   {
     title: 'Jurisdictional Limitations',
-    body: 'Murray Legal is licensed to practice law in New York. If you are located outside New York, contact with this firm does not constitute legal representation, and the firm may not be licensed to practice in your jurisdiction.',
+    body: 'Murray Legal is licensed to practice law in New York and Pennsylvania. If you are located outside New York or Pennsylvania, contact with this firm does not constitute legal representation, and the firm may not be licensed to practice in your jurisdiction.',
   },
   {
     title: 'Contact',

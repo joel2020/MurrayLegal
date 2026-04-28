@@ -64,8 +64,8 @@ export default function Home(): JSX.Element {
 
       <section className="relative bg-navy text-ivory">
         <img
-          src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=1800&q=80"
-          alt="Yonkers New York skyline real estate attorney"
+          src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1800&q=80"
+          alt="Manhattan and Yonkers New York real estate attorney Murray Legal"
           width={1800}
           height={900}
           loading="lazy"
@@ -105,12 +105,40 @@ export default function Home(): JSX.Element {
         </div>
       </section>
 
-      <section className="bg-ivory px-4 py-16 md:px-6"><div className="mx-auto max-w-6xl"><h2 className="font-display text-4xl text-navy">Real Estate Attorney</h2><p className="mt-3 text-text-muted">New York real estate matters demand careful drafting, due diligence, regulatory alignment, and decisive advocacy.</p><div className="mt-8 grid gap-4 md:grid-cols-4">{[
-        ['Land Use', ['Variances and appeals', 'Permit strategy', 'Municipal approvals']],
-        ['Transactional', ['Contract drafting', 'Title and survey review', 'Closing support']],
-        ['Commercial', ['Lease negotiation', 'Development agreements', 'Construction contracts']],
-        ['Residential', ['Purchase and sale counsel', 'Co-op and condo closings', 'Deed and title issues']],
-      ].map(([title, bullets]) => (<article key={String(title)} className="rounded-md bg-white p-5 shadow-soft"><h3 className="text-lg font-semibold">{title}</h3><ul className="mt-3 list-disc pl-5 text-sm text-text-muted">{(bullets as string[]).map((bullet) => <li key={bullet}>{bullet}</li>)}</ul></article>))}</div></div></section>
+      <section className="bg-ivory px-4 py-16 md:px-6">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-display text-4xl text-navy">Real Estate Attorney</h2>
+          <p className="mt-3 text-text-muted">
+            New York real estate matters demand careful drafting, due diligence, regulatory alignment, and decisive
+            advocacy.
+          </p>
+          <img
+            src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80"
+            alt="Manhattan and Yonkers New York real estate attorney Murray Legal"
+            width={1200}
+            height={800}
+            loading="lazy"
+            className="mt-8 h-64 w-full rounded-md object-cover shadow-soft md:h-80"
+          />
+          <div className="mt-8 grid gap-4 md:grid-cols-4">
+            {[
+              ['Land Use', ['Variances and appeals', 'Permit strategy', 'Municipal approvals']],
+              ['Transactional', ['Contract drafting', 'Title and survey review', 'Closing support']],
+              ['Commercial', ['Lease negotiation', 'Development agreements', 'Construction contracts']],
+              ['Residential', ['Purchase and sale counsel', 'Co-op and condo closings', 'Deed and title issues']],
+            ].map(([title, bullets]) => (
+              <article key={String(title)} className="rounded-md bg-white p-5 shadow-soft">
+                <h3 className="text-lg font-semibold">{title}</h3>
+                <ul className="mt-3 list-disc pl-5 text-sm text-text-muted">
+                  {(bullets as string[]).map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="bg-stone px-4 py-16 md:px-6"><div className="mx-auto max-w-6xl"><h2 className="font-display text-4xl text-navy">Corporate Law & Business Governance</h2><p className="mt-3 text-text-muted">From entity formation to board-level governance and transaction structuring, Murray Legal provides disciplined corporate counsel.</p><ul className="mt-4 list-disc pl-6 text-sm text-text-muted"><li>Entity selection and formation</li><li>Commercial contract negotiation</li><li>Governance frameworks and fiduciary duties</li><li>Mergers, acquisitions, and operational agreements</li></ul></div></section>
 

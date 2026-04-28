@@ -13,14 +13,14 @@ export default function Footer(): JSX.Element {
           </p>
           <p className="mt-4 text-[0.85rem] text-stone/70">
             Phone:{' '}
-            <a href="tel:+19145550199" aria-label="Call Murray Legal" className="text-stone/80 hover:text-gold">
-              (914) 555-0199
+            <a href="tel:+19142141880" aria-label="Call Murray Legal" className="text-stone/80 hover:text-gold">
+              9142141880
             </a>
           </p>
           <p className="text-[0.85rem] text-stone/70">
             Email:{' '}
-            <a href="mailto:info@murraylegal.com" aria-label="Email Murray Legal" className="text-stone/80 hover:text-gold">
-              info@murraylegal.com
+            <a href="mailto:admin@murraylegalfirm.com" aria-label="Email Murray Legal" className="text-stone/80 hover:text-gold">
+              admin@murraylegalfirm.com
             </a>
           </p>
         </section>

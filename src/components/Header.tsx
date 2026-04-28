@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, usePathname } from '../lib/router';
 
-const PHONE = '(914) 555-0199';
+const PHONE = '9142141880';
 
 const navItems = [
   { label: 'About', href: '/about' },
@@ -74,7 +74,7 @@ export default function Header(): JSX.Element {
 
         <div className="hidden items-center gap-4 xl:flex">
           <a
-            href="tel:+19145550199"
+            href="tel:+19142141880"
             aria-label="Call Murray Legal"
             className="inline-flex items-center gap-2 py-2 text-[0.8rem] text-navy"
           >
@@ -122,7 +122,7 @@ export default function Header(): JSX.Element {
                 </Link>
               );
             })}
-            <a href="tel:+19145550199" aria-label="Call Murray Legal" className="w-full px-1 py-3 text-[0.8rem] text-navy">
+            <a href="tel:+19142141880" aria-label="Call Murray Legal" className="w-full px-1 py-3 text-[0.8rem] text-navy">
               ☎ {PHONE}
             </a>
             <Link to="/contact" ariaLabel="Schedule a consultation" className="btn-primary mt-2 w-full">

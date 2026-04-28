@@ -62,7 +62,7 @@ export default function Contact(): JSX.Element {
   };
 
   return (
-    <main className="bg-ivory px-4 py-14 md:px-6">
+    <main className="bg-ivory px-4 py-14 md:px-6 md:py-16">
       <SEOHead
         title="Contact Murray Legal | Schedule a Consultation"
         description="Contact Murray Legal to request a consultation for real estate, business law, corporate governance, and civil litigation matters in New York."
@@ -71,13 +71,13 @@ export default function Contact(): JSX.Element {
       />
       <section className="mx-auto max-w-6xl">
         <h1 className="font-display text-5xl text-navy">Schedule a Consultation</h1>
-        <p className="mt-4 max-w-3xl text-text-muted">
+        <p className="mt-4 max-w-3xl text-base leading-7 text-text-muted">
           Use the form below to describe your legal matter and request a consultation. All inquiries are confidential.
           Submitting this form does not create an attorney-client relationship.
         </p>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-2">
-          <section className="rounded-md bg-white p-8 shadow-soft">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <section className="rounded-md border border-[rgba(15,31,61,0.08)] bg-white p-6 shadow-soft sm:p-8">
             <h2 className="font-display text-3xl text-navy">Contact Form</h2>
             {isSuccess && (
               <p className="mt-5 rounded-sm border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
@@ -89,7 +89,7 @@ export default function Contact(): JSX.Element {
                 {errorMessage}
               </p>
             )}
-            <form method="POST" onSubmit={handleSubmit} className="mt-5 space-y-4">
+            <form method="POST" onSubmit={handleSubmit} className="mt-6 space-y-4">
               <input
                 type="text"
                 name="website"
@@ -166,7 +166,7 @@ export default function Contact(): JSX.Element {
               <button
                 aria-label="Submit contact form"
                 type="submit"
-                className="min-h-11 rounded-sm bg-gold px-6 py-3 font-semibold text-navy"
+                className="mt-2 min-h-11 w-full rounded-sm bg-gold px-6 py-3 text-center font-semibold text-navy sm:w-auto"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit'}
@@ -175,30 +175,36 @@ export default function Contact(): JSX.Element {
           </section>
 
           <section className="space-y-6">
-            <article className="rounded-md bg-white p-8 shadow-soft">
+            <article className="rounded-md border border-[rgba(184,151,42,0.3)] bg-gradient-to-b from-white to-stone p-6 shadow-soft sm:p-8">
               <h2 className="font-display text-3xl text-navy">Office Information</h2>
-              <p className="mt-3 text-text-muted">
+              <p className="mt-4 text-sm uppercase tracking-[0.08em] text-text-muted">Primary Office</p>
+              <p className="mt-1 text-text-muted">
                 {PRIMARY_ADDRESS_LINE_1}
                 <br />
                 {PRIMARY_CITY_STATE_ZIP}
-                <br />
+              </p>
+              <p className="mt-4 text-sm uppercase tracking-[0.08em] text-text-muted">Mailing Location</p>
+              <p className="mt-1 text-text-muted">
                 {SECONDARY_ADDRESS_LINE_1}
                 <br />
                 {SECONDARY_CITY_STATE_ZIP}
               </p>
-              <p className="mt-2 text-text-muted">
+              <p className="mt-5 text-text-muted">
                 Phone:{' '}
-                <a aria-label="Call Murray Legal" href={`tel:${PHONE_TEL}`}>
+                <a aria-label="Call Murray Legal" href={`tel:${PHONE_TEL}`} className="font-medium text-navy hover:text-gold">
                   {PHONE_DISPLAY}
                 </a>
               </p>
               <p className="text-text-muted">
                 Email:{' '}
-                <a aria-label="Email Murray Legal" href={`mailto:${EMAIL}`}>
+                <a aria-label="Email Murray Legal" href={`mailto:${EMAIL}`} className="font-medium text-navy hover:text-gold">
                   {EMAIL}
                 </a>
               </p>
               <p className="mt-2 text-text-muted">Hours: Monday–Friday, 8:30 AM–6:00 PM</p>
+              <div className="mt-6 border-l-2 border-gold pl-4 text-sm text-text-muted">
+                Confidential intake. Representation begins only after conflict check and signed engagement.
+              </div>
             </article>
           </section>
         </div>

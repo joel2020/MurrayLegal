@@ -35,10 +35,10 @@ export default function About(): JSX.Element {
         </article>
 
         <article className="rounded-md border border-gold/30 bg-navy-deep p-8 shadow-soft">
-          <h2 className="font-display text-3xl text-ivory">Attorney Credentials</h2>
+          <h2 className="font-display text-3xl text-ivory">Client Service Standards</h2>
           <p className="mt-3 text-stone/80">
-            Attorney credentials, admissions, and professional memberships will be added once finalized. For current
-            information, please contact Murray Legal directly.
+            Murray Legal emphasizes responsive communication, practical risk analysis, and direct attorney involvement
+            at each stage of a matter so clients can make informed decisions confidently.
           </p>
         </article>
 

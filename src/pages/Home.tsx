@@ -81,13 +81,13 @@ export default function Home(): JSX.Element {
             Murray Legal provides focused, attorney-led representation for property owners, businesses, and
             individuals navigating important legal matters across Westchester and greater New York.
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-wrap gap-4 max-sm:flex-col">
             <Link to="/contact" ariaLabel="Schedule a consultation" className="btn-primary">
               Schedule a Consultation
             </Link>
-            <Link to="#practice-areas" ariaLabel="View practice areas" className="btn-outline">
+            <a href="#practice-areas" aria-label="View practice areas" className="btn-outline text-center">
               View Practice Areas
-            </Link>
+            </a>
           </div>
         </div>
       </section>

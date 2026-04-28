@@ -4,11 +4,10 @@ import { Link, usePathname } from '../lib/router';
 const PHONE = '(914) 555-0199';
 
 const navItems = [
+  { label: 'About', href: '/about' },
   { label: 'Real Estate', href: '/real-estate-attorney' },
   { label: 'Corporate Law', href: '/corporate-law' },
   { label: 'Civil Litigation', href: '/civil-litigation' },
-  { label: 'Entertainment', href: '/entertainment-law' },
-  { label: 'Sports', href: '/sports-transactions' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contact', href: '/contact' },
 ];

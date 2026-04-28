@@ -1,0 +1,9 @@
+export const FIRM_NAME = 'Murray Legal';
+export const PHONE_DISPLAY = '(914) 214-1880';
+export const PHONE_TEL = '+19142141880';
+export const EMAIL = 'admin@murraylegalfirm.com';
+export const PRIMARY_ADDRESS_LINE_1 = '465 Tuckahoe Road #1246';
+export const PRIMARY_CITY_STATE_ZIP = 'Yonkers, NY 10710';
+export const SECONDARY_ADDRESS_LINE_1 = '7244 Castor Avenue #1048';
+export const SECONDARY_CITY_STATE_ZIP = 'Philadelphia, PA 19149';
+export const SITE_URL = 'https://murraylegal.com';

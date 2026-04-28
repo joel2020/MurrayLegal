@@ -1,5 +1,7 @@
 import ConsultationCTA from '../components/ConsultationCTA';
 import SEOHead from '../components/SEOHead';
+import { SITE_URL } from '../lib/firm';
+import { breadcrumbSchema } from '../lib/schema';
 
 const sections = [
   {
@@ -58,7 +60,8 @@ export default function RealEstate(): JSX.Element {
       <SEOHead
         title="Real Estate Attorney in Yonkers, NY | Murray Legal"
         description="Murray Legal provides real estate attorney services in Yonkers and Westchester County — land use, commercial and residential transactions, closings, and title matters. Schedule a consultation."
-        canonical="https://murraylegal.com/real-estate-attorney"
+        canonical={`${SITE_URL}/real-estate-attorney`}
+        schema={breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Real Estate', path: '/real-estate-attorney' }])}
       />
 
       <section className="mx-auto max-w-6xl">

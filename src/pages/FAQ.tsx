@@ -1,5 +1,7 @@
 import FAQAccordion, { type FAQItem } from '../components/FAQAccordion';
 import SEOHead from '../components/SEOHead';
+import { SITE_URL } from '../lib/firm';
+import { faqSchema } from '../lib/schema';
 
 const realEstate: FAQItem[] = [
   {
@@ -104,16 +106,8 @@ export default function FAQ(): JSX.Element {
       <SEOHead
         title="Frequently Asked Questions | Murray Legal"
         description="Frequently asked questions about Murray Legal services in real estate, business law, corporate governance, civil litigation, and personal injury matters in New York."
-        canonical="https://murraylegal.com/faq"
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: all.map((item) => ({
-            '@type': 'Question',
-            name: item.question,
-            acceptedAnswer: { '@type': 'Answer', text: item.answer },
-          })),
-        }}
+        canonical={`${SITE_URL}/faq`}
+        schema={faqSchema(all)}
       />
 
       <section className="mx-auto max-w-5xl">

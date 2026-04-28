@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
+import { PHONE_DISPLAY, PHONE_TEL } from '../lib/firm';
 import { Link, usePathname } from '../lib/router';
-
-const PHONE = '9142141880';
 
 const navItems = [
   { label: 'About', href: '/about' },
@@ -74,12 +73,12 @@ export default function Header(): JSX.Element {
 
         <div className="hidden items-center gap-4 xl:flex">
           <a
-            href="tel:+19142141880"
+            href={`tel:${PHONE_TEL}`}
             aria-label="Call Murray Legal"
             className="inline-flex items-center gap-2 py-2 text-[0.8rem] text-navy"
           >
             <span aria-hidden="true">☎</span>
-            {PHONE}
+            {PHONE_DISPLAY}
           </a>
           <Link to="/contact" ariaLabel="Schedule a consultation" className="btn-primary">
             Schedule a Consultation
@@ -122,8 +121,8 @@ export default function Header(): JSX.Element {
                 </Link>
               );
             })}
-            <a href="tel:+19142141880" aria-label="Call Murray Legal" className="w-full px-1 py-3 text-[0.8rem] text-navy">
-              ☎ {PHONE}
+            <a href={`tel:${PHONE_TEL}`} aria-label="Call Murray Legal" className="w-full px-1 py-3 text-[0.8rem] text-navy">
+              ☎ {PHONE_DISPLAY}
             </a>
             <Link to="/contact" ariaLabel="Schedule a consultation" className="btn-primary mt-2 w-full">
               Schedule a Consultation

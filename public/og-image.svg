@@ -1,0 +1,10 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Murray Legal</title>
+  <desc id="desc">Murray Legal premium social preview image.</desc>
+  <rect width="1200" height="630" fill="#0F1F3D"/>
+  <rect x="84" y="84" width="1032" height="462" rx="8" fill="#15284B" stroke="#B8972A" stroke-opacity="0.5"/>
+  <path d="M88 470H1112" stroke="#B8972A" stroke-width="2"/>
+  <text x="120" y="270" fill="#F8F6F1" font-family="Georgia, 'Times New Roman', serif" font-size="84" letter-spacing="1">Murray Legal</text>
+  <text x="120" y="330" fill="#D6CFB2" font-family="Arial, sans-serif" font-size="30" letter-spacing="1.5">Real Estate · Business Law · Civil Litigation</text>
+  <text x="120" y="508" fill="#B8972A" font-family="Arial, sans-serif" font-size="22" letter-spacing="4">YONKERS · WESTCHESTER · NEW YORK</text>
+</svg>

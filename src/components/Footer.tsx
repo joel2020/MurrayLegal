@@ -1,3 +1,4 @@
+import { EMAIL, FIRM_NAME, PHONE_DISPLAY, PHONE_TEL } from '../lib/firm';
 import { Link } from '../lib/router';
 
 export default function Footer(): JSX.Element {
@@ -5,7 +6,7 @@ export default function Footer(): JSX.Element {
     <footer className="border-t border-[rgba(184,151,42,0.25)] bg-navy-deep text-stone">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-2 md:px-6 xl:grid-cols-4">
         <section>
-          <h2 className="font-display text-[2rem] text-ivory">Murray Legal</h2>
+          <h2 className="font-display text-[2rem] text-ivory">{FIRM_NAME}</h2>
           <span className="mt-4 block h-[2px] w-6 bg-gold" aria-hidden="true" />
           <p className="mt-4 text-[0.85rem] leading-7 text-stone/70">
             Boutique legal counsel in Yonkers and New York for real estate, business law, corporate governance, civil
@@ -13,14 +14,14 @@ export default function Footer(): JSX.Element {
           </p>
           <p className="mt-4 text-[0.85rem] text-stone/70">
             Phone:{' '}
-            <a href="tel:+19142141880" aria-label="Call Murray Legal" className="text-stone/80 hover:text-gold">
-              9142141880
+            <a href={`tel:${PHONE_TEL}`} aria-label="Call Murray Legal" className="text-stone/80 hover:text-gold">
+              {PHONE_DISPLAY}
             </a>
           </p>
           <p className="text-[0.85rem] text-stone/70">
             Email:{' '}
-            <a href="mailto:admin@murraylegalfirm.com" aria-label="Email Murray Legal" className="text-stone/80 hover:text-gold">
-              admin@murraylegalfirm.com
+            <a href={`mailto:${EMAIL}`} aria-label="Email Murray Legal" className="text-stone/80 hover:text-gold">
+              {EMAIL}
             </a>
           </p>
         </section>
@@ -44,7 +45,7 @@ export default function Footer(): JSX.Element {
               </Link>
             </li>
             <li>
-              <Link ariaLabel="Personal Injury" to="/civil-litigation">
+              <Link ariaLabel="Personal Injury" to="/civil-litigation/personal-injury">
                 Personal Injury
               </Link>
             </li>
@@ -90,7 +91,7 @@ export default function Footer(): JSX.Element {
         </section>
       </div>
       <div className="border-t border-ivory/20 px-4 py-4 text-center text-xs text-stone">
-        Attorney Advertising. Prior results do not guarantee a similar outcome. © 2026 Murray Legal. All rights
+        Attorney Advertising. Prior results do not guarantee a similar outcome. © 2026 {FIRM_NAME}. All rights
         reserved.
       </div>
     </footer>

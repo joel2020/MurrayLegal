@@ -265,7 +265,7 @@ export function ContactSection(): JSX.Element {
             Send us a brief summary of your legal matter. We typically respond within one business day with intake steps
             and scheduling options.
           </p>
-          <p className="mt-5 text-sm text-slate-700">Phone: 9142141880</p>
+          <p className="mt-5 text-sm text-slate-700">Phone: (914) 214-1880</p>
           <p className="text-sm text-slate-700">Email: admin@murraylegalfirm.com</p>
           <a
             aria-label="Schedule a consultation by email"
@@ -366,7 +366,7 @@ export function SiteFooter(): JSX.Element {
         </section>
         <section>
           <h2 className="text-lg font-semibold">Contact</h2>
-          <p className="mt-2 text-sm text-slate-200">9142141880</p>
+          <p className="mt-2 text-sm text-slate-200">(914) 214-1880</p>
           <p className="text-sm text-slate-200">admin@murraylegalfirm.com</p>
           <p className="mt-3 text-sm text-slate-300">© 2026 Murray Legal. All rights reserved.</p>
         </section>

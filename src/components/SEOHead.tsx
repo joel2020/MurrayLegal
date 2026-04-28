@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
+import { SITE_URL } from '../lib/firm';
 
 type SEOHeadProps = {
   title: string;
   description: string;
   canonical: string;
-  schema: Record<string, unknown>;
+  schema?: Record<string, unknown>;
+  ogImage?: string;
 };
 
 const upsertMeta = (selector: string, attrs: Record<string, string>): void => {
@@ -25,7 +27,13 @@ const upsertLink = (selector: string, attrs: Record<string, string>): void => {
   Object.entries(attrs).forEach(([key, value]) => element?.setAttribute(key, value));
 };
 
-export default function SEOHead({ title, description, canonical, schema }: SEOHeadProps): null {
+export default function SEOHead({
+  title,
+  description,
+  canonical,
+  schema,
+  ogImage = `${SITE_URL}/og-image.svg`,
+}: SEOHeadProps): null {
   useEffect(() => {
     document.title = title;
 
@@ -34,32 +42,38 @@ export default function SEOHead({ title, description, canonical, schema }: SEOHe
     upsertMeta('meta[property="og:title"]', { property: 'og:title', content: title });
     upsertMeta('meta[property="og:description"]', { property: 'og:description', content: description });
     upsertMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' });
+    upsertMeta('meta[property="og:url"]', { property: 'og:url', content: canonical });
     upsertMeta('meta[property="og:image"]', {
       property: 'og:image',
-      content: 'https://murraylegal.com/og-image.jpg',
+      content: ogImage,
     });
     upsertMeta('meta[property="og:image:width"]', { property: 'og:image:width', content: '1200' });
     upsertMeta('meta[property="og:image:height"]', { property: 'og:image:height', content: '630' });
     upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
     upsertMeta('meta[name="twitter:image"]', {
       name: 'twitter:image',
-      content: 'https://murraylegal.com/og-image.jpg',
+      content: ogImage,
     });
     upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonical });
 
-    let script = document.head.querySelector('script[data-schema="murray-legal"]') as
+    const existingScript = document.head.querySelector('script[data-schema="murray-legal"]') as
       | HTMLScriptElement
       | null;
 
-    if (!script) {
-      script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.setAttribute('data-schema', 'murray-legal');
-      document.head.appendChild(script);
+    if (!schema) {
+      existingScript?.remove();
+      return;
     }
 
+    const script = existingScript ?? document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-schema', 'murray-legal');
     script.text = JSON.stringify(schema);
-  }, [title, description, canonical, schema]);
+
+    if (!existingScript) {
+      document.head.appendChild(script);
+    }
+  }, [title, description, canonical, schema, ogImage]);
 
   return null;
 }

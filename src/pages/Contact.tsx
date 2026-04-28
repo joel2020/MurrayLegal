@@ -1,7 +1,18 @@
 import { FormEvent, useState } from 'react';
 import SEOHead from '../components/SEOHead';
+import {
+  EMAIL,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  PRIMARY_ADDRESS_LINE_1,
+  PRIMARY_CITY_STATE_ZIP,
+  SECONDARY_ADDRESS_LINE_1,
+  SECONDARY_CITY_STATE_ZIP,
+  SITE_URL,
+} from '../lib/firm';
+import { localLegalServiceSchema } from '../lib/schema';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/[FORM_ID]';
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT;
 
 export default function Contact(): JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -10,11 +21,23 @@ export default function Contact(): JSX.Element {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
-    setIsSubmitting(true);
     setErrorMessage('');
+
+    if (!FORMSPREE_ENDPOINT) {
+      setErrorMessage(
+        `Online form submission is not configured yet. Please call ${PHONE_DISPLAY} or email ${EMAIL}.`
+      );
+      return;
+    }
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+
+    if (formData.get('website')) {
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch(FORMSPREE_ENDPOINT, {
@@ -32,7 +55,7 @@ export default function Contact(): JSX.Element {
       setIsSuccess(true);
       form.reset();
     } catch {
-      setErrorMessage('Unable to submit your message right now. Please call us at 9142141880.');
+      setErrorMessage(`Unable to submit your message right now. Please call us at ${PHONE_DISPLAY}.`);
     } finally {
       setIsSubmitting(false);
     }
@@ -42,15 +65,15 @@ export default function Contact(): JSX.Element {
     <main className="bg-ivory px-4 py-14 md:px-6">
       <SEOHead
         title="Contact Murray Legal | Schedule a Consultation"
-        description="Contact Murray Legal to request a consultation for real estate, business law, corporate governance, civil litigation, or personal injury matters in New York."
-        canonical="https://murraylegal.com/contact"
+        description="Contact Murray Legal to request a consultation for real estate, business law, corporate governance, and civil litigation matters in New York."
+        canonical={`${SITE_URL}/contact`}
+        schema={localLegalServiceSchema('Real Estate Law, Business Law, Civil Litigation')}
       />
       <section className="mx-auto max-w-6xl">
         <h1 className="font-display text-5xl text-navy">Schedule a Consultation</h1>
         <p className="mt-4 max-w-3xl text-text-muted">
           Use the form below to describe your legal matter and request a consultation. All inquiries are confidential.
-          Submitting this form does not create an attorney-client relationship. Murray Legal will respond within one
-          business day — sooner for matters marked urgent.
+          Submitting this form does not create an attorney-client relationship.
         </p>
 
         <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -66,7 +89,15 @@ export default function Contact(): JSX.Element {
                 {errorMessage}
               </p>
             )}
-            <form action={FORMSPREE_ENDPOINT} method="POST" onSubmit={handleSubmit} className="mt-5 space-y-4">
+            <form method="POST" onSubmit={handleSubmit} className="mt-5 space-y-4">
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
               <label className="block text-sm font-medium text-text-dark">
                 Name
                 <input
@@ -108,7 +139,6 @@ export default function Contact(): JSX.Element {
                   <option>Real Estate</option>
                   <option>Business Law</option>
                   <option>Civil Litigation</option>
-                  <option>Personal Injury</option>
                   <option>Other</option>
                 </select>
               </label>
@@ -142,36 +172,30 @@ export default function Contact(): JSX.Element {
                 {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
             </form>
-
-            <div className="mt-8 grid gap-3 text-sm text-text-muted">
-              <p>✓ Confidential — Your inquiry is protected</p>
-              <p>✓ No obligation — A consultation is not a commitment</p>
-              <p>✓ Direct response — You hear from the attorney, not staff</p>
-            </div>
           </section>
 
           <section className="space-y-6">
             <article className="rounded-md bg-white p-8 shadow-soft">
               <h2 className="font-display text-3xl text-navy">Office Information</h2>
               <p className="mt-3 text-text-muted">
-                465 Tuckahoe Road #1246
+                {PRIMARY_ADDRESS_LINE_1}
                 <br />
-                Yonkers NY 10710
+                {PRIMARY_CITY_STATE_ZIP}
                 <br />
-                7244 Castor Avenue #1048
+                {SECONDARY_ADDRESS_LINE_1}
                 <br />
-                Philedelphia PA 19149
+                {SECONDARY_CITY_STATE_ZIP}
               </p>
               <p className="mt-2 text-text-muted">
                 Phone:{' '}
-                <a aria-label="Call Murray Legal" href="tel:+19142141880">
-                  9142141880
+                <a aria-label="Call Murray Legal" href={`tel:${PHONE_TEL}`}>
+                  {PHONE_DISPLAY}
                 </a>
               </p>
               <p className="text-text-muted">
                 Email:{' '}
-                <a aria-label="Email Murray Legal" href="mailto:admin@murraylegalfirm.com">
-                  admin@murraylegalfirm.com
+                <a aria-label="Email Murray Legal" href={`mailto:${EMAIL}`}>
+                  {EMAIL}
                 </a>
               </p>
               <p className="mt-2 text-text-muted">Hours: Monday–Friday, 8:30 AM–6:00 PM</p>

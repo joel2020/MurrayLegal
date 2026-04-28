@@ -1,5 +1,7 @@
 import ConsultationCTA from '../components/ConsultationCTA';
 import SEOHead from '../components/SEOHead';
+import { SITE_URL } from '../lib/firm';
+import { breadcrumbSchema } from '../lib/schema';
 
 export default function CivilLitigation(): JSX.Element {
   return (
@@ -7,7 +9,8 @@ export default function CivilLitigation(): JSX.Element {
       <SEOHead
         title="Civil Litigation Attorney Yonkers NY | Murray Legal"
         description="Murray Legal handles civil litigation in New York including business disputes, breach of contract, and personal injury. Direct attorney representation."
-        canonical="https://murraylegal.com/civil-litigation"
+        canonical={`${SITE_URL}/civil-litigation`}
+        schema={breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Civil Litigation', path: '/civil-litigation' }])}
       />
 
       <section className="mx-auto max-w-6xl">

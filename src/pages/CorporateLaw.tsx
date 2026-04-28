@@ -1,5 +1,7 @@
 import ConsultationCTA from '../components/ConsultationCTA';
 import SEOHead from '../components/SEOHead';
+import { SITE_URL } from '../lib/firm';
+import { breadcrumbSchema } from '../lib/schema';
 
 const services = [
   'LLC and corporation formation, NY filing and compliance',
@@ -17,7 +19,8 @@ export default function CorporateLaw(): JSX.Element {
       <SEOHead
         title="Business Law Attorney Yonkers NY | Murray Legal"
         description="Murray Legal advises businesses in Yonkers and New York on formation, governance, contracts, and corporate transactions. Contact us for a consultation."
-        canonical="https://murraylegal.com/corporate-law"
+        canonical={`${SITE_URL}/corporate-law`}
+        schema={breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Corporate Law', path: '/corporate-law' }])}
       />
 
       <section className="mx-auto max-w-6xl">

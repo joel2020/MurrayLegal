@@ -32,7 +32,7 @@ export default function CorporateLaw(): JSX.Element {
           negotiation, and transactional matters. The firm works closely with founders, officers, and shareholders to
           build the legal frameworks that support growth, reduce conflict, and document ownership clearly. Whether you
           are starting a new business, negotiating a commercial agreement, or managing a governance dispute, Murray
-          Legal provides direct senior counsel rather than handing matters to junior staff.
+          Legal provides strategic, practical counsel tailored to your goals.
         </p>
       </section>
 

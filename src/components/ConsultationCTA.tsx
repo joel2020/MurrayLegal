@@ -15,11 +15,11 @@ export default function ConsultationCTA(): JSX.Element {
             Schedule a Consultation
           </Link>
           <a
-            href="tel:+19145550199"
+            href="tel:+19142141880"
             aria-label="Call Murray Legal"
             className="inline-flex min-h-[48px] items-center text-sm font-medium uppercase tracking-[0.08em] text-gold"
           >
-            ☎ (914) 555-0199
+            ☎ 9142141880
           </a>
         </div>
       </div>

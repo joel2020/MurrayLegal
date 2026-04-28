@@ -32,7 +32,7 @@ export default function Contact(): JSX.Element {
       setIsSuccess(true);
       form.reset();
     } catch {
-      setErrorMessage('Unable to submit your message right now. Please call us at (914) 555-0199.');
+      setErrorMessage('Unable to submit your message right now. Please call us at 9142141880.');
     } finally {
       setIsSubmitting(false);
     }
@@ -154,20 +154,24 @@ export default function Contact(): JSX.Element {
             <article className="rounded-md bg-white p-8 shadow-soft">
               <h2 className="font-display text-3xl text-navy">Office Information</h2>
               <p className="mt-3 text-text-muted">
-                45 Main Street, Suite 800
+                465 Tuckahoe Road #1246
                 <br />
-                Yonkers, NY 10701
+                Yonkers NY 10710
+                <br />
+                7244 Castor Avenue #1048
+                <br />
+                Philedelphia PA 19149
               </p>
               <p className="mt-2 text-text-muted">
                 Phone:{' '}
-                <a aria-label="Call Murray Legal" href="tel:+19145550199">
-                  (914) 555-0199
+                <a aria-label="Call Murray Legal" href="tel:+19142141880">
+                  9142141880
                 </a>
               </p>
               <p className="text-text-muted">
                 Email:{' '}
-                <a aria-label="Email Murray Legal" href="mailto:info@murraylegal.com">
-                  info@murraylegal.com
+                <a aria-label="Email Murray Legal" href="mailto:admin@murraylegalfirm.com">
+                  admin@murraylegalfirm.com
                 </a>
               </p>
               <p className="mt-2 text-text-muted">Hours: Monday–Friday, 8:30 AM–6:00 PM</p>

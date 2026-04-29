@@ -2,6 +2,7 @@ import SEOHead from '../components/SEOHead';
 import { getBlogPostBySlug } from '../data/blogPosts';
 import { usePathname, Link } from '../lib/router';
 import { blogPostingSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
+import { SITE_URL } from '../lib/firm';
 
 export default function BlogPost(): JSX.Element {
   const pathname = usePathname();
@@ -32,7 +33,11 @@ export default function BlogPost(): JSX.Element {
 
   return (
     <main className="px-6 py-16 max-w-4xl mx-auto">
-      <SEOHead title={post.metaTitle} description={post.metaDescription} />
+      <SEOHead 
+        title={post.metaTitle} 
+        description={post.metaDescription}
+        canonical={`${SITE_URL}/blog/${post.slug}`}
+      />
 
       <script
         type="application/ld+json"

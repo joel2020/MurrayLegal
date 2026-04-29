@@ -1,6 +1,7 @@
 import SEOHead from '../components/SEOHead';
 import { getBlogPostBySlug } from '../data/blogPosts';
 import { usePathname, Link } from '../lib/router';
+import { blogPostingSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
 
 export default function BlogPost(): JSX.Element {
   const pathname = usePathname();
@@ -11,9 +12,32 @@ export default function BlogPost(): JSX.Element {
     return <div className="p-10">Post not found</div>;
   }
 
+  const schema = [
+    blogPostingSchema({
+      slug: post.slug,
+      title: post.title,
+      description: post.metaDescription,
+      datePublished: post.datePublished,
+      dateModified: post.dateModified,
+      category: post.category,
+      keywords: post.keywords,
+    }),
+    faqSchema(post.faqs),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Blog', path: '/blog' },
+      { name: post.title, path: `/blog/${post.slug}` },
+    ]),
+  ];
+
   return (
     <main className="px-6 py-16 max-w-4xl mx-auto">
       <SEOHead title={post.metaTitle} description={post.metaDescription} />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
 
       <h1 className="text-4xl font-bold mb-6">{post.title}</h1>
 

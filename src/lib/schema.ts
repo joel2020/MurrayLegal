@@ -19,6 +19,16 @@ type BreadcrumbInput = {
   path: string;
 };
 
+type BlogArticleInput = {
+  slug: string;
+  title: string;
+  description: string;
+  datePublished: string;
+  dateModified: string;
+  category: string;
+  keywords: string[];
+};
+
 const parseCityStateZip = (value: string): { city: string; state: string; zip: string } => {
   const [city, stateZip] = value.split(',').map((part) => part.trim());
   const [state = '', zip = ''] = (stateZip ?? '').split(' ');
@@ -86,4 +96,29 @@ export const breadcrumbSchema = (items: BreadcrumbInput[]) => ({
     name: item.name,
     item: `${SITE_URL}${item.path}`,
   })),
+});
+
+export const blogPostingSchema = (post: BlogArticleInput) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.description,
+  datePublished: post.datePublished,
+  dateModified: post.dateModified,
+  author: {
+    '@type': 'Organization',
+    name: FIRM_NAME,
+    url: SITE_URL,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: FIRM_NAME,
+    url: SITE_URL,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `${SITE_URL}/blog/${post.slug}`,
+  },
+  articleSection: post.category,
+  keywords: post.keywords.join(', '),
 });

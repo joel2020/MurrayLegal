@@ -23,7 +23,7 @@ export default function BlogPost(): JSX.Element {
       category: post.category,
       keywords: post.keywords,
     }),
-    faqSchema(post.faqs),
+    ...(post.faqs.length > 0 ? [faqSchema(post.faqs)] : []),
     breadcrumbSchema([
       { name: 'Home', path: '/' },
       { name: 'Blog', path: '/blog' },
@@ -47,8 +47,9 @@ export default function BlogPost(): JSX.Element {
       <h1 className="text-4xl font-bold mb-6">{post.title}</h1>
 
       <p className="mb-6 text-lg text-text-muted">
-        Murray Legal provides legal guidance for clients in Yonkers, Westchester County, New York City, and Pennsylvania.
-        If you are dealing with a matter related to this topic, it is important to understand your legal position early.
+        Murray Legal maintains an office in Yonkers, New York and is licensed in Pennsylvania. The firm works with
+        clients on nationwide matters where permitted by law, including through local counsel or jurisdiction-appropriate
+        arrangements when needed.
       </p>
 
       {post.intro.map((p, i) => (
@@ -56,10 +57,10 @@ export default function BlogPost(): JSX.Element {
       ))}
 
       <div className="my-8 rounded-md border border-gold/40 bg-gold/5 p-6">
-        <h2 className="text-xl font-semibold text-navy">Speak With a Real Estate or Business Attorney</h2>
+        <h2 className="text-xl font-semibold text-navy">Discuss Your Legal Matter</h2>
         <p className="mt-2 text-sm text-text-muted">
           If you are facing a legal issue involving real estate, business transactions, or a dispute, Murray Legal can help you
-          evaluate your options and next steps.
+          evaluate your options and next steps where permitted by law.
         </p>
         <Link to="/contact" className="btn-primary mt-4 inline-block" ariaLabel="Contact Murray Legal">
           Request a Consultation
@@ -75,21 +76,24 @@ export default function BlogPost(): JSX.Element {
         </section>
       ))}
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold">FAQs</h2>
-        {post.faqs.map((faq) => (
-          <div key={faq.question} className="mt-4">
-            <h3 className="font-semibold">{faq.question}</h3>
-            <p>{faq.answer}</p>
+      {post.faqs.length > 0 && (
+        <section className="mt-10 rounded-md border border-[rgba(15,31,61,0.10)] bg-white p-6">
+          <h2 className="text-2xl font-semibold text-navy">Frequently Asked Questions</h2>
+          <div className="mt-4 space-y-5">
+            {post.faqs.map((faq) => (
+              <div key={faq.question}>
+                <h3 className="font-semibold text-navy">{faq.question}</h3>
+                <p className="mt-2 text-text-muted">{faq.answer}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </section>
+        </section>
+      )}
 
       <div className="my-10 rounded-md border border-navy/20 bg-navy/5 p-6">
         <h2 className="text-xl font-semibold text-navy">Need Legal Guidance?</h2>
         <p className="mt-2 text-sm text-text-muted">
-          Murray Legal works with clients throughout Yonkers, Westchester County, New York City, and Pennsylvania on
-          real estate transactions, business matters, and litigation.
+          Murray Legal works with clients on real estate transactions, business matters, and litigation where permitted by law.
         </p>
         <Link to="/contact" className="btn-primary mt-4 inline-block" ariaLabel="Contact Murray Legal">
           Speak With an Attorney
@@ -108,7 +112,7 @@ export default function BlogPost(): JSX.Element {
       </section>
 
       <div className="mt-10 border-t pt-6 text-sm text-gray-500">
-        This article is for general informational purposes only and does not constitute legal advice.
+        This article is for general informational purposes only and does not constitute legal advice. Reading this article or contacting Murray Legal through this website does not create an attorney-client relationship.
       </div>
     </main>
   );

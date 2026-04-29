@@ -41,7 +41,7 @@ export const localLegalServiceSchema = (practiceArea?: string) => {
     url: SITE_URL,
     telephone: PHONE_TEL,
     email: EMAIL,
-    areaServed: ['Yonkers', 'Westchester County', 'New York'],
+    areaServed: ['Yonkers', 'Westchester County', 'New York', 'Pennsylvania'],
     serviceType: practiceArea ?? 'Real Estate Law, Business Law, Civil Litigation',
     address: [
       {

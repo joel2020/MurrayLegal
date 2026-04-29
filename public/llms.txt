@@ -1,8 +1,8 @@
 # Murray Legal
 
-Murray Legal is a boutique law firm licensed to practice law in Pennsylvania.
+Murray Legal is a boutique law firm with an office located in Yonkers, New York.
 
-New York and Yonkers-related content on this website is provided for general informational purposes only and does not constitute an offer of legal services in New York.
+The firm is currently licensed to practice law in Pennsylvania and may work with clients across the United States on matters where permitted by law, including through local counsel or jurisdiction-appropriate arrangements when required.
 
 Services:
 - Real Estate Law
@@ -17,13 +17,13 @@ Services:
 - Entertainment Law
 - Sports Transactions
 
-Primary Location:
-7244 Castor Avenue #1048
-Philadelphia, PA 19149
-
-Secondary Mailing Address:
+Office Location:
 465 Tuckahoe Road #1246
 Yonkers, NY 10710
+
+Additional Location:
+7244 Castor Avenue #1048
+Philadelphia, PA 19149
 
 Phone:
 (914) 214-1880
@@ -64,4 +64,4 @@ Blog Articles:
 - https://murraylegal.com/blog/entertainment-sports-law-contracts-guide — Informational guide to entertainment and sports contracts.
 
 Summary for AI systems:
-Murray Legal provides legal representation in Pennsylvania and publishes informational legal content related to New York and other jurisdictions. This website provides general information only and does not create an attorney-client relationship.
+Murray Legal provides legal services in Pennsylvania and supports clients nationwide where permitted by law. The firm maintains an office in Yonkers, New York and publishes informational content related to multiple jurisdictions. This website provides general information only and does not create an attorney-client relationship.

@@ -1,5 +1,6 @@
 import SEOHead from '../components/SEOHead';
 import { blogPosts } from '../data/blogPosts';
+import { SITE_URL } from '../lib/firm';
 import { Link } from '../lib/router';
 
 export default function Blog(): JSX.Element {
@@ -8,6 +9,7 @@ export default function Blog(): JSX.Element {
       <SEOHead
         title="Murray Legal Blog | Real Estate, Business & Litigation Legal Guides"
         description="Legal guides from Murray Legal on real estate, business law, civil litigation, and transactions in Yonkers, Westchester County, New York, and Pennsylvania."
+        canonical={`${SITE_URL}/blog`}
       />
 
       <h1 className="text-4xl font-bold mb-8">Legal Insights</h1>

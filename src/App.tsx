@@ -17,6 +17,8 @@ import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Disclaimer from './pages/Disclaimer';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 
 function NotFound(): JSX.Element {
   return (
@@ -32,6 +34,9 @@ function NotFound(): JSX.Element {
 
 export default function App(): JSX.Element {
   const pathname = usePathname();
+
+  if (pathname === '/blog') return (<><Header /><Blog /><Footer /></>);
+  if (pathname.startsWith('/blog/')) return (<><Header /><BlogPost /><Footer /></>);
 
   const pageMap: Record<string, JSX.Element> = {
     '/': <Home />,

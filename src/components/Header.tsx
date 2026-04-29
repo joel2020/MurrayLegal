@@ -7,6 +7,7 @@ const navItems = [
   { label: 'Real Estate', href: '/real-estate-attorney' },
   { label: 'Corporate Law', href: '/corporate-law' },
   { label: 'Civil Litigation', href: '/civil-litigation' },
+  { label: 'Blog', href: '/blog' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contact', href: '/contact' },
 ];

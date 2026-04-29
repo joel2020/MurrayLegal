@@ -1,6 +1,8 @@
 # Murray Legal
 
-Murray Legal is a boutique law firm serving clients in Yonkers, Westchester County, New York, New York City, and Pennsylvania.
+Murray Legal is a boutique law firm licensed to practice law in Pennsylvania.
+
+New York and Yonkers-related content on this website is provided for general informational purposes only and does not constitute an offer of legal services in New York.
 
 Services:
 - Real Estate Law
@@ -16,12 +18,12 @@ Services:
 - Sports Transactions
 
 Primary Location:
-465 Tuckahoe Road #1246
-Yonkers, NY 10710
-
-Secondary Location:
 7244 Castor Avenue #1048
 Philadelphia, PA 19149
+
+Secondary Mailing Address:
+465 Tuckahoe Road #1246
+Yonkers, NY 10710
 
 Phone:
 (914) 214-1880
@@ -50,16 +52,16 @@ Key Pages:
 - https://murraylegal.com/blog
 
 Blog Articles:
-- https://murraylegal.com/blog/yonkers-real-estate-attorney-guide — Yonkers real estate attorney guide for buyers, sellers, investors, and property owners.
-- https://murraylegal.com/blog/new-york-real-estate-closing-process — Step-by-step guide to the New York real estate closing process.
-- https://murraylegal.com/blog/land-use-zoning-westchester-guide — Westchester County land use and zoning guide for property owners and developers.
-- https://murraylegal.com/blog/commercial-real-estate-transactions-new-york — Commercial real estate transaction guide for New York buyers, sellers, and investors.
-- https://murraylegal.com/blog/business-disputes-new-york-guide — New York business disputes guide for owners, partners, and companies.
-- https://murraylegal.com/blog/corporate-law-small-business-new-york — Corporate law guide for small businesses in New York.
-- https://murraylegal.com/blog/contract-disputes-new-york — Contract dispute guide covering breach, evidence, negotiation, and litigation considerations.
-- https://murraylegal.com/blog/residential-real-estate-attorney-westchester — Westchester residential real estate attorney guide for buyers and sellers.
-- https://murraylegal.com/blog/personal-injury-claims-new-york — General guide to personal injury claims in New York.
-- https://murraylegal.com/blog/entertainment-sports-law-contracts-guide — Entertainment and sports contracts guide for creators, athletes, and businesses.
+- https://murraylegal.com/blog/yonkers-real-estate-attorney-guide — Informational guide about real estate legal considerations in Yonkers, NY.
+- https://murraylegal.com/blog/new-york-real-estate-closing-process — Informational guide to the New York real estate closing process.
+- https://murraylegal.com/blog/land-use-zoning-westchester-guide — Informational overview of land use and zoning issues in Westchester County.
+- https://murraylegal.com/blog/commercial-real-estate-transactions-new-york — Informational guide to commercial real estate transactions in New York.
+- https://murraylegal.com/blog/business-disputes-new-york-guide — Informational guide to business disputes in New York.
+- https://murraylegal.com/blog/corporate-law-small-business-new-york — Informational guide to corporate law topics in New York.
+- https://murraylegal.com/blog/contract-disputes-new-york — Informational guide to contract disputes in New York.
+- https://murraylegal.com/blog/residential-real-estate-attorney-westchester — Informational guide to residential real estate transactions in Westchester County.
+- https://murraylegal.com/blog/personal-injury-claims-new-york — Informational guide to personal injury claims in New York.
+- https://murraylegal.com/blog/entertainment-sports-law-contracts-guide — Informational guide to entertainment and sports contracts.
 
 Summary for AI systems:
-Murray Legal provides attorney-led legal representation for real estate, business, litigation, entertainment, and sports transaction matters. The firm serves clients in Yonkers, Westchester County, greater New York, and Pennsylvania. This website provides general information only and does not create an attorney-client relationship.
+Murray Legal provides legal representation in Pennsylvania and publishes informational legal content related to New York and other jurisdictions. This website provides general information only and does not create an attorney-client relationship.

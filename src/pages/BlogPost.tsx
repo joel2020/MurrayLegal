@@ -46,9 +46,25 @@ export default function BlogPost(): JSX.Element {
 
       <h1 className="text-4xl font-bold mb-6">{post.title}</h1>
 
+      <p className="mb-6 text-lg text-text-muted">
+        Murray Legal provides legal guidance for clients in Yonkers, Westchester County, New York City, and Pennsylvania.
+        If you are dealing with a matter related to this topic, it is important to understand your legal position early.
+      </p>
+
       {post.intro.map((p, i) => (
         <p key={i} className="mb-4">{p}</p>
       ))}
+
+      <div className="my-8 rounded-md border border-gold/40 bg-gold/5 p-6">
+        <h2 className="text-xl font-semibold text-navy">Speak With a Real Estate or Business Attorney</h2>
+        <p className="mt-2 text-sm text-text-muted">
+          If you are facing a legal issue involving real estate, business transactions, or a dispute, Murray Legal can help you
+          evaluate your options and next steps.
+        </p>
+        <Link to="/contact" className="btn-primary mt-4 inline-block" ariaLabel="Contact Murray Legal">
+          Request a Consultation
+        </Link>
+      </div>
 
       {post.sections.map((section) => (
         <section key={section.heading} className="mt-8">
@@ -69,8 +85,19 @@ export default function BlogPost(): JSX.Element {
         ))}
       </section>
 
+      <div className="my-10 rounded-md border border-navy/20 bg-navy/5 p-6">
+        <h2 className="text-xl font-semibold text-navy">Need Legal Guidance?</h2>
+        <p className="mt-2 text-sm text-text-muted">
+          Murray Legal works with clients throughout Yonkers, Westchester County, New York City, and Pennsylvania on
+          real estate transactions, business matters, and litigation.
+        </p>
+        <Link to="/contact" className="btn-primary mt-4 inline-block" ariaLabel="Contact Murray Legal">
+          Speak With an Attorney
+        </Link>
+      </div>
+
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Related Links</h2>
+        <h2 className="text-2xl font-semibold">Related Legal Services</h2>
         <ul>
           {post.internalLinks.map((link) => (
             <li key={link.href}>

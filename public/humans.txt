@@ -1,0 +1,4 @@
+Murray Legal Website
+Built with React + Vite
+Deployed on Vercel
+Maintained for SEO, performance, and accessibility

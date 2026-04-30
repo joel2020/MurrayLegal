@@ -19,7 +19,7 @@ import About from './pages/About';
 import Disclaimer from './pages/Disclaimer';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
-import PennsylvaniaServices from './pages/PennsylvaniaServices';
+import PennsylvaniaServices, { pennsylvaniaServicePaths } from './pages/PennsylvaniaServices';
 
 function NotFound(): JSX.Element {
   return (
@@ -35,14 +35,12 @@ function NotFound(): JSX.Element {
 
 export default function App(): JSX.Element {
   const pathname = usePathname();
+  const normalizedPath = pathname.endsWith('/') && pathname !== '/' ? pathname.slice(0, -1) : pathname;
 
-  if (pathname === '/blog') return (<><Header /><Blog /><Footer /></>);
-  if (pathname.startsWith('/blog/')) return (<><Header /><BlogPost /><Footer /></>);
+  if (normalizedPath === '/blog') return (<><Header /><Blog /><Footer /></>);
+  if (normalizedPath.startsWith('/blog/')) return (<><Header /><BlogPost /><Footer /></>);
 
-  if (
-    pathname.startsWith('/pennsylvania') ||
-    pathname.startsWith('/philadelphia-real-estate-attorney')
-  ) {
+  if (pennsylvaniaServicePaths.includes(normalizedPath)) {
     return (<><Header /><PennsylvaniaServices /><Footer /></>);
   }
 
@@ -68,7 +66,7 @@ export default function App(): JSX.Element {
   return (
     <>
       <Header />
-      {pageMap[pathname] ?? <NotFound />}
+      {pageMap[normalizedPath] ?? <NotFound />}
       <Footer />
     </>
   );

@@ -5,7 +5,7 @@ type SEOHeadProps = {
   title: string;
   description: string;
   canonical: string;
-  schema?: Record<string, unknown>;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   ogImage?: string;
 };
 

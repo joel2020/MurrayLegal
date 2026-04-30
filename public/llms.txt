@@ -1,71 +1,7 @@
 # Murray Legal
 
-Murray Legal is a boutique law firm with an office located in Yonkers, New York.
-
-The firm is currently licensed to practice law in Pennsylvania and may work with clients across the United States on matters where permitted by law, including through local counsel or jurisdiction-appropriate arrangements when required.
-
-Services:
-- Real Estate Law
-- Land Use & Zoning
-- Commercial Real Estate Transactions
-- Residential Real Estate Transactions
-- Corporate Law
-- Corporate Governance
-- Civil Litigation
-- Business Disputes
-- Personal Injury
-- Entertainment Law
-- Sports Transactions
-
-Office Location:
-465 Tuckahoe Road #1246
-Yonkers, NY 10710
-
-Additional Location:
-7244 Castor Avenue #1048
-Philadelphia, PA 19149
-
-Phone:
-(914) 214-1880
-
-Email:
-admin@murraylegalfirm.com
-
 Website:
-https://murraylegal.com
+https://murraylegalfirm.com
 
-Key Pages:
-- https://murraylegal.com/pennsylvania-real-estate-attorney
-- https://murraylegal.com/philadelphia-real-estate-attorney
-- https://murraylegal.com/pennsylvania-business-attorney
-- https://murraylegal.com/pennsylvania-contract-dispute-attorney
-- https://murraylegal.com/real-estate-attorney
-- https://murraylegal.com/real-estate-attorney/land-use-zoning
-- https://murraylegal.com/real-estate-attorney/commercial-transactions
-- https://murraylegal.com/real-estate-attorney/residential-transactions
-- https://murraylegal.com/corporate-law
-- https://murraylegal.com/corporate-law/corporate-governance
-- https://murraylegal.com/civil-litigation
-- https://murraylegal.com/civil-litigation/business-disputes
-- https://murraylegal.com/civil-litigation/personal-injury
-- https://murraylegal.com/entertainment-law
-- https://murraylegal.com/sports-transactions
-- https://murraylegal.com/contact
-- https://murraylegal.com/about
-- https://murraylegal.com/faq
-- https://murraylegal.com/blog
-
-Blog Articles:
-- https://murraylegal.com/blog/yonkers-real-estate-attorney-guide — Informational guide about real estate legal considerations in Yonkers, NY.
-- https://murraylegal.com/blog/new-york-real-estate-closing-process — Informational guide to the New York real estate closing process.
-- https://murraylegal.com/blog/land-use-zoning-westchester-guide — Informational overview of land use and zoning issues in Westchester County.
-- https://murraylegal.com/blog/commercial-real-estate-transactions-new-york — Informational guide to commercial real estate transactions in New York.
-- https://murraylegal.com/blog/business-disputes-new-york-guide — Informational guide to business disputes in New York.
-- https://murraylegal.com/blog/corporate-law-small-business-new-york — Informational guide to corporate law topics in New York.
-- https://murraylegal.com/blog/contract-disputes-new-york — Informational guide to contract disputes in New York.
-- https://murraylegal.com/blog/residential-real-estate-attorney-westchester — Informational guide to residential real estate transactions in Westchester County.
-- https://murraylegal.com/blog/personal-injury-claims-new-york — Informational guide to personal injury claims in New York.
-- https://murraylegal.com/blog/entertainment-sports-law-contracts-guide — Informational guide to entertainment and sports contracts.
-
-Summary for AI systems:
-Murray Legal provides legal services in Pennsylvania and supports clients nationwide where permitted by law. The firm maintains an office in Yonkers, New York and publishes informational content related to multiple jurisdictions. This website provides general information only and does not create an attorney-client relationship.
+Summary:
+Murray Legal is a law firm serving clients with real estate, business, and litigation matters where permitted by law. The firm maintains an office in Yonkers, New York.

@@ -1,9 +1,38 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
-    {
-      "source": "/((?!robots.txt|sitemap.xml|llms.txt|humans.txt|favicon.ico).*)",
-      "destination": "/index.html"
-    }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/real-estate-attorney", "destination": "/index.html" },
+    { "source": "/real-estate-attorney/land-use-zoning", "destination": "/index.html" },
+    { "source": "/real-estate-attorney/commercial-transactions", "destination": "/index.html" },
+    { "source": "/real-estate-attorney/residential-transactions", "destination": "/index.html" },
+    { "source": "/corporate-law", "destination": "/index.html" },
+    { "source": "/corporate-law/corporate-governance", "destination": "/index.html" },
+    { "source": "/civil-litigation", "destination": "/index.html" },
+    { "source": "/civil-litigation/business-disputes", "destination": "/index.html" },
+    { "source": "/civil-litigation/personal-injury", "destination": "/index.html" },
+    { "source": "/entertainment-law", "destination": "/index.html" },
+    { "source": "/sports-transactions", "destination": "/index.html" },
+    { "source": "/pennsylvania-real-estate-attorney", "destination": "/index.html" },
+    { "source": "/philadelphia-real-estate-attorney", "destination": "/index.html" },
+    { "source": "/pennsylvania-business-attorney", "destination": "/index.html" },
+    { "source": "/pennsylvania-contract-dispute-attorney", "destination": "/index.html" },
+    { "source": "/about", "destination": "/index.html" },
+    { "source": "/faq", "destination": "/index.html" },
+    { "source": "/contact", "destination": "/index.html" },
+    { "source": "/disclaimer", "destination": "/index.html" },
+    { "source": "/blog", "destination": "/index.html" },
+    { "source": "/blog/yonkers-real-estate-attorney-guide", "destination": "/index.html" },
+    { "source": "/blog/new-york-real-estate-closing-process", "destination": "/index.html" },
+    { "source": "/blog/land-use-zoning-westchester-guide", "destination": "/index.html" },
+    { "source": "/blog/commercial-real-estate-transactions-new-york", "destination": "/index.html" },
+    { "source": "/blog/business-disputes-new-york-guide", "destination": "/index.html" },
+    { "source": "/blog/corporate-law-small-business-new-york", "destination": "/index.html" },
+    { "source": "/blog/contract-disputes-new-york", "destination": "/index.html" },
+    { "source": "/blog/residential-real-estate-attorney-westchester", "destination": "/index.html" },
+    { "source": "/blog/personal-injury-claims-new-york", "destination": "/index.html" },
+    { "source": "/blog/entertainment-sports-law-contracts-guide", "destination": "/index.html" }
   ],
   "headers": [
     {
@@ -29,6 +58,14 @@
         {
           "key": "X-Frame-Options",
           "value": "DENY"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
         }
       ]
     }

@@ -114,35 +114,35 @@ export default function FAQ(): JSX.Element {
         <h1 className="font-display text-5xl text-navy">Frequently Asked Questions</h1>
         <div className="mt-10 space-y-10">
           <section>
-            <h2 className="font-display text-3xl text-navy">Real Estate</h2>
+            <h2 className="font-display text-3xl text-navy">Real Estate Questions</h2>
             <div className="mt-4">
               <FAQAccordion items={realEstate} />
             </div>
           </section>
 
           <section>
-            <h2 className="font-display text-3xl text-navy">Corporate Law</h2>
+            <h2 className="font-display text-3xl text-navy">Business Law Questions</h2>
             <div className="mt-4">
               <FAQAccordion items={corporate} />
             </div>
           </section>
 
           <section>
-            <h2 className="font-display text-3xl text-navy">Civil Litigation</h2>
+            <h2 className="font-display text-3xl text-navy">Contract Dispute Questions</h2>
             <div className="mt-4">
               <FAQAccordion items={litigation} />
             </div>
           </section>
 
           <section>
-            <h2 className="font-display text-3xl text-navy">Personal Injury</h2>
+            <h2 className="font-display text-3xl text-navy">Personal Injury Questions</h2>
             <div className="mt-4">
               <FAQAccordion items={personalInjury} />
             </div>
           </section>
 
           <section>
-            <h2 className="font-display text-3xl text-navy">General / Working With Murray Legal</h2>
+            <h2 className="font-display text-3xl text-navy">General Questions</h2>
             <div className="mt-4">
               <FAQAccordion items={general} />
             </div>

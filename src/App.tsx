@@ -19,6 +19,7 @@ import About from './pages/About';
 import Disclaimer from './pages/Disclaimer';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import PennsylvaniaServices from './pages/PennsylvaniaServices';
 
 function NotFound(): JSX.Element {
   return (
@@ -37,6 +38,13 @@ export default function App(): JSX.Element {
 
   if (pathname === '/blog') return (<><Header /><Blog /><Footer /></>);
   if (pathname.startsWith('/blog/')) return (<><Header /><BlogPost /><Footer /></>);
+
+  if (
+    pathname.startsWith('/pennsylvania') ||
+    pathname.startsWith('/philadelphia-real-estate-attorney')
+  ) {
+    return (<><Header /><PennsylvaniaServices /><Footer /></>);
+  }
 
   const pageMap: Record<string, JSX.Element> = {
     '/': <Home />,

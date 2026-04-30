@@ -6,6 +6,6 @@ export const PRIMARY_ADDRESS_LINE_1 = '465 Tuckahoe Road #1246';
 export const PRIMARY_CITY_STATE_ZIP = 'Yonkers, NY 10710';
 export const SECONDARY_ADDRESS_LINE_1 = '7244 Castor Avenue #1048';
 export const SECONDARY_CITY_STATE_ZIP = 'Philadelphia, PA 19149';
-export const SITE_URL = 'https://murraylegal.com';
+export const SITE_URL = 'https://murraylegalfirm.com';
 export const LICENSED_JURISDICTION = 'Pennsylvania';
 export const JURISDICTION_NOTICE = 'Murray Legal maintains an office location in Yonkers, New York and is currently licensed to practice law in Pennsylvania. The firm may work with clients nationwide on matters where permitted by law, including through local counsel or jurisdiction-appropriate arrangements when necessary. Website content is general information only and does not create an attorney-client relationship.';

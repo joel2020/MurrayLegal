@@ -12,19 +12,19 @@ type FAQItem = {
 
 const faqs: FAQItem[] = [
   {
-    question: 'Do I need a real estate attorney for property transactions in New York?',
+    question: 'Where is Murray Legal licensed to practice law?',
     answer:
-      'In New York, attorney representation is standard for closings. Counsel helps with contract terms, title issues, and closing coordination before risks become expensive.',
+      'Murray Legal is licensed in Pennsylvania, maintains an office in Yonkers, New York, and works with clients on nationwide matters where permitted by law, including through local counsel or jurisdiction-appropriate arrangements when needed.',
   },
   {
-    question: 'Can Murray Legal help with zoning issues before a purchase?',
+    question: 'Can Murray Legal help with Pennsylvania real estate transactions?',
     answer:
-      'Yes. Zoning due diligence can identify use restrictions, violations, and approval requirements before acquisition decisions are final.',
+      'Yes. The firm assists with Pennsylvania real estate contract review, transaction planning, closing preparation, title-related concerns, and deal-risk strategy.',
   },
   {
-    question: 'Does the firm handle business litigation in addition to transactions?',
+    question: 'Does the firm handle business and contract matters?',
     answer:
-      'Yes. Murray Legal handles contract disputes, ownership conflicts, and related commercial litigation matters in addition to transactional work.',
+      'Yes. Murray Legal supports business owners and companies with contract review, governance issues, dispute prevention, and contract dispute strategy.',
   },
   {
     question: 'How quickly can I expect a response from Murray Legal?',
@@ -34,20 +34,26 @@ const faqs: FAQItem[] = [
 
 const practiceCards = [
   {
-    title: 'Real Estate Law',
-    description: 'Land use, zoning, commercial transactions, and residential closings.',
-    href: '/real-estate-attorney',
+    title: 'Pennsylvania Real Estate Attorney',
+    description: 'Contract review, closing preparation, title concerns, and transaction strategy for Pennsylvania property matters.',
+    href: '/pennsylvania-real-estate-attorney',
   },
   {
-    title: 'Business Law',
-    description: 'Entity formation, contracts, governance, and strategic legal support.',
-    href: '/corporate-law',
+    title: 'Pennsylvania Business Attorney',
+    description: 'Contracts, governance, entity issues, ownership documentation, and business risk management.',
+    href: '/pennsylvania-business-attorney',
   },
   {
-    title: 'Civil Litigation',
-    description: 'Business disputes and civil claims handled with disciplined case strategy.',
-    href: '/civil-litigation',
+    title: 'Pennsylvania Contract Disputes',
+    description: 'Breach review, negotiation strategy, document preservation, and litigation-risk planning.',
+    href: '/pennsylvania-contract-dispute-attorney',
   },
+];
+
+const secondaryLinks = [
+  { label: 'Philadelphia Real Estate Attorney', href: '/philadelphia-real-estate-attorney' },
+  { label: 'Real Estate Legal Guides', href: '/blog' },
+  { label: 'Contact Murray Legal', href: '/contact' },
 ];
 
 export default function Home(): JSX.Element {
@@ -56,8 +62,8 @@ export default function Home(): JSX.Element {
   return (
     <main>
       <SEOHead
-        title="Murray Legal | Real Estate Attorney & Business Law Counsel in Yonkers"
-        description="Murray Legal provides focused, attorney-led representation for real estate, business law, and civil litigation matters in Yonkers, Westchester, and greater New York."
+        title="Murray Legal | Pennsylvania Real Estate, Business & Contract Counsel"
+        description="Murray Legal is licensed in Pennsylvania, maintains an office in Yonkers, and helps clients with real estate, business, contract, and dispute matters where permitted by law."
         canonical={`${SITE_URL}/`}
         schema={localLegalServiceSchema()}
       />
@@ -65,7 +71,7 @@ export default function Home(): JSX.Element {
       <section className="relative isolate overflow-hidden bg-navy-deep text-ivory">
         <img
           src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1920&q=80"
-          alt="New York skyline at dusk"
+          alt="City skyline at dusk"
           width={1920}
           height={1200}
           className="absolute inset-0 h-full w-full object-cover opacity-30"
@@ -75,19 +81,19 @@ export default function Home(): JSX.Element {
         <div className="relative mx-auto w-full max-w-7xl px-4 py-24 md:px-6 md:py-36">
           <span className="gold-rule" aria-hidden="true" />
           <h1 className="max-w-4xl font-display text-display-xl text-ivory">
-            Real Estate, Business &amp; Litigation Counsel in Yonkers, New York
+            Pennsylvania Real Estate, Business &amp; Contract Counsel
           </h1>
-          <p className="mt-6 max-w-[70ch] text-base text-stone/85 md:text-lg">
-            Murray Legal provides focused, attorney-led representation for property owners, businesses, and
-            individuals navigating important legal matters across Westchester and greater New York.
+          <p className="mt-6 max-w-[72ch] text-base text-stone/85 md:text-lg">
+            Murray Legal is licensed in Pennsylvania, maintains an office in Yonkers, New York, and helps clients evaluate
+            real estate transactions, business contracts, governance issues, and disputes where permitted by law.
           </p>
           <div className="mt-10 flex flex-wrap gap-4 max-sm:flex-col">
             <Link to="/contact" ariaLabel="Schedule a consultation" className="btn-primary">
               Schedule a Consultation
             </Link>
-            <a href="#practice-areas" aria-label="View practice areas" className="btn-outline text-center">
-              View Practice Areas
-            </a>
+            <Link to="/pennsylvania-real-estate-attorney" ariaLabel="View Pennsylvania real estate services" className="btn-outline text-center">
+              Pennsylvania Real Estate Services
+            </Link>
           </div>
         </div>
       </section>
@@ -95,12 +101,13 @@ export default function Home(): JSX.Element {
       <section className="bg-ivory px-4 py-20 md:px-6 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-3xl">
-            <span className="section-label">About the Firm</span>
+            <span className="section-label">Pennsylvania Legal Services</span>
             <span className="gold-rule" aria-hidden="true" />
-            <h2 className="font-display text-display-lg text-navy">Direct attorney-led counsel with clear strategy.</h2>
+            <h2 className="font-display text-display-lg text-navy">Focused legal guidance for property, business, and contract matters.</h2>
             <p className="mt-5 text-text-muted">
-              Murray Legal advises clients on real estate, business, and litigation matters with clear communication and
-              practical legal execution.
+              The site includes educational resources for New York and nationwide topics, but Murray Legal’s licensed-service
+              focus is Pennsylvania. These pages help clients quickly find the right starting point for real estate,
+              business, and contract-related matters.
             </p>
           </div>
 
@@ -114,6 +121,34 @@ export default function Home(): JSX.Element {
                 </Link>
               </article>
             ))}
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            {secondaryLinks.map((link) => (
+              <Link key={link.href} to={link.href} ariaLabel={link.label} className="btn-secondary">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-20 md:px-6 md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.1fr]">
+          <div>
+            <span className="section-label">Why Clients Contact Murray Legal</span>
+            <span className="gold-rule" aria-hidden="true" />
+            <h2 className="font-display text-display-md text-navy">Legal issues are easier to manage before deadlines, disputes, or closing pressure take over.</h2>
+          </div>
+          <div className="space-y-5 text-text-muted">
+            <p>
+              Buyers, sellers, investors, founders, and business owners often wait until a contract is signed, a title issue appears,
+              or a disagreement has already escalated. Early review can clarify rights, preserve options, and reduce avoidable risk.
+            </p>
+            <p>
+              Murray Legal helps clients organize documents, identify legal and business risks, and choose practical next steps. For matters
+              outside Pennsylvania, the firm works only where permitted by law, including through local counsel or jurisdiction-appropriate arrangements when required.
+            </p>
           </div>
         </div>
       </section>

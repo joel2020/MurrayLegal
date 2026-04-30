@@ -1,6 +1,6 @@
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { Link, usePathname } from './lib/router';
+import { usePathname } from './lib/router';
 import Home from './pages/Home';
 import RealEstate from './pages/RealEstate';
 import CorporateLaw from './pages/CorporateLaw';

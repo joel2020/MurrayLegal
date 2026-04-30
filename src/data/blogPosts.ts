@@ -137,14 +137,6 @@ const makeYonkersRealEstateGuideSections = (): BlogSection[] => [
       'No result is guaranteed in any legal matter. Real estate outcomes depend on contract language, title status, financing, municipal records, party cooperation, and timing. Informational planning and careful documentation can nonetheless reduce avoidable friction and improve readiness for each stage of the transaction.'
     ],
   },
-  {
-    heading: 'FAQ Expansion',
-    paragraphs: [
-      'Do I need an attorney for a Yonkers closing? Many New York transactions involve attorney participation because contracts, title matters, lender terms, and transfer documents create legal obligations that can materially affect risk and timing.',
-      'What can delay a Yonkers closing? Common delays include title defects, unresolved liens, missing municipal records, lender condition issues, inspection disputes, and misaligned expectations about repairs, credits, or occupancy timing.',
-      'What documents should I gather, and can counsel help if I am already under contract? Buyers and sellers should gather the contract package, riders, title and municipal records, financing communications, and inspection reports; legal review can still help mid-transaction. If you are outside Pennsylvania, support may still be available through nationwide matters where permitted by law, with local counsel coordination where appropriate.'
-    ],
-  },
 ];
 
 const makeResidentialWestchesterSections = (): BlogSection[] => [
@@ -155,7 +147,6 @@ const makeResidentialWestchesterSections = (): BlogSection[] => [
   { heading: 'Westchester-Specific Practical Considerations', paragraphs: ['Westchester properties can involve older housing stock, prior renovations, and layered permit histories that require careful municipal record checks. Buyers and sellers should evaluate whether improvements appear properly documented and whether open items may affect financing, insurance, or resale plans.', 'Property taxes, utility adjustments, and local administrative requirements also deserve attention. Accurate figures and timing assumptions are important for both affordability planning and closing statement accuracy. For multi-family properties, rental arrangements and occupancy realities should be compared against written records.', 'Because municipalities and management parties may move at different speeds, proactive follow-up is often necessary. Building extra time into planning can reduce stress when records or approvals take longer than expected.']},
   { heading: 'Attorney Review and Risk Reduction', paragraphs: ['Attorney review can clarify rights and obligations at each stage of the deal, from contract drafting through final transfer documents. This includes identifying ambiguous language, aligning deadlines with practical realities, and flagging provisions that shift risk unexpectedly.', 'Risk reduction is not about eliminating every uncertainty; it is about making informed decisions with clear documentation. When issues arise, written strategy helps parties choose between negotiation, extension requests, credits, escrow solutions, or other practical options.', 'Early legal guidance can also improve communication quality across all participants. Clear legal framing often prevents small misunderstandings from escalating into major closing disputes.']},
   { heading: 'How Murray Legal May Help Where Permitted', paragraphs: ['Murray Legal supports clients through consultation, transaction strategy, document review, and coordination planning designed to keep residential transactions organized and decision-ready. The objective is practical execution with clear communication, not unnecessary complexity.', 'Murray Legal has an office in Yonkers and is licensed in Pennsylvania. Assistance for New York and other jurisdictions is provided through nationwide matters where permitted by law, including local counsel coordination and jurisdiction-appropriate arrangements when required.', 'This content is informational only and does not create an attorney-client relationship. Specific legal advice depends on the facts, documents, and jurisdictional framework of each matter.']},
-  { heading: 'FAQ Expansion', paragraphs: ['When should I contact counsel? Ideally before signing, before waiving contingencies, or immediately when title, lender, inspection, or timeline disputes appear.', 'What should buyers gather? Buyers should organize the contract package, riders, lender communications, inspection reports, title updates, and any building-management requirements tied to the property type.', 'What should sellers gather, are co-ops different, and what if title issues appear? Sellers should assemble payoff and transfer records, municipal documentation, and property condition records; co-op transactions usually add board-driven steps; and title issues should be addressed promptly with a documented cure plan before closing pressure peaks.']},
 ];
 
 const makeNewYorkClosingProcessSections = (): BlogSection[] => [
@@ -167,7 +158,6 @@ const makeNewYorkClosingProcessSections = (): BlogSection[] => [
   { heading: 'Final Walkthrough and Closing Day', paragraphs: ['The final walkthrough confirms that property condition and transfer expectations remain aligned with contract terms. Utility status, agreed repairs, included items, and vacancy or possession conditions should be verified before closing funds are released.', 'Closing day itself typically involves signatures, disbursement instructions, transfer documentation, and confirmation of keys or possession logistics. Accurate execution depends on prior coordination rather than same-day problem solving.', 'When disputes arise on closing day, parties often rely on credits, escrow arrangements, or short extensions to complete the transfer. Structured fallback options help avoid full transaction collapse.']},
   { heading: 'Post-Closing Items', paragraphs: ['Post-closing tasks may include recording confirmation, title policy issuance follow-up, escrow reconciliation, and final tax or utility adjustment checks. These items are less visible than closing day but still important for clean completion.', 'If post-closing occupancy is involved, written terms should define access, condition, duration, and financial responsibility. Ambiguous occupancy language can trigger avoidable disputes after transfer.', 'Buyers and sellers should keep complete copies of closing documents, disbursement records, and key communications. Organized records support faster resolution if questions arise later.']},
   { heading: 'How Murray Legal May Help Where Permitted', paragraphs: ['Murray Legal provides informational guidance on transaction strategy, document organization, and process planning designed to help clients make clear, well-timed decisions during closing preparation.', 'Murray Legal is licensed in Pennsylvania and maintains an office in Yonkers. Support for matters outside Pennsylvania is handled as nationwide matters where permitted by law, including jurisdiction-appropriate arrangements and local counsel coordination where required.', 'No statement here should be read as a claim of New York licensure or guaranteed case outcomes. Each matter depends on its facts, documentation, and governing jurisdiction.']},
-  { heading: 'FAQ Expansion', paragraphs: ['How long does closing take? Timing varies based on contract terms, title conditions, lender readiness, inspections, and party responsiveness, so even similar transactions can close on different schedules.', 'What causes delays and what is title clearance? Delays often come from title defects, municipal records, lender conditions, appraisal issues, and unresolved repair or credit disputes; title clearance means resolving recorded ownership or lien issues so transfer can proceed.', 'What should buyers and sellers bring? Parties should be prepared with identification, required signatures and authority documentation, certified or wired funds as applicable, and any transaction-specific documents requested by the closing team.']},
 ];
 
 export const blogPosts: BlogPost[] = [
@@ -189,9 +179,26 @@ export const blogPosts: BlogPost[] = [
     ],
     sections: makeYonkersRealEstateGuideSections(),
     faqs: [
-      { question: 'Do I need an attorney for a New York real estate closing?', answer: 'Attorney involvement is standard in many New York real estate transactions because contracts, title, lender requirements, and closing documents can create significant legal obligations.' },
-      { question: 'When should I contact a real estate attorney?', answer: 'Ideally before signing a contract, waiving contingencies, responding to title issues, or agreeing to closing terms.' },
-      { question: 'Does Murray Legal handle residential real estate matters?', answer: 'Murray Legal provides guidance for residential real estate transactions, including buyer and seller representation.' },
+      {
+        question: 'Do I need an attorney for a Yonkers real estate closing?',
+        answer: 'Attorney involvement is common in many New York real estate transactions because contracts, title matters, lender requirements, and transfer documents can create significant legal obligations. This content is informational only and does not imply New York licensure.'
+      },
+      {
+        question: 'When should I contact counsel about a Yonkers property transaction?',
+        answer: 'Ideally before signing a contract, waiving contingencies, responding to title issues, agreeing to repairs or credits, or committing to a closing timeline.'
+      },
+      {
+        question: 'What can delay a Yonkers real estate closing?',
+        answer: 'Common delays include title defects, unresolved liens, lender conditions, inspection disputes, missing municipal records, open permits, payoff issues, and disagreement over repairs, credits, or occupancy.'
+      },
+      {
+        question: 'What documents should buyers and sellers gather?',
+        answer: 'Useful documents may include the contract package, riders, inspection reports, title updates, municipal records, lender communications, payoff information, and any repair or credit agreements.'
+      },
+      {
+        question: 'Can Murray Legal help if the matter involves New York property?',
+        answer: 'Murray Legal has an office in Yonkers and is licensed in Pennsylvania. The firm may support nationwide matters where permitted by law, including through local counsel or jurisdiction-appropriate arrangements when needed.'
+      }
     ],
     internalLinks: [
       { label: 'Real Estate Attorney', href: '/real-estate-attorney' },
@@ -215,9 +222,26 @@ export const blogPosts: BlogPost[] = [
     ],
     sections: makeNewYorkClosingProcessSections(),
     faqs: [
-      { question: 'How long does a New York closing usually take?', answer: 'Timing depends on contract terms, financing, title, inspections, and party coordination. Many closings take several weeks or longer.' },
-      { question: 'What can delay a closing?', answer: 'Title defects, financing issues, inspection disputes, missing documents, board approvals, and unresolved contract issues can all delay closing.' },
-      { question: 'What does a closing attorney review?', answer: 'A closing attorney may review the contract, title documents, closing statements, lender documents, transfer documents, and related communications.' },
+      {
+        question: 'How long does the New York real estate closing process usually take?',
+        answer: 'Timing varies based on the contract, title search, lender readiness, inspections, municipal records, board approvals if applicable, and party responsiveness. Many closings take several weeks or longer.'
+      },
+      {
+        question: 'What are the main steps in a New York real estate closing?',
+        answer: 'Common steps include offer acceptance, attorney review, contract signing, inspections, due diligence, title search, financing coordination, closing statement review, final walkthrough, closing day, and post-closing recording or title follow-up.'
+      },
+      {
+        question: 'What can delay closing day?',
+        answer: 'Common causes include unresolved title issues, open permits, missing payoff letters, lender conditions, appraisal issues, inspection disputes, board approvals, inaccurate closing figures, or disagreement over repairs and credits.'
+      },
+      {
+        question: 'What is title clearance?',
+        answer: 'Title clearance is the process of identifying and resolving recorded issues such as liens, judgments, open mortgages, ownership discrepancies, easements, or other matters that may affect transfer.'
+      },
+      {
+        question: 'What should buyers and sellers prepare for closing?',
+        answer: 'Parties should prepare identification, required signatures, closing funds or payoff information, lender or entity authority documents if applicable, and any transaction-specific documents requested by the closing team.'
+      }
     ],
     internalLinks: [
       { label: 'Residential Transactions', href: '/real-estate-attorney/residential-transactions' },
@@ -375,9 +399,26 @@ export const blogPosts: BlogPost[] = [
     ],
     sections: makeResidentialWestchesterSections(),
     faqs: [
-      { question: 'What does a buyer attorney do?', answer: 'A buyer attorney may review the contract, negotiate terms, evaluate title issues, coordinate with the lender, and review closing documents.' },
-      { question: 'What does a seller attorney do?', answer: 'A seller attorney may prepare or review the contract, respond to title issues, coordinate payoff documents, and handle closing requirements.' },
-      { question: 'Are condo and co-op transactions different?', answer: 'Yes. Condo and co-op transactions may include board packages, building documents, managing agent requirements, and additional review steps.' },
+      {
+        question: 'When should buyers or sellers contact counsel in a Westchester residential transaction?',
+        answer: 'The best time is usually before signing, before waiving contingencies, or as soon as title, inspection, financing, municipal, or timeline issues appear.'
+      },
+      {
+        question: 'What should buyers gather before legal review?',
+        answer: 'Buyers should gather the draft contract, riders, lender communications, inspection reports, title updates, building or board documents, and any written communications about repairs or credits.'
+      },
+      {
+        question: 'What should sellers gather before closing?',
+        answer: 'Sellers should organize payoff information, title-related documents, municipal records, permit information, repair records, occupancy details, and any documents requested by the title company or closing team.'
+      },
+      {
+        question: 'Are co-op and condo transactions different from single-family home sales?',
+        answer: 'Yes. Co-op and condo transactions often involve board packages, management company requirements, financial disclosures, rules, fees, and approval timelines that can affect closing.'
+      },
+      {
+        question: 'What happens if a title issue appears before closing?',
+        answer: 'The parties may need to identify the issue, determine who is responsible, request payoff or release documents, negotiate an extension, or consider other contract-based solutions.'
+      }
     ],
     internalLinks: [
       { label: 'Residential Transactions', href: '/real-estate-attorney/residential-transactions' },

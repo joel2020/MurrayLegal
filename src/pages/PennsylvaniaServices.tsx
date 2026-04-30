@@ -2,7 +2,7 @@ import ConsultationCTA from '../components/ConsultationCTA';
 import SEOHead from '../components/SEOHead';
 import { SITE_URL } from '../lib/firm';
 import { breadcrumbSchema, localLegalServiceSchema } from '../lib/schema';
-import { Link } from '../lib/router';
+import { Link, usePathname } from '../lib/router';
 
 type PAServicePage = {
   path: string;
@@ -82,7 +82,7 @@ const pages: Record<string, PAServicePage> = {
 export const pennsylvaniaServicePaths = Object.keys(pages);
 
 export default function PennsylvaniaServices(): JSX.Element {
-  const path = window.location.pathname;
+  const path = usePathname();
   const page = pages[path] ?? pages['/pennsylvania-real-estate-attorney'];
 
   const schema = [

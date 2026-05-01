@@ -1,0 +1,1 @@
+export default function PrivacyPolicy(){return <main className='px-4 py-16'><h1 className='font-display text-5xl'>Privacy Policy</h1><p className='mt-4'>Murray Legal uses inquiry information solely to evaluate requests for consultation and provide legal service communications.</p></main>}

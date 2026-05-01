@@ -9,85 +9,44 @@ import {
   SITE_URL,
 } from './firm';
 
-type FAQInput = {
-  question: string;
-  answer: string;
-};
+const allServiceTypes = [
+  'Corporate Law',
+  'Real Estate',
+  'Civil Litigation',
+  'Entertainment Transactions',
+  'Sports Transactions',
+  'Intellectual Property',
+  'Trusts, Wills & Estates',
+  'Divorce & Family Law',
+];
 
-type BreadcrumbInput = {
-  name: string;
-  path: string;
-};
-
-type BlogArticleInput = {
-  slug: string;
-  title: string;
-  description: string;
-  datePublished: string;
-  dateModified: string;
-  category: string;
-  keywords: string[];
-};
-
-const parseCityStateZip = (value: string): { city: string; state: string; zip: string } => {
-  const [city, stateZip] = value.split(',').map((part) => part.trim());
-  const [state = '', zip = ''] = (stateZip ?? '').split(' ');
-
-  return {
-    city: city ?? '',
-    state,
-    zip,
-  };
-};
-
-export const localLegalServiceSchema = (practiceArea?: string) => {
-  const primary = parseCityStateZip(PRIMARY_CITY_STATE_ZIP);
-  const secondary = parseCityStateZip(SECONDARY_CITY_STATE_ZIP);
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'LegalService',
-    name: FIRM_NAME,
-    url: SITE_URL,
-    telephone: PHONE_TEL,
-    email: EMAIL,
-    areaServed: ['Yonkers', 'Westchester County', 'New York', 'Pennsylvania'],
-    serviceType: practiceArea ?? 'Real Estate Law, Business Law, Civil Litigation',
-    address: [
-      {
-        '@type': 'PostalAddress',
-        streetAddress: PRIMARY_ADDRESS_LINE_1,
-        addressLocality: primary.city,
-        addressRegion: primary.state,
-        postalCode: primary.zip,
-        addressCountry: 'US',
-      },
-      {
-        '@type': 'PostalAddress',
-        streetAddress: SECONDARY_ADDRESS_LINE_1,
-        addressLocality: secondary.city,
-        addressRegion: secondary.state,
-        postalCode: secondary.zip,
-        addressCountry: 'US',
-      },
-    ],
-  };
-};
-
-export const faqSchema = (faqs: FAQInput[]) => ({
+export const organizationSchema = () => ({
   '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer,
-    },
-  })),
+  '@type': 'Organization',
+  name: FIRM_NAME,
+  url: SITE_URL,
+  email: EMAIL,
+  telephone: PHONE_TEL,
+  address: [`${PRIMARY_ADDRESS_LINE_1}, ${PRIMARY_CITY_STATE_ZIP}`, `${SECONDARY_ADDRESS_LINE_1}, ${SECONDARY_CITY_STATE_ZIP}`],
 });
 
-export const breadcrumbSchema = (items: BreadcrumbInput[]) => ({
+export const websiteSchema = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: FIRM_NAME,
+  url: SITE_URL,
+});
+
+export const legalServiceSchema = (serviceType?: string[] | string) => ({
+  '@context': 'https://schema.org',
+  '@type': 'LegalService',
+  name: FIRM_NAME,
+  url: SITE_URL,
+  areaServed: 'United States',
+  serviceType: serviceType ? (Array.isArray(serviceType) ? serviceType : [serviceType]) : allServiceTypes,
+});
+
+export const breadcrumbSchema = (items: { name: string; path: string }[]) => ({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: items.map((item, index) => ({
@@ -98,27 +57,41 @@ export const breadcrumbSchema = (items: BreadcrumbInput[]) => ({
   })),
 });
 
-export const blogPostingSchema = (post: BlogArticleInput) => ({
+export const faqSchema = (faqs: { question: string; answer: string }[]) => ({
   '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+});
+
+export const articleSchema = (post: {
+  slug: string;
+  title: string;
+  description: string;
+  datePublished: string;
+  dateModified: string;
+  category: string;
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
   headline: post.title,
   description: post.description,
   datePublished: post.datePublished,
   dateModified: post.dateModified,
-  author: {
-    '@type': 'Organization',
-    name: FIRM_NAME,
-    url: SITE_URL,
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: FIRM_NAME,
-    url: SITE_URL,
-  },
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': `${SITE_URL}/blog/${post.slug}`,
-  },
+  author: { '@type': 'Organization', name: FIRM_NAME },
+  publisher: { '@type': 'Organization', name: FIRM_NAME },
+  mainEntityOfPage: `${SITE_URL}/insights/${post.slug}`,
   articleSection: post.category,
-  keywords: post.keywords.join(', '),
 });
+
+export const contactPageSchema = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Murray Legal',
+  url: `${SITE_URL}/contact`,
+});
+
+export const localLegalServiceSchema = legalServiceSchema;

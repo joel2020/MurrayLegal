@@ -1,119 +1,33 @@
 import SEOHead from '../components/SEOHead';
-import { getBlogPostBySlug } from '../data/blogPosts';
-import { usePathname, Link } from '../lib/router';
-import { blogPostingSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
+import { insights } from '../data/insights';
 import { SITE_URL } from '../lib/firm';
+import { Link, usePathname } from '../lib/router';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../lib/schema';
 
 export default function BlogPost(): JSX.Element {
   const pathname = usePathname();
-  const slug = pathname.replace('/blog/', '');
-  const post = getBlogPostBySlug(slug);
-
-  if (!post) {
-    return <div className="p-10">Post not found</div>;
-  }
-
-  const schema = [
-    blogPostingSchema({
-      slug: post.slug,
-      title: post.title,
-      description: post.metaDescription,
-      datePublished: post.datePublished,
-      dateModified: post.dateModified,
-      category: post.category,
-      keywords: post.keywords,
-    }),
-    ...(post.faqs.length > 0 ? [faqSchema(post.faqs)] : []),
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: 'Blog', path: '/blog' },
-      { name: post.title, path: `/blog/${post.slug}` },
-    ]),
-  ];
+  const slug = pathname.split('/').pop() || '';
+  const post = insights.find((entry) => entry.slug === slug) || insights[0];
+  const canonical = `${SITE_URL}/insights/${post.slug}`;
+  const schema = { '@context': 'https://schema.org', '@graph': [articleSchema(post), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Insights', path: '/insights' }, { name: post.title, path: `/insights/${post.slug}` }]), faqSchema(post.faqs)] };
 
   return (
-    <main className="px-6 py-16 max-w-4xl mx-auto">
-      <SEOHead 
-        title={post.metaTitle} 
-        description={post.metaDescription}
-        canonical={`${SITE_URL}/blog/${post.slug}`}
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
-
-      <h1 className="text-4xl font-bold mb-6">{post.title}</h1>
-
-      <p className="mb-6 text-lg text-text-muted">
-        Murray Legal maintains an office in Yonkers, New York and is licensed in Pennsylvania. The firm works with
-        clients on nationwide matters where permitted by law, including through local counsel or jurisdiction-appropriate
-        arrangements when needed.
-      </p>
-
-      {post.intro.map((p, i) => (
-        <p key={i} className="mb-4">{p}</p>
-      ))}
-
-      <div className="my-8 rounded-md border border-gold/40 bg-gold/5 p-6">
-        <h2 className="text-xl font-semibold text-navy">Discuss Your Legal Matter</h2>
-        <p className="mt-2 text-sm text-text-muted">
-          If you are facing a legal issue involving real estate, business transactions, or a dispute, Murray Legal can help you
-          evaluate your options and next steps where permitted by law.
-        </p>
-        <Link to="/contact" className="btn-primary mt-4 inline-block" ariaLabel="Contact Murray Legal">
-          Request a Consultation
-        </Link>
-      </div>
-
-      {post.sections.map((section) => (
-        <section key={section.heading} className="mt-8">
-          <h2 className="text-2xl font-semibold">{section.heading}</h2>
-          {section.paragraphs.map((p, i) => (
-            <p key={i} className="mt-3">{p}</p>
-          ))}
-        </section>
-      ))}
-
-      {post.faqs.length > 0 && (
-        <section className="mt-10 rounded-md border border-[rgba(15,31,61,0.10)] bg-white p-6">
-          <h2 className="text-2xl font-semibold text-navy">Frequently Asked Questions</h2>
-          <div className="mt-4 space-y-5">
-            {post.faqs.map((faq) => (
-              <div key={faq.question}>
-                <h3 className="font-semibold text-navy">{faq.question}</h3>
-                <p className="mt-2 text-text-muted">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <div className="my-10 rounded-md border border-navy/20 bg-navy/5 p-6">
-        <h2 className="text-xl font-semibold text-navy">Need Legal Guidance?</h2>
-        <p className="mt-2 text-sm text-text-muted">
-          Murray Legal works with clients on real estate transactions, business matters, and litigation where permitted by law.
-        </p>
-        <Link to="/contact" className="btn-primary mt-4 inline-block" ariaLabel="Contact Murray Legal">
-          Speak With an Attorney
-        </Link>
-      </div>
-
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Related Legal Services</h2>
-        <ul>
-          {post.internalLinks.map((link) => (
-            <li key={link.href}>
-              <Link to={link.href}>{link.label}</Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <div className="mt-10 border-t pt-6 text-sm text-gray-500">
-        This article is for general informational purposes only and does not constitute legal advice. Reading this article or contacting Murray Legal through this website does not create an attorney-client relationship.
-      </div>
+    <main className="bg-ivory px-4 py-16 md:px-6">
+      <SEOHead title={post.seoTitle} description={post.metaDescription} canonical={canonical} schema={schema} />
+      <article className="mx-auto max-w-4xl">
+        <h1 className="font-display text-5xl text-navy">{post.title}</h1>
+        <p className="mt-4 text-text-muted">{post.executiveSummary}</p>
+        <h2 className="mt-8 font-display text-3xl text-navy">Key Takeaways</h2>
+        <ul className="mt-3 space-y-2">{post.keyTakeaways.map((item) => <li key={item}>• {item}</li>)}</ul>
+        {post.sections.map((section) => <section key={section.heading} className="mt-8"><h2 className="font-display text-3xl text-navy">{section.heading}</h2>{section.paragraphs.map((paragraph, index) => <p className="mt-3 text-text-muted" key={index}>{paragraph}</p>)}</section>)}
+        <h2 className="mt-8 font-display text-3xl text-navy">Frequently Asked Questions</h2>
+        {post.faqs.map((faq) => <div key={faq.question} className="mt-4"><h3 className="font-semibold text-navy">{faq.question}</h3><p className="text-text-muted">{faq.answer}</p></div>)}
+        <p className="mt-8 text-sm text-text-muted">This website provides general information only and does not constitute legal advice. Contacting Murray Legal does not create an attorney-client relationship.</p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link to={`/practice-areas/${post.relatedPractice}`} className="btn-secondary" ariaLabel="View related practice area">View Related Practice Area</Link>
+          <Link to="/contact" className="btn-primary" ariaLabel="Discuss Your Matter">Discuss Your Matter</Link>
+        </div>
+      </article>
     </main>
   );
 }

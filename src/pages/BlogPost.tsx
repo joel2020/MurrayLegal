@@ -1,7 +1,8 @@
 import SEOHead from '../components/SEOHead';
 import { insights } from '../data/insights';
 import { SITE_URL } from '../lib/firm';
-import { Link, usePathname } from '../lib/router';
+import { Link } from '../lib/router';
+import { usePathname } from '../lib/usePathname';
 import { articleSchema, breadcrumbSchema, faqSchema } from '../lib/schema';
 
 export default function BlogPost(): JSX.Element {

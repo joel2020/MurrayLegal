@@ -1,6 +1,6 @@
 import Footer from './components/Footer';
 import Header from './components/Header';
-import { usePathname } from './lib/router';
+import { usePathname } from './lib/usePathname';
 import About from './pages/About';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';

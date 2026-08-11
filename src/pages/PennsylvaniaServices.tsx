@@ -2,7 +2,8 @@ import ConsultationCTA from '../components/ConsultationCTA';
 import SEOHead from '../components/SEOHead';
 import { SITE_URL } from '../lib/firm';
 import { breadcrumbSchema, faqSchema, localLegalServiceSchema } from '../lib/schema';
-import { Link, usePathname } from '../lib/router';
+import { Link } from '../lib/router';
+import { usePathname } from '../lib/usePathname';
 
 type NationalServicePage = {
   path: string;
@@ -96,8 +97,6 @@ const pages: Record<string, NationalServicePage> = {
     ],
   },
 };
-
-export const nationalServicePaths = Object.keys(pages);
 
 export default function NationalServices(): JSX.Element {
   const path = usePathname();

@@ -4,6 +4,16 @@ Date: August 12, 2026
 Site: `https://murraylegalfirm.com`  
 Platform: Vite, React, TypeScript, Vercel
 
+## Source decisions
+
+The scope includes the decisions Eddie made in the August 11, 2026 Granola meeting titled **Property management AI implementation — website redesign, compliance automation, and resident services**:
+
+- Remove only the Trusts, Wills & Estates and Divorce & Family Law practices.
+- Keep the other existing practice areas, including corporate law, real estate, civil litigation, entertainment transactions, sports transactions, and intellectual property.
+- Do not add an attorney photo or credentials yet.
+- Keep the confirmed phone number, `(914) 214-1880`.
+- Provide a chatbot-style intake channel that captures lead information, emails it to `admin@murraylegalfirm.com`, and supports follow-up by Eddie's virtual assistant.
+
 ## Objective
 
 Make every valuable Murray Legal page independently discoverable, crawlable, and indexable while ensuring duplicate and nonexistent URLs resolve through unambiguous HTTP redirects or genuine HTTP 404 responses.
@@ -16,11 +26,20 @@ A single typed route manifest will define the canonical indexable URL set. It wi
 
 - The homepage
 - About, contact, insights, privacy policy, and disclaimer pages
-- Eight practice-area pages
+- Six practice-area pages
 - Five industry pages
 - Every valid insight article from `src/data/insights.ts`
 
 The same manifest will drive prerendering, Vercel rewrites, route validation, and sitemap generation so these surfaces cannot silently drift apart.
+
+The removed practice pages and their two directly associated articles will not appear in the manifest, sitemap, navigation, structured data, or internal links:
+
+- `/practice-areas/trusts-wills-estates`
+- `/practice-areas/divorce-family-law`
+- `/insights/estate-planning-checklist-for-executives-and-business-owners`
+- `/insights/high-net-worth-divorce-legal-and-financial-issues-to-consider`
+
+Those URLs will return HTTP 404 because the firm does not want to present those services and there is no equivalent replacement page. Sitewide titles, descriptions, FAQs, service descriptions, and industry links will be updated to remove estate-planning and family-law claims.
 
 ## Rendering architecture
 
@@ -76,18 +95,42 @@ After the repaired site is deployed and verified:
 
 No mass indexing requests or URL-removal requests will be made.
 
+## Intake chatbot
+
+An accessible, deterministic intake assistant will be available from every page. It is a guided lead form, not a legal-advice or generative-AI system.
+
+The assistant will:
+
+- Explain that it collects information for consultation review and cannot provide legal advice.
+- Collect name, email, phone, practice area, state or jurisdiction, a brief matter description, urgency, and preferred contact method.
+- Require acknowledgement that submission does not create an attorney-client relationship and should not include confidential information.
+- Submit to the existing `/api/intake` endpoint with `source: chatbot`.
+- Show an explicit success or error state and preserve the user's entries when a submission fails.
+- Be keyboard accessible, closable, and usable on mobile without obscuring the page.
+
+The existing contact-page intake form will use the same validated submission path and will be repaired so its submit button sends the request. Both channels will email `admin@murraylegalfirm.com` for virtual-assistant follow-up. No automated legal response, engagement decision, or claim of immediate availability will be made.
+
+The intake endpoint will enforce required fields, input-length limits, email validation, the existing honeypot, and a defined source value. It will not log matter descriptions or other intake contents to application logs.
+
+## Attorney profile constraints
+
+No attorney portrait, biography credentials, bar credentials beyond the existing jurisdiction-safe firm disclosures, awards, results, or unverified trust claims will be added. The implementation will preserve this constraint while correcting SEO content.
+
 ## Testing strategy
 
 Automated tests will establish the desired behavior before implementation:
 
 - The route manifest includes every valid static and article route exactly once.
 - Every redirect source is excluded from the canonical manifest and points to a canonical destination.
+- Removed practices and their associated articles are absent from navigation, content data, structured data, sitemap output, and the canonical manifest.
 - Unknown article slugs resolve to the Not Found component rather than an existing article.
 - Sitemap output exactly matches the canonical indexable manifest.
 - The production build generates HTML for every canonical route.
 - Every generated HTML file contains its expected canonical, title, robots directive, H1, and rendered content.
 - Generated 404 HTML uses `noindex` and does not claim a valid canonical page.
 - Vercel configuration has no catch-all rewrite and contains the expected permanent redirects.
+- Chatbot and contact-form submissions validate required fields and send the expected intake payload to the shared endpoint.
+- The intake endpoint rejects malformed or oversized submissions without exposing their contents in logs.
 
 Production-style verification will run against `vercel dev` or a Vercel preview deployment. Representative checks will confirm:
 
@@ -112,7 +155,9 @@ The repair is complete when:
 - All canonical routes return HTTP 200 and meaningful page-specific HTML without requiring JavaScript.
 - All specified aliases return a permanent one-hop redirect to a canonical route.
 - Random nonexistent paths and invalid article slugs return HTTP 404.
+- Removed practice and article URLs return HTTP 404 and are absent from every discovery surface.
 - The sitemap and application route inventory agree exactly.
+- Both intake interfaces successfully deliver a test submission to the configured administrative inbox in a non-production recipient test or controlled production verification.
 - The current sitemap is accepted in Search Console and the obsolete sitemap is removed.
 - Google URL Inspection can discover the submitted inner pages, even if Google has not yet completed indexing them.
 
@@ -121,7 +166,7 @@ The historical count of 6,977 excluded URLs is not a completion criterion becaus
 ## Out of scope
 
 - Visual redesign
-- Rewriting legal content
+- Rewriting unrelated legal content
 - Migrating to Next.js, Astro, or another framework
 - Backlink acquisition or directory submissions
 - Guaranteeing Google indexing or rankings

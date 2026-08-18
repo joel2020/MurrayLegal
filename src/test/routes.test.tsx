@@ -4,7 +4,7 @@ import App from '../App';
 import { BrowserRouter } from '../lib/router';
 
 const routes: Array<[path: string, heading: RegExp]> = [
-  ['/', /Premium Legal Counsel/i],
+  ['/', /Strategic Legal Counsel/i],
   ['/insights', /Legal Insights/i],
   ['/blog', /Legal Insights/i],
   ['/insights/business-contract-red-flags-executives-should-review-before-signing', /Business Contract Red Flags/i],

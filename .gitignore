@@ -10,6 +10,9 @@ node_modules
 dist
 dist-ssr
 .worktrees/
+artifacts/playwright/
+playwright-report/
+test-results/
 *.local
 
 .vscode/*

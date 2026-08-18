@@ -1,16 +1,22 @@
-Murray Legal
-Boutique law firm
-Office: Yonkers, New York
-Licensed jurisdiction: Pennsylvania
+# Murray Legal
+
+Canonical website: https://murraylegalfirm.com
 Phone: (914) 214-1880
 Email: admin@murraylegalfirm.com
-Website: https://murraylegal.com
 
-Services:
-Real estate law, commercial transactions, residential transactions, land use and zoning, corporate law, civil litigation, business disputes, personal injury, entertainment law, sports transactions
+Murray Legal provides strategic legal counsel for businesses, investors, executives, creators, athletes, families, and private clients. Practice areas include corporate law, real estate, civil litigation, entertainment transactions, sports transactions, intellectual property, trusts, wills and estates, and divorce and family law.
 
-Service positioning:
-Murray Legal works with clients nationwide on matters where permitted by law, including through local counsel or jurisdiction-appropriate arrangements when required.
+Primary pages:
+- https://murraylegalfirm.com/about
+- https://murraylegalfirm.com/contact
+- https://murraylegalfirm.com/insights
+- https://murraylegalfirm.com/practice-areas/corporate-law
+- https://murraylegalfirm.com/practice-areas/real-estate
+- https://murraylegalfirm.com/practice-areas/civil-litigation
+- https://murraylegalfirm.com/practice-areas/entertainment-transactions
+- https://murraylegalfirm.com/practice-areas/sports-transactions
+- https://murraylegalfirm.com/practice-areas/intellectual-property
+- https://murraylegalfirm.com/practice-areas/trusts-wills-estates
+- https://murraylegalfirm.com/practice-areas/divorce-family-law
 
-Important notice:
-The firm is licensed to practice law in Pennsylvania. Content related to other jurisdictions is provided for general informational purposes only and does not constitute legal advice or an offer of representation in those jurisdictions.
+Jurisdiction notice: Murray Legal maintains an office location in Yonkers, New York and is currently licensed to practice law in Pennsylvania. The firm may work with clients nationwide where permitted by law, including through local counsel or jurisdiction-appropriate arrangements when necessary. Website content is general information only and does not create an attorney-client relationship.

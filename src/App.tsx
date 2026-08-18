@@ -47,8 +47,9 @@ export default function App(): JSX.Element {
 
   return (
     <>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <Header />
-      {page}
+      <div id="main-content" tabIndex={-1}>{page}</div>
       <Footer />
     </>
   );

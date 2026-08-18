@@ -1,7 +1,20 @@
 # Murray Legal
 
-Website:
-https://murraylegalfirm.com
+Canonical website: https://murraylegalfirm.com
 
-Summary:
-Murray Legal is a law firm serving clients with real estate, business, and litigation matters where permitted by law. The firm maintains an office in Yonkers, New York.
+Murray Legal provides strategic legal counsel for businesses, investors, executives, creators, athletes, families, and private clients. Practice areas include corporate law, real estate, civil litigation, entertainment transactions, sports transactions, intellectual property, trusts, wills and estates, and divorce and family law.
+
+Primary pages:
+- https://murraylegalfirm.com/about
+- https://murraylegalfirm.com/contact
+- https://murraylegalfirm.com/insights
+- https://murraylegalfirm.com/practice-areas/corporate-law
+- https://murraylegalfirm.com/practice-areas/real-estate
+- https://murraylegalfirm.com/practice-areas/civil-litigation
+- https://murraylegalfirm.com/practice-areas/entertainment-transactions
+- https://murraylegalfirm.com/practice-areas/sports-transactions
+- https://murraylegalfirm.com/practice-areas/intellectual-property
+- https://murraylegalfirm.com/practice-areas/trusts-wills-estates
+- https://murraylegalfirm.com/practice-areas/divorce-family-law
+
+Jurisdiction notice: Murray Legal maintains an office location in Yonkers, New York and is currently licensed to practice law in Pennsylvania. The firm may work with clients nationwide where permitted by law, including through local counsel or jurisdiction-appropriate arrangements when necessary. Website content is general information only and does not create an attorney-client relationship.

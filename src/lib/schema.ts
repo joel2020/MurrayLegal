@@ -7,6 +7,7 @@ import {
   SECONDARY_ADDRESS_LINE_1,
   SECONDARY_CITY_STATE_ZIP,
   SITE_URL,
+  LICENSED_JURISDICTION,
 } from './firm';
 
 const allServiceTypes = [
@@ -27,6 +28,7 @@ export const organizationSchema = () => ({
   url: SITE_URL,
   email: EMAIL,
   telephone: PHONE_TEL,
+  areaServed: { '@type': 'AdministrativeArea', name: LICENSED_JURISDICTION },
   address: [`${PRIMARY_ADDRESS_LINE_1}, ${PRIMARY_CITY_STATE_ZIP}`, `${SECONDARY_ADDRESS_LINE_1}, ${SECONDARY_CITY_STATE_ZIP}`],
 });
 
@@ -42,7 +44,8 @@ export const legalServiceSchema = (serviceType?: string[] | string) => ({
   '@type': 'LegalService',
   name: FIRM_NAME,
   url: SITE_URL,
-  areaServed: 'United States',
+  areaServed: { '@type': 'AdministrativeArea', name: LICENSED_JURISDICTION },
+  description: 'Pennsylvania-licensed legal counsel serving clients in other jurisdictions where permitted by law and through jurisdiction-appropriate arrangements when necessary.',
   serviceType: serviceType ? (Array.isArray(serviceType) ? serviceType : [serviceType]) : allServiceTypes,
 });
 

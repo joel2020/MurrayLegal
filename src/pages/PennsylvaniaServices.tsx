@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- route data is exported with its page for legacy consumers */
 import ConsultationCTA from '../components/ConsultationCTA';
 import SEOHead from '../components/SEOHead';
 import { SITE_URL } from '../lib/firm';

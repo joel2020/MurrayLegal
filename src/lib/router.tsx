@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- router primitives and hook intentionally share one small module */
 import { createContext, type ReactNode, useContext, useMemo, useSyncExternalStore } from 'react';
 
 type RouterContextValue = {

@@ -41,7 +41,6 @@ export default function Home(): JSX.Element {
               height="1024"
               alt="Contemporary limestone and bronze architecture in directional light"
               className="h-[19rem] w-full object-cover object-[62%_58%] sm:h-[27rem] lg:h-[34rem]"
-              fetchPriority="high"
             />
           </picture>
 

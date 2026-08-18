@@ -14,7 +14,7 @@ test('homepage shell routes to consultation without overflow', async ({ page }) 
 test('mobile navigation exposes practice and industry links', async ({ page }, testInfo) => {
   test.skip(!testInfo.project.name.startsWith('mobile'), 'Mobile navigation contract');
   await page.goto('/');
-  const menuButton = page.getByRole('button', { name: /Toggle mobile menu/i });
+  const menuButton = page.getByRole('button', { name: 'Open navigation' });
   await menuButton.click();
   const mobileNavigation = page.getByRole('navigation', { name: 'Mobile navigation' });
   await expect(mobileNavigation.getByRole('link', { name: 'Corporate Law', exact: true })).toBeVisible();

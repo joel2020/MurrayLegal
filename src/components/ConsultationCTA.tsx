@@ -1,29 +1,23 @@
+import { ArrowUpRight, Phone } from 'lucide-react';
 import { PHONE_DISPLAY, PHONE_TEL } from '../lib/firm';
 import { Link } from '../lib/router';
+import Container from './Container';
 
 export default function ConsultationCTA(): JSX.Element {
   return (
-    <section className="bg-navy px-4 py-20 md:px-6 md:py-28" aria-label="Consultation call to action">
-      <div className="mx-auto max-w-7xl">
-        <h2 className="font-display text-display-lg text-ivory">Ready to Discuss Your Legal Matter?</h2>
-        <span className="gold-rule mt-6" aria-hidden="true" />
-        <p className="text-base text-stone/80">
-          Murray Legal provides focused counsel for real estate, corporate, and litigation matters throughout Yonkers,
-          Westchester, and greater New York.
-        </p>
-        <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-          <Link to="/contact" ariaLabel="Schedule a consultation" className="btn-primary">
-            Schedule a Consultation
-          </Link>
-          <a
-            href={`tel:${PHONE_TEL}`}
-            aria-label="Call Murray Legal"
-            className="inline-flex min-h-[48px] items-center text-sm font-medium uppercase tracking-[0.08em] text-gold"
-          >
-            ☎ {PHONE_DISPLAY}
-          </a>
+    <section className="relative overflow-hidden bg-navy py-20 text-paper sm:py-24 lg:py-28" aria-label="Consultation call to action">
+      <div className="absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 rotate-45 border border-gold/20" aria-hidden="true" />
+      <Container className="relative grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
+        <div>
+          <p className="eyebrow">Start a conversation</p>
+          <h2 className="mt-5 max-w-4xl font-display text-display-lg text-paper">Strategic counsel starts with a focused conversation.</h2>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-stone sm:text-lg">Tell us what is at stake. Murray Legal will evaluate fit, urgency, and jurisdiction before any engagement begins.</p>
         </div>
-      </div>
+        <div className="flex flex-col items-start gap-4 lg:items-stretch">
+          <Link to="/contact" ariaLabel="Schedule a consultation" className="btn-primary justify-between">Schedule a consultation <ArrowUpRight aria-hidden="true" size={17} /></Link>
+          <a href={`tel:${PHONE_TEL}`} aria-label="Call Murray Legal" className="btn-outline justify-between"><span className="flex items-center gap-2"><Phone aria-hidden="true" size={16} />{PHONE_DISPLAY}</span><ArrowUpRight aria-hidden="true" size={17} /></a>
+        </div>
+      </Container>
     </section>
   );
 }

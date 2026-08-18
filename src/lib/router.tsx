@@ -18,10 +18,18 @@ export function BrowserRouter({ children }: { children: ReactNode }): JSX.Elemen
   const pathname = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 
   const navigate = (to: string): void => {
-    if (to !== window.location.pathname) {
-      window.history.pushState({}, '', to);
-      window.dispatchEvent(new PopStateEvent('popstate'));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    const destination = new URL(to, window.location.origin);
+    const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    const next = `${destination.pathname}${destination.search}${destination.hash}`;
+    if (next === current) return;
+
+    window.history.pushState({}, '', next);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    if (destination.hash) {
+      window.requestAnimationFrame(() => document.querySelector(destination.hash)?.scrollIntoView({ behavior: 'smooth' }));
+    } else {
+      const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
     }
   };
 
@@ -49,11 +57,13 @@ export function Link({
   className,
   children,
   ariaLabel,
+  onClick,
 }: {
   to: string;
   className?: string;
   children: ReactNode;
   ariaLabel?: string;
+  onClick?: () => void;
 }): JSX.Element {
   const { navigate } = useRouter();
 
@@ -63,7 +73,9 @@ export function Link({
       aria-label={ariaLabel}
       className={className}
       onClick={(event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
+        onClick?.();
         navigate(to);
       }}
     >

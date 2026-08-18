@@ -37,6 +37,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed.' });
   }
 
+  const contentType = String(req.headers?.['content-type'] || '');
+  if (!contentType.includes('application/json')) {
+    return res.status(415).json({ error: 'Content-Type must be application/json.' });
+  }
+
   const data = req.body || {};
 
   if (data.website) {
@@ -46,8 +51,18 @@ export default async function handler(req, res) {
   const requiredFields = ['name', 'email', 'phone', 'practiceArea', 'jurisdiction', 'matterDescription'];
   const missingFields = requiredFields.filter((key) => !String(data[key] || '').trim());
 
-  if (missingFields.length > 0) {
+  if (missingFields.length > 0 || data.consent !== true) {
     return res.status(400).json({ error: 'Please complete all required fields.' });
+  }
+
+  const email = String(data.email).trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ error: 'Please enter a valid email address.' });
+  }
+
+  const limits = { name: 160, email: 320, phone: 80, company: 240, practiceArea: 160, jurisdiction: 160, urgency: 120, contactMethod: 80, matterDescription: 4000, pageUrl: 1000 };
+  if (Object.entries(limits).some(([key, limit]) => String(data[key] || '').length > limit)) {
+    return res.status(400).json({ error: 'One or more fields exceed the allowed length.' });
   }
 
   if (!process.env.RESEND_API_KEY) {

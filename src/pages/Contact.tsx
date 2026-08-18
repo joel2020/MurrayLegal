@@ -1,46 +1,17 @@
+import { Mail, MapPin, Phone } from 'lucide-react';
+import Container from '../components/Container';
+import IntakeForm from '../components/IntakeForm';
+import PageHero from '../components/PageHero';
 import SEOHead from '../components/SEOHead';
-import { SITE_URL } from '../lib/firm';
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, PRIMARY_ADDRESS_LINE_1, PRIMARY_CITY_STATE_ZIP, SECONDARY_ADDRESS_LINE_1, SECONDARY_CITY_STATE_ZIP, SITE_URL } from '../lib/firm';
 import { breadcrumbSchema, contactPageSchema, organizationSchema } from '../lib/schema';
 
 export default function Contact(): JSX.Element {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@graph': [contactPageSchema(), organizationSchema(), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }])],
-  };
+  const schema = { '@context': 'https://schema.org', '@graph': [contactPageSchema(), organizationSchema(), breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }])] };
 
-  return (
-    <main className="bg-ivory px-4 py-16 md:px-6">
-      <SEOHead title="Contact Murray Legal | Schedule a Legal Consultation" description="Contact Murray Legal to discuss a business, real estate, litigation, entertainment, sports, IP, estate planning, or family law matter." canonical={`${SITE_URL}/contact`} schema={schema} />
-      <section className="mx-auto max-w-6xl">
-        <h1 className="font-display text-5xl text-navy">Schedule a Consultation</h1>
-        <p className="mt-4 max-w-4xl text-text-muted">Use this form to request a consultation with Murray Legal. The firm will review your inquiry and determine whether it is able to assist.</p>
-
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <form className="rounded border border-[rgba(15,31,61,0.1)] bg-white p-6 md:p-8">
-            <h2 className="font-display text-3xl text-navy">Legal Intake</h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <label className="text-sm">Name<input className="mt-1 w-full rounded border p-3" name="name" /></label>
-              <label className="text-sm">Email<input className="mt-1 w-full rounded border p-3" type="email" name="email" /></label>
-              <label className="text-sm">Phone<input className="mt-1 w-full rounded border p-3" name="phone" /></label>
-              <label className="text-sm">Company<input className="mt-1 w-full rounded border p-3" name="company" /></label>
-              <label className="text-sm">Practice Area<input className="mt-1 w-full rounded border p-3" name="practiceArea" /></label>
-              <label className="text-sm">State / Jurisdiction<input className="mt-1 w-full rounded border p-3" name="jurisdiction" /></label>
-              <label className="text-sm">Urgency<input className="mt-1 w-full rounded border p-3" name="urgency" /></label>
-              <label className="text-sm">Preferred contact method<input className="mt-1 w-full rounded border p-3" name="contactMethod" /></label>
-              <label className="text-sm md:col-span-2">Brief description of matter<textarea className="mt-1 w-full rounded border p-3" rows={5} name="matterDescription" /></label>
-              <label className="text-sm md:col-span-2"><input type="checkbox" className="mr-2" />I understand submitting an inquiry does not create an attorney-client relationship.</label>
-            </div>
-            <p className="mt-4 text-sm text-text-muted">Please do not submit confidential or time-sensitive information through this form. Submitting an inquiry does not create an attorney-client relationship.</p>
-            <button className="btn-primary mt-6" type="button">Contact Murray Legal</button>
-          </form>
-
-          <aside className="rounded border border-[rgba(184,151,42,0.25)] bg-navy-deep p-6 text-ivory md:p-8">
-            <h2 className="font-display text-3xl">Consultation Standards</h2>
-            <p className="mt-4 text-stone">Murray Legal evaluates fit, urgency, and jurisdiction before engagement. Representation begins only after conflict review and signed engagement terms.</p>
-            <p className="mt-4 text-stone">Murray Legal serves clients across the United States where permitted by law and in coordination with local counsel when required.</p>
-          </aside>
-        </div>
-      </section>
-    </main>
-  );
+  return <main>
+    <SEOHead title="Contact Murray Legal | Schedule a Legal Consultation" description="Contact Murray Legal to discuss a business, real estate, litigation, entertainment, sports, IP, estate planning, or family law matter." canonical={`${SITE_URL}/contact`} schema={schema} />
+    <PageHero eyebrow="Start a conversation" title="Schedule a Consultation" description="Share the essential, non-confidential context. Murray Legal will evaluate fit, urgency, conflicts, and jurisdiction before any engagement begins." breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} aside={<p className="text-sm leading-7">Submitting an inquiry does not create an attorney-client relationship. Please do not send confidential or time-sensitive information.</p>} />
+    <section className="section-shell bg-ivory"><Container className="grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-start"><IntakeForm /><aside className="bg-ink p-7 text-paper sm:p-9 lg:sticky lg:top-36"><p className="eyebrow">What happens next</p><ol className="mt-6 border-t border-paper/20">{['The firm reviews fit and jurisdiction.', 'A conflict check may be required.', 'The firm contacts you about next steps.', 'Representation begins only through a written engagement.'].map((item, index) => <li key={item} className="grid grid-cols-[2.5rem_1fr] gap-3 border-b border-paper/20 py-5 text-sm leading-7 text-stone"><span className="font-display text-xl text-gold-light">0{index + 1}</span>{item}</li>)}</ol><div className="mt-9 space-y-5 text-sm leading-7 text-stone"><a className="flex items-start gap-3 hover:text-gold-light" href={`tel:${PHONE_TEL}`}><Phone size={17} className="mt-1 shrink-0 text-gold" aria-hidden="true" />{PHONE_DISPLAY}</a><a className="flex items-start gap-3 break-all hover:text-gold-light" href={`mailto:${EMAIL}`}><Mail size={17} className="mt-1 shrink-0 text-gold" aria-hidden="true" />{EMAIL}</a><div className="flex items-start gap-3"><MapPin size={17} className="mt-1 shrink-0 text-gold" aria-hidden="true" /><p>{PRIMARY_ADDRESS_LINE_1}<br />{PRIMARY_CITY_STATE_ZIP}<br /><br />{SECONDARY_ADDRESS_LINE_1}<br />{SECONDARY_CITY_STATE_ZIP}</p></div></div></aside></Container></section>
+  </main>;
 }

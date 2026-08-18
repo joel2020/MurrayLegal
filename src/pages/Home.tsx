@@ -113,7 +113,7 @@ export default function Home(): JSX.Element {
         </Container>
       </section>
 
-      <section className="section-shell bg-stone/70">
+      <section id="who-we-serve" className="section-shell bg-stone/70">
         <Container>
           <SectionHeading eyebrow="Who we serve" title="Advice shaped around the client, the context, and the consequence." description="Legal risk does not look the same from every seat. Explore counsel organized around the people and organizations Murray Legal serves." />
           <div className="mt-12 grid border-t border-ink/20 md:grid-cols-2 lg:grid-cols-5">

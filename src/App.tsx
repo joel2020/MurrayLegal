@@ -11,6 +11,7 @@ import IndustryPage from './pages/IndustryPage';
 import NotFound from './pages/NotFound';
 import PracticeAreaPage from './pages/PracticeAreaPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import { industryBySlug } from './data/industries';
 
 const routes: Record<string, JSX.Element> = {
   '/': <Home />,
@@ -30,11 +31,7 @@ const routes: Record<string, JSX.Element> = {
   '/practice-areas/trusts-wills-estates': <PracticeAreaPage slug="trusts-wills-estates" canonicalPath="/practice-areas/trusts-wills-estates" />,
   '/practice-areas/divorce-family-law': <PracticeAreaPage slug="divorce-family-law" canonicalPath="/practice-areas/divorce-family-law" />,
 
-  '/industries/businesses-founders': <IndustryPage title="Businesses & Founders" slug="businesses-founders" links={[{ name: 'Corporate Law', slug: 'corporate-law' }, { name: 'Civil Litigation', slug: 'civil-litigation' }, { name: 'Intellectual Property', slug: 'intellectual-property' }, { name: 'Real Estate', slug: 'real-estate' }]} />,
-  '/industries/real-estate-investors': <IndustryPage title="Real Estate Investors" slug="real-estate-investors" links={[{ name: 'Real Estate', slug: 'real-estate' }, { name: 'Corporate Law', slug: 'corporate-law' }, { name: 'Civil Litigation', slug: 'civil-litigation' }]} />,
-  '/industries/entertainment-professionals': <IndustryPage title="Entertainment Professionals" slug="entertainment-professionals" links={[{ name: 'Entertainment Transactions', slug: 'entertainment-transactions' }, { name: 'Intellectual Property', slug: 'intellectual-property' }, { name: 'Civil Litigation', slug: 'civil-litigation' }]} />,
-  '/industries/athletes-sports-organizations': <IndustryPage title="Athletes & Sports Organizations" slug="athletes-sports-organizations" links={[{ name: 'Sports Transactions', slug: 'sports-transactions' }, { name: 'Intellectual Property', slug: 'intellectual-property' }, { name: 'Civil Litigation', slug: 'civil-litigation' }]} />,
-  '/industries/high-net-worth-individuals': <IndustryPage title="High-Net-Worth Individuals" slug="high-net-worth-individuals" links={[{ name: 'Trusts, Wills & Estates', slug: 'trusts-wills-estates' }, { name: 'Divorce & Family Law', slug: 'divorce-family-law' }, { name: 'Real Estate', slug: 'real-estate' }, { name: 'Civil Litigation', slug: 'civil-litigation' }]} />,
+  ...Object.fromEntries(Object.values(industryBySlug).map((industry) => [`/industries/${industry.slug}`, <IndustryPage key={industry.slug} industry={industry} />])),
 
   '/real-estate-attorney': <PracticeAreaPage slug="real-estate" canonicalPath="/practice-areas/real-estate" />,
   '/corporate-law': <PracticeAreaPage slug="corporate-law" canonicalPath="/practice-areas/corporate-law" />,

@@ -1,72 +1,90 @@
 # Murray Legal Redesign Completion Audit
 
 Date: August 18, 2026  
-Branch: `codex/murray-legal-redesign`  
-Audited implementation commit: `4822bf1`
+Branch: `codex/murray-legal-redesign`
 
 ## Outcome
 
-Murray Legal now uses one responsive editorial design system across its homepage, practice areas, industries, firm story, insights, legal notices, 404 state, and consultation flow. The work preserves the current React/Vite architecture, authoritative firm details, canonical practice URLs, aliases, structured data, and jurisdiction safeguards.
+Murray Legal uses one firm-focused, metropolitan editorial system across the homepage, practice areas, industries, firm story, insights, legal notices, branded 404, and consultation flow. The approved navy, brass, ivory, Bodoni Moda, Instrument Sans, Manhattan photography, and Counsel Grid language is consistent across the route set. The implementation adapts the approved 21st.dev expandable-icon and hover-card interaction ideas locally without adding a runtime component dependency.
 
-The visual direction uses the clarity and confidence of the client reference as a quality bar without copying its branding, copy, imagery, or exact composition. The homepage adapts the editorial image-first hierarchy of the 21st.dev `Editorial Image Hero` pattern into an original Murray Legal composition. Direct 21st.dev CLI retrieval required account authentication, so the publicly documented pattern was adapted locally without adding its optional dependencies.
+The implementation preserves the verified office, telephone, email, canonical content, and legal safeguards. It states that the firm is Pennsylvania-licensed counsel, describes Yonkers only as a New York office location, and makes no claim of New York admission.
 
-## Verification Gates
+## Fresh Verification Gates
 
 | Gate | Evidence | Result |
 | --- | --- | --- |
-| Production build | `npm run build` | Pass. HTML 1.03 kB; CSS 35.55 kB (6.78 kB gzip); JS 250.48 kB (75.56 kB gzip). |
 | Type safety | `npm run typecheck` | Pass, zero TypeScript errors. |
-| Lint | `npm run lint` | Pass, zero errors and zero warnings. |
-| Component/API regression suite | `npm test -- --run` | Pass, 8 files and 50 tests. |
-| Browser suite | `npm run test:e2e` | Pass, 15 tests; 1 intentional project skip for a desktop-only mobile-menu condition. |
-| Canonical route coverage | `e2e/seo-accessibility.spec.ts` | Pass on desktop and mobile for all 28 sitemap URLs; one `h1`, one description, one canonical, no unlabeled controls, no horizontal overflow, and no console errors. |
-| Route aliases | `src/test/routes.test.tsx`, `src/test/seo.test.tsx` | Pass for `/blog`, five legacy practice aliases, and alias-to-canonical metadata. Valid `/blog/:slug` insight aliases retain `/insights/:slug` canonicals. |
-| Intake validation and delivery contract | `src/test/intake-form.test.tsx`, `src/test/intake-api.test.ts`, `e2e/intake.spec.ts` | Pass for required fields, email validation, consent, JSON-only requests, success reset, delivery-error preservation, and submitted payload. |
-| SEO/schema | `src/test/seo.test.tsx` | Pass for unique metadata, canonical URLs, noindex 404s, valid JSON-LD graph, and Pennsylvania jurisdiction. |
-| Crawler discovery | `public/robots.txt`, `public/sitemap.xml`, both `llms.txt` files | 28 canonical URLs; canonical `murraylegalfirm.com` domain throughout; robots points to the correct sitemap. |
-| Production dependency security | `npm audit --omit=dev --audit-level=high` | Pass: 0 production vulnerabilities. An unused Supabase dependency and its vulnerable transitive WebSocket package were removed. |
-| Jurisdiction language | `src/lib/firm.ts`, shell/page tests | Pass. Pennsylvania licensure, New York office-location wording, nationwide-where-permitted qualification, and no-relationship notice remain explicit. |
-| Responsive visual review | screenshots listed below and `view_image` inspection | Approved at 1440px, 768px, and 390px. No observed collision, clipping, illegible text, or overflow. |
-| Reduced motion/focus/touch | `src/index.css`, `e2e/seo-accessibility.spec.ts` | Pass. Reduced-motion override, visible focus, skip link, 48px menu control, keyboard dropdown dismissal, and deliberate touch behavior are present. |
+| Lint | `npm run lint` | Pass, including `api/**/*.js` under Node globals, with zero errors and zero warnings. |
+| Unit/component/API suite | `npm test` | Pass: 13 files, 97 tests. |
+| Production build | `npm run build` | Pass. HTML 1.04 kB (0.54 kB gzip); CSS 50.52 kB (8.28 kB gzip); JS 252.92 kB (76.73 kB gzip). |
+| Browser suite | `npm run test:e2e` | Pass: 33 tests; 7 intentional project/viewport skips; 40 total. |
+| Canonical route coverage | `e2e/seo-accessibility.spec.ts` | Pass on desktop and mobile for all 28 sitemap URLs: one `h1`, description, canonical, labeled controls, no horizontal overflow, and no console errors. |
+| Route aliases | `src/test/routes.test.tsx`, `src/test/production-routing.test.ts` | Pass for `/blog`, all six data-defined practice aliases, and valid `/blog/:slug` routes. Alias metadata remains canonical. |
+| Intake resilience | `src/test/intake-api.test.ts`, `src/test/intake-form.test.tsx`, `e2e/intake.spec.ts` | Pass for native/custom required semantics, first-invalid focus, pending announcement, duplicate guard, string bounds, server timestamp, honeypot, timeout, thrown delivery, upstream non-2xx, rate limit, state preservation, and success reset. |
+| Accessibility | Focused unit tests and desktop/mobile browser tests | Pass for route focus, skip navigation, focus-contained mobile overlay, background inertness, focus restoration, `aria-current`, reduced-motion hash navigation, phone names, and rendered contrast. |
+| Production dependency security | `npm audit --omit=dev --audit-level=high` | Pass: 0 production vulnerabilities. |
+| Responsive visual review | Seven screenshots below, regenerated by the full browser gate and inspected with `view_image` | Approved at 1440px, 768px, and 390px. No observed collision, clipping, broken hierarchy, image failure, or horizontal overflow. |
 
-## Canonical Route Inventory
+## Routing and Canonical Inventory
 
-- 6 core pages: home, about, contact, insights, disclaimer, privacy policy.
+- 6 core pages: home, about, contact, insights, disclaimer, and privacy policy.
 - 8 practice-area pages.
 - 5 industry pages.
 - 9 insight detail pages.
 - Total sitemap URLs: 28.
-- Additional compatibility paths: `/blog`, five legacy practice aliases, and `/blog/:slug` for valid insight slugs.
+- Compatibility paths: `/blog`; `/corporate-law`; `/business-attorney`; `/real-estate-attorney`; `/civil-litigation`; `/contract-disputes`; `/sports-transactions`; and `/blog/:slug` for valid insight slugs.
+- `src/App.tsx` derives every practice canonical and legacy route from `practiceAreas`; it does not maintain a second partial alias list.
+- `vercel.json` keeps `cleanUrls: true` and uses the documented catch-all SPA destination `/index`. Vercel resolves static assets and `/api/intake` ahead of the fallback; canonical, alias, and unknown browser routes receive the React shell. The React 404 supplies branded recovery actions and `noindex` metadata.
+
+## Accessibility and Contrast Evidence
+
+- Small readable brass (`#806020`) against paper (`#FCFAF5`): 5.574:1.
+- Small readable brass (`#806020`) against ivory (`#F7F4ED`): 5.293:1.
+- Muted-on-stone (`#5C6470`) against the rendered 70% stone/paper composite: 4.948:1.
+- Resting control border (`#848A93`) against paper (`#FCFAF5`): 3.334:1.
+- Light brass (`#D0B467`) remains available for dark navy surfaces, where it measures 8.701:1 against deep navy (`#0B1930`).
+- Browser regression tests calculate computed foreground, border, alpha, and ancestor background compositing rather than checking source strings.
+- Every required intake control, including consent, has native/programmatic required semantics. A polite status region announces pending delivery while the exact submit control remains disabled.
+- Client-side route changes focus the page main region. The open mobile menu traps focus, makes covered content inert, closes with Escape or navigation, and restores focus where appropriate.
+- Each real phone action is named `Call Murray Legal at (914) 214-1880`.
+
+## Licensure and Content Safety
+
+- Every practice-area hero visibly includes the exact line `Pennsylvania-licensed counsel`, adjacent to attorney-titled content at desktop and mobile widths.
+- The jurisdiction notice continues to distinguish the Yonkers office location from Pennsylvania licensure and qualifies nationwide service as permitted by law.
+- No attorney portrait, biography, signature, testimonial, rating, ranking, result, award, unsupported credential, or New York admission claim was introduced.
+
+## Intake Endpoint Controls
+
+- The server creates `submittedAt`; client-supplied timestamps are ignored.
+- Every accepted string is type-checked and bounded, including optional fields, the honeypot, matter description, and `pageUrl`; unknown fields are not forwarded.
+- Validation, unsupported method/content type, missing configuration, upstream failure, thrown fetch, timeout, and rate-limit responses use generic `{ ok: false, error: ... }` JSON.
+- Delivery has an 8-second abort timeout with cleanup.
+- The endpoint provides a conservative in-memory limit of five valid delivery attempts per IP per 15 minutes and returns `Retry-After` when exceeded.
+- The in-memory limiter is intentionally best effort. Authoritative distributed enforcement across function instances remains a deployment-platform control.
+
+## Responsive Image Evidence
+
+The licensed Unsplash Manhattan source (`photo-1701200368668-096d514f3680`) was prepared into pre-grayscaled responsive derivatives. `CityHero` and `PageHero` use width descriptors, `sizes="100vw"`, intrinsic `2400 × 1600` dimensions, WebP sources, and a 1200px JPEG fallback. CSS retains deterministic monochrome rendering and a complete navy content fallback if all image requests fail.
+
+| Candidate | Dimensions | JPEG | WebP |
+| --- | ---: | ---: | ---: |
+| Mobile | 600 × 400 | 66,036 bytes | 44,490 bytes |
+| Tablet | 1200 × 800 | 233,951 bytes | 143,168 bytes |
+| Desktop | 2400 × 1600 | 935,985 bytes | 529,520 bytes |
+
+Browser `currentSrc` checks select the 600px WebP at a 375px viewport, the 1200px WebP at 768px, and the 2400px WebP at 1440px for both hero components. Each WebP is meaningfully smaller than its matching JPEG; mobile does not request the 2400px source. The unused architecture PNG/WebP and obsolete single-source Manhattan files are absent from production output.
 
 ## Visual Evidence
 
 - `artifacts/site-audit/redesign-desktop-home.png` — 1440px homepage.
 - `artifacts/site-audit/redesign-tablet-home.png` — 768px homepage.
 - `artifacts/site-audit/redesign-mobile-home.png` — 390px homepage.
-- `artifacts/site-audit/content-desktop-chromium.png` and `content-mobile-chromium.png` — representative practice template.
-- `artifacts/site-audit/contact-desktop-chromium.png` and `contact-mobile-chromium.png` — consultation intake.
+- `artifacts/site-audit/content-desktop-chromium.png` and `content-mobile-chromium.png` — representative practice template and mobile licensure placement.
+- `artifacts/site-audit/contact-desktop-chromium.png` and `contact-mobile-chromium.png` — consultation form and next-step panel.
 
-## Material Audit Corrections
+## External Deployment Dependencies
 
-| Page / viewport | Defect | Correction | Verification |
-| --- | --- | --- | --- |
-| All direct production routes | Canonical practice, industry, insight, and privacy paths lacked hosting rewrites. | Added scoped SPA rewrites in `vercel.json`. | Canonical browser-route suite. |
-| Crawler files | Sitemap omitted industries, articles, and legal pages; root `llms.txt` used the old domain and stale service framing. | Rebuilt the 28-URL sitemap and aligned both AI-discovery files to current content and domain. | Crawler-file browser test. |
-| All pages / keyboard | No skip-navigation link. | Added a focus-visible skip link and focusable main-content target. | Desktop/mobile keyboard test. |
-| Homepage / browser console | React warned about the image priority attribute in the installed runtime. | Removed the unsupported property; the above-fold image remains eagerly loaded by default. | Full canonical console-error test. |
-| Consultation / all widths | Placeholder form had no delivery action or durable validation states. | Added controlled intake, field errors, consent, duplicate-submit guard, success/error states, and server validation. | Unit, API, and browser intake tests. |
-| Dependencies | Unused Supabase dependency introduced a high-severity transitive production advisory. | Removed unused dependency. | Production audit reports 0 vulnerabilities. |
-
-## Asset Decision
-
-The built-in image generation tool created `public/images/murray-legal-architecture.png` from an original premium architectural brief; `public/images/murray-legal-architecture.webp` is the optimized 55,808-byte production source. Final prompt:
-
-> Use case photorealistic-natural; premium law-firm hero; original architectural photo with warm limestone, dark bronze, deep shadows, civic/institutional but not identifiable, negative space, no people/text/logos/flags/courthouse/gavel/scales/handshake/books/desk; late afternoon calm editorial photo.
-
-Higgsfield/video was intentionally omitted. The static asset achieved the intended brand mood with lower motion, bandwidth, and accessibility cost.
-
-## Known Non-Blocking Tooling Notes
-
-- The build reports an outdated local `caniuse-lite` dataset; this does not fail the build or alter the tested output.
-- The full development dependency audit reports advisories in build/test tooling. The production-only audit reports zero vulnerabilities.
-- Live Resend delivery requires deployment environment variables (`RESEND_API_KEY` and optionally `CONTACT_EMAIL_FROM`); endpoint validation and the outbound request contract are covered with mocked delivery tests.
+- Live intake delivery requires the deployment secret `RESEND_API_KEY`; `CONTACT_EMAIL_FROM` remains optional. Repository tests mock delivery and verify the complete outbound contract without sending client data.
+- The repository limiter cannot enforce a single counter across separate serverless instances. Distributed rate limiting/firewall enforcement remains an authoritative platform responsibility.
+- The local build reports an outdated `caniuse-lite` data warning; it does not fail compilation or alter the tested output.

@@ -17,6 +17,27 @@ async function completeRequiredFields(): Promise<void> {
 }
 
 describe('consultation intake form', () => {
+  it('exposes native required semantics while retaining custom validation', () => {
+    render(<IntakeForm />);
+
+    for (const label of [
+      /Full name/i,
+      /Email address/i,
+      /Phone number/i,
+      /Practice area/i,
+      /State or jurisdiction/i,
+      /Brief description/i,
+      /I understand that submitting/i,
+    ]) {
+      const control = screen.getByLabelText(label);
+      expect(control).toBeRequired();
+      expect(control).toHaveAttribute('aria-required', 'true');
+    }
+
+    expect(screen.getByLabelText(/Company or organization/i)).not.toBeRequired();
+    expect(screen.getByRole('button', { name: 'Request a consultation' }).closest('form')).toHaveAttribute('novalidate');
+  });
+
   it('keeps the approved action label and legal warning after validation failure', async () => {
     render(<IntakeForm />);
     await userEvent.click(screen.getByRole('button', { name: 'Request a consultation' }));
@@ -69,11 +90,14 @@ describe('consultation intake form', () => {
     expect(pendingButton).toBeDisabled();
     const form = pendingButton.closest('form');
     expect(form).not.toBeNull();
+    expect(form).toHaveAttribute('aria-busy', 'true');
+    expect(screen.getByRole('status')).toHaveTextContent('Sending request…');
+    expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite');
     fireEvent.submit(form!);
     expect(fetchMock).toHaveBeenCalledTimes(1);
 
     resolveFetch({ ok: true });
-    expect(await screen.findByRole('status')).toHaveTextContent(/request has been received/i);
+    await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent(/request has been received/i));
   });
 
   it('preserves entered information after failure and retries successfully', async () => {

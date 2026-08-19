@@ -30,7 +30,7 @@ export default function FAQAccordion({ items }: FAQAccordionProps): JSX.Element 
             <h3>
               <button
                 id={buttonId}
-                className="flex min-h-16 w-full items-center justify-between gap-6 py-5 text-left text-base font-bold leading-7 text-ink transition hover:text-gold-dark"
+                className="flex min-h-16 w-full items-center justify-between gap-6 py-5 text-left text-base font-bold leading-7 text-ink transition hover:text-gold-readable"
                 onClick={() => toggle(index)}
                 aria-expanded={isOpen}
                 aria-controls={panelId}

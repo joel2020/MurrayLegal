@@ -27,7 +27,8 @@ export function BrowserRouter({ children }: { children: ReactNode }): JSX.Elemen
     window.history.pushState({}, '', next);
     window.dispatchEvent(new PopStateEvent('popstate'));
     if (destination.hash) {
-      window.requestAnimationFrame(() => document.querySelector(destination.hash)?.scrollIntoView({ behavior: 'smooth' }));
+      const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+      window.requestAnimationFrame(() => document.querySelector(destination.hash)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }));
     } else {
       const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
@@ -66,12 +67,14 @@ export function Link({
   ariaLabel?: string;
   onClick?: () => void;
 }): JSX.Element {
-  const { navigate } = useRouter();
+  const { navigate, pathname } = useRouter();
+  const destinationPath = new URL(to, window.location.origin).pathname;
 
   return (
     <a
       href={to}
       aria-label={ariaLabel}
+      aria-current={destinationPath === pathname ? 'page' : undefined}
       className={className}
       onClick={(event) => {
         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;

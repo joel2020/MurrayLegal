@@ -20,3 +20,14 @@ test('representative content templates are responsive', async ({ page }, testInf
   await page.goto('/practice-areas/corporate-law');
   await page.screenshot({ path: `artifacts/site-audit/content-${testInfo.project.name}.png`, fullPage: true });
 });
+
+test('practice hero keeps Pennsylvania licensure adjacent and visible on mobile', async ({ page }, testInfo) => {
+  test.skip(!testInfo.project.name.startsWith('mobile'), 'Mobile prominence check');
+  await page.goto('/practice-areas/corporate-law');
+  const hero = page.locator('[data-hero-visual="city"]').first();
+  await expect(hero.getByText('Pennsylvania-licensed counsel', { exact: true })).toBeVisible();
+  const box = await hero.getByText('Pennsylvania-licensed counsel', { exact: true }).boundingBox();
+  expect(box).not.toBeNull();
+  expect(box!.x).toBeGreaterThanOrEqual(0);
+  expect(box!.x + box!.width).toBeLessThanOrEqual(page.viewportSize()?.width ?? 390);
+});

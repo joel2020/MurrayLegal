@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import App from '../App';
+import { practiceAreas } from '../data/practiceAreas';
 import { BrowserRouter } from '../lib/router';
 
 const routes: Array<[path: string, heading: RegExp]> = [
@@ -44,4 +45,18 @@ describe('public route contract', () => {
 
     expect(screen.getByRole('heading', { level: 1, name: heading })).toBeInTheDocument();
   });
+
+  it.each(practiceAreas.flatMap((area) => area.legacyPaths.map((path) => [path, area.heroHeadline] as const)))(
+    'derives legacy practice alias %s from practice-area data',
+    (path, heading) => {
+      window.history.replaceState({}, '', path);
+      render(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>,
+      );
+
+      expect(screen.getByRole('heading', { level: 1, name: heading })).toBeInTheDocument();
+    },
+  );
 });

@@ -8,7 +8,7 @@ test('consultation request validates and submits successfully', async ({ page },
   });
   await page.goto('/contact');
   await expect(page.locator('[data-hero-visual="solid"]')).toBeVisible();
-  const phoneLink = page.locator('main').getByRole('link', { name: 'Call Murray Legal' });
+  const phoneLink = page.locator('main').getByRole('link', { name: 'Call Murray Legal at (914) 214-1880' });
   await expect(phoneLink).toBeVisible();
   await expect(phoneLink).toHaveAttribute('href', 'tel:+19142141880');
   await page.screenshot({ path: `artifacts/site-audit/contact-${testInfo.project.name}.png`, fullPage: true });

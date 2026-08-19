@@ -81,10 +81,12 @@ export default function IntakeForm(): JSX.Element {
     }
   };
 
-  const inputProps = (name: keyof FormFields) => ({
+  const inputProps = (name: keyof FormFields, required = false) => ({
     id: name,
     name,
     value: String(fields[name]),
+    required,
+    'aria-required': required || undefined,
     'aria-invalid': Boolean(errors[name]),
     'aria-describedby': errors[name] ? `${name}-error` : undefined,
     onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => update(name, event.target.value),
@@ -96,23 +98,24 @@ export default function IntakeForm(): JSX.Element {
     return <div className="border border-ink/15 border-t-[6px] border-t-gold bg-paper p-8 sm:p-10" role="status" aria-live="polite"><CheckCircle2 className="text-gold-dark" size={34} aria-hidden="true" /><h2 className="mt-6 font-display text-display-md text-ink">Your request has been received.</h2><p className="mt-5 text-base leading-8 text-muted">Murray Legal will review the information for fit, conflicts, and jurisdiction. No attorney-client relationship exists unless the firm confirms an engagement in writing.</p><button className="action-link action-link--secondary mt-7" type="button" onClick={() => setStatus('idle')}>Submit another request</button></div>;
   }
 
-  return <form className="border border-ink/15 border-t-[6px] border-t-gold bg-paper p-6 sm:p-10" onSubmit={submit} noValidate>
+  return <form className="border border-ink/15 border-t-[6px] border-t-gold bg-paper p-6 sm:p-10" onSubmit={submit} noValidate aria-busy={status === 'submitting'}>
     <div><p className="eyebrow">Consultation request</p><h2 className="mt-4 font-display text-display-md text-ink">Tell us what is at stake.</h2><p className="mt-4 max-w-2xl text-sm leading-7 text-muted"><span aria-hidden="true">*</span> Required fields. Do not include confidential or time-sensitive information.</p></div>
     {status === 'error' && Object.keys(errors).length === 0 && <p className="mt-6 border-l-2 border-red-800 bg-red-50 p-4 text-sm font-semibold text-red-900" role="alert">We could not send your request. Your information is still here—please try again or call the firm.</p>}
     {status === 'error' && Object.keys(errors).length > 0 && <p className="mt-6 border-l-2 border-red-800 bg-red-50 p-4 text-sm font-semibold text-red-900" role="alert">Review the highlighted fields before sending your request.</p>}
     <div className="mt-8 grid gap-x-6 gap-y-5 sm:grid-cols-2">
-      <label className="text-sm font-semibold text-ink" htmlFor="name">Full name *</label><div className="sm:col-start-1"><input className="field !mt-0" autoComplete="name" {...inputProps('name')} /><ErrorText name="name" /></div>
-      <label className="text-sm font-semibold text-ink sm:col-start-2 sm:row-start-1" htmlFor="email">Email address *</label><div className="sm:col-start-2 sm:row-start-2"><input className="field !mt-0" type="email" autoComplete="email" spellCheck={false} {...inputProps('email')} /><ErrorText name="email" /></div>
-      <div><label className="text-sm font-semibold text-ink" htmlFor="phone">Phone number *</label><input className="field" type="tel" autoComplete="tel" {...inputProps('phone')} /><ErrorText name="phone" /></div>
+      <label className="text-sm font-semibold text-ink" htmlFor="name">Full name *</label><div className="sm:col-start-1"><input className="field !mt-0" autoComplete="name" {...inputProps('name', true)} /><ErrorText name="name" /></div>
+      <label className="text-sm font-semibold text-ink sm:col-start-2 sm:row-start-1" htmlFor="email">Email address *</label><div className="sm:col-start-2 sm:row-start-2"><input className="field !mt-0" type="email" autoComplete="email" spellCheck={false} {...inputProps('email', true)} /><ErrorText name="email" /></div>
+      <div><label className="text-sm font-semibold text-ink" htmlFor="phone">Phone number *</label><input className="field" type="tel" autoComplete="tel" {...inputProps('phone', true)} /><ErrorText name="phone" /></div>
       <div><label className="text-sm font-semibold text-ink" htmlFor="company">Company or organization</label><input className="field" autoComplete="organization" {...inputProps('company')} /></div>
-      <div><label className="text-sm font-semibold text-ink" htmlFor="practiceArea">Practice area *</label><select className="field" {...inputProps('practiceArea')}><option value="">Select one</option>{practiceAreas.map((area) => <option key={area.slug} value={area.name}>{area.name}</option>)}<option value="Not sure">Not sure</option></select><ErrorText name="practiceArea" /></div>
-      <div><label className="text-sm font-semibold text-ink" htmlFor="jurisdiction">State or jurisdiction *</label><input className="field" autoComplete="address-level1" placeholder="e.g., Pennsylvania…" {...inputProps('jurisdiction')} /><ErrorText name="jurisdiction" /></div>
+      <div><label className="text-sm font-semibold text-ink" htmlFor="practiceArea">Practice area *</label><select className="field" {...inputProps('practiceArea', true)}><option value="">Select one</option>{practiceAreas.map((area) => <option key={area.slug} value={area.name}>{area.name}</option>)}<option value="Not sure">Not sure</option></select><ErrorText name="practiceArea" /></div>
+      <div><label className="text-sm font-semibold text-ink" htmlFor="jurisdiction">State or jurisdiction *</label><input className="field" autoComplete="address-level1" placeholder="e.g., Pennsylvania…" {...inputProps('jurisdiction', true)} /><ErrorText name="jurisdiction" /></div>
       <div><label className="text-sm font-semibold text-ink" htmlFor="urgency">Timing</label><select className="field" {...inputProps('urgency')}><option value="">Select one</option><option>Immediate deadline</option><option>Within one week</option><option>Within one month</option><option>Planning ahead</option></select></div>
       <div><label className="text-sm font-semibold text-ink" htmlFor="contactMethod">Preferred contact method</label><select className="field" {...inputProps('contactMethod')}><option value="">Select one</option><option>Email</option><option>Phone</option><option>Either</option></select></div>
-      <div className="sm:col-span-2"><label className="text-sm font-semibold text-ink" htmlFor="matterDescription">Brief description of the matter *</label><textarea className="field min-h-40 resize-y" maxLength={4000} {...inputProps('matterDescription')} /><div className="flex items-start justify-between gap-4"><ErrorText name="matterDescription" /><p className="mt-2 ml-auto text-xs text-muted">{fields.matterDescription.length}/4000</p></div></div>
+      <div className="sm:col-span-2"><label className="text-sm font-semibold text-ink" htmlFor="matterDescription">Brief description of the matter *</label><textarea className="field min-h-40 resize-y" maxLength={4000} {...inputProps('matterDescription', true)} /><div className="flex items-start justify-between gap-4"><ErrorText name="matterDescription" /><p className="mt-2 ml-auto text-xs text-muted">{fields.matterDescription.length}/4000</p></div></div>
       <div className="hidden" aria-hidden="true"><label htmlFor="website">Website</label><input id="website" name="website" tabIndex={-1} autoComplete="off" value={fields.website} onChange={(event) => update('website', event.target.value)} /></div>
-      <div className="sm:col-span-2"><label className="flex cursor-pointer items-start gap-3 text-sm leading-7 text-muted" htmlFor="consent"><input id="consent" name="consent" type="checkbox" className="mt-1.5 h-4 w-4 shrink-0 accent-[#b08a32]" checked={fields.consent} aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? 'consent-error' : undefined} onChange={(event) => update('consent', event.target.checked)} /><span>I understand that submitting this form does not create an attorney-client relationship and that I should not send confidential information. *</span></label><ErrorText name="consent" /></div>
+      <div className="sm:col-span-2"><label className="flex cursor-pointer items-start gap-3 text-sm leading-7 text-muted" htmlFor="consent"><input id="consent" name="consent" type="checkbox" className="form-consent mt-1.5 h-4 w-4 shrink-0" checked={fields.consent} required aria-required="true" aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? 'consent-error' : undefined} onChange={(event) => update('consent', event.target.checked)} /><span>I understand that submitting this form does not create an attorney-client relationship and that I should not send confidential information. *</span></label><ErrorText name="consent" /></div>
     </div>
+    <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{status === 'submitting' ? 'Sending request…' : ''}</p>
     <button className="action-link action-link--primary mt-8 w-full sm:w-auto" type="submit" disabled={status === 'submitting'}>
       <span>{status === 'submitting' ? 'Sending request…' : 'Request a consultation'}</span>
       <span className="action-link__icon" aria-hidden="true"><ArrowRight size={15} /></span>

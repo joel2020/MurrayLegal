@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Locator } from '@playwright/test';
 
 test.setTimeout(90_000);
 
@@ -8,6 +8,44 @@ const canonicalRoutes = [
   '/industries/businesses-founders', '/industries/real-estate-investors', '/industries/entertainment-professionals', '/industries/athletes-sports-organizations', '/industries/high-net-worth-individuals',
   '/insights/business-contract-red-flags-executives-should-review-before-signing', '/insights/commercial-real-estate-due-diligence-checklist', '/insights/what-to-do-when-a-business-contract-is-breached', '/insights/entertainment-contract-red-flags-for-creators-and-producers', '/insights/athlete-endorsement-agreement-red-flags', '/insights/trademark-vs-copyright-what-business-owners-need-to-know', '/insights/estate-planning-checklist-for-executives-and-business-owners', '/insights/high-net-worth-divorce-legal-and-financial-issues-to-consider', '/insights/what-should-be-included-in-a-shareholder-agreement',
 ];
+
+async function renderedContrast(locator: Locator, foregroundProperty: 'color' | 'borderTopColor' = 'color'): Promise<number> {
+  return locator.evaluate((element, property) => {
+    type Color = [number, number, number, number];
+    const parse = (value: string): Color => {
+      const parts = value.match(/[\d.]+/g)?.map(Number) ?? [];
+      return [parts[0] ?? 0, parts[1] ?? 0, parts[2] ?? 0, parts[3] ?? 1];
+    };
+    const composite = (foreground: Color, background: Color): Color => {
+      const alpha = foreground[3] + background[3] * (1 - foreground[3]);
+      if (alpha === 0) return [0, 0, 0, 0];
+      return [
+        (foreground[0] * foreground[3] + background[0] * background[3] * (1 - foreground[3])) / alpha,
+        (foreground[1] * foreground[3] + background[1] * background[3] * (1 - foreground[3])) / alpha,
+        (foreground[2] * foreground[3] + background[2] * background[3] * (1 - foreground[3])) / alpha,
+        alpha,
+      ];
+    };
+    const ancestors: Element[] = [];
+    for (let current: Element | null = element; current; current = current.parentElement) ancestors.push(current);
+    let background: Color = [255, 255, 255, 1];
+    for (const current of ancestors.reverse()) {
+      background = composite(parse(getComputedStyle(current).backgroundColor), background);
+    }
+    const foreground = composite(parse(getComputedStyle(element)[property]), background);
+    const luminance = (color: Color): number => {
+      const channels = color.slice(0, 3).map((channel) => {
+        const normalized = channel / 255;
+        return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+      });
+      return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+    };
+    const foregroundLuminance = luminance(foreground);
+    const backgroundLuminance = luminance(background);
+    return (Math.max(foregroundLuminance, backgroundLuminance) + 0.05)
+      / (Math.min(foregroundLuminance, backgroundLuminance) + 0.05);
+  }, foregroundProperty);
+}
 
 test('all canonical routes expose a stable accessible document shell', async ({ page }) => {
   const consoleErrors: string[] = [];
@@ -49,6 +87,20 @@ test('keyboard users can skip navigation and operate disclosure menus', async ({
     await page.getByRole('button', { name: 'Open navigation' }).click();
     await expect(page.getByRole('navigation', { name: 'Mobile navigation' })).toBeVisible();
   }
+});
+
+test('small text and resting control boundaries meet rendered WCAG contrast', async ({ page }) => {
+  await page.goto('/');
+  expect(await renderedContrast(page.locator('.bg-paper .eyebrow').first()), 'gold label on paper').toBeGreaterThanOrEqual(4.5);
+  expect(await renderedContrast(page.locator('p.text-gold-readable').first()), 'small gold category on paper').toBeGreaterThanOrEqual(4.5);
+  expect(await renderedContrast(page.locator('#who-we-serve .text-muted').first()), 'muted copy on stone').toBeGreaterThanOrEqual(4.5);
+
+  await page.goto('/contact');
+  expect(await renderedContrast(page.locator('.field').first(), 'borderTopColor'), 'resting field boundary').toBeGreaterThanOrEqual(3);
+  expect(await renderedContrast(page.locator('.form-consent'), 'borderTopColor'), 'resting consent boundary').toBeGreaterThanOrEqual(3);
+
+  await page.goto('/insights/business-contract-red-flags-executives-should-review-before-signing');
+  expect(await renderedContrast(page.locator('[data-key-takeaway-number]').first()), 'small takeaway number on paper').toBeGreaterThanOrEqual(4.5);
 });
 
 test('crawler files reference the canonical domain and published routes', async ({ page }) => {

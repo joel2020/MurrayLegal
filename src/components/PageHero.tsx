@@ -27,12 +27,19 @@ export default function PageHero({
     >
       {visual === 'city' && (
         <picture className="pointer-events-none absolute inset-0 -z-20 block" aria-hidden="true">
-          <source srcSet="/images/murray-legal-manhattan.webp" type="image/webp" />
+          <source
+            srcSet="/images/murray-legal-manhattan-600.webp 600w, /images/murray-legal-manhattan-1200.webp 1200w, /images/murray-legal-manhattan-2400.webp 2400w"
+            sizes="100vw"
+            type="image/webp"
+          />
           <img
-            src="/images/murray-legal-manhattan.jpg"
+            src="/images/murray-legal-manhattan-1200.jpg"
+            srcSet="/images/murray-legal-manhattan-600.jpg 600w, /images/murray-legal-manhattan-1200.jpg 1200w, /images/murray-legal-manhattan-2400.jpg 2400w"
+            sizes="100vw"
             alt=""
             width="2400"
             height="1600"
+            loading="eager"
             decoding="async"
             className="hero-image h-full w-full object-cover object-center"
           />

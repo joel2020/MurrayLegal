@@ -25,8 +25,7 @@ test('homepage renders the editorial hero and responsive content', async ({ page
 });
 
 test('CityHero content remains complete when Manhattan images fail', async ({ page }) => {
-  await page.route('**/images/murray-legal-manhattan.webp', (route) => route.abort());
-  await page.route('**/images/murray-legal-manhattan.jpg', (route) => route.abort());
+  await page.route('**/images/murray-legal-manhattan-*.*', (route) => route.abort());
   await page.goto('/');
 
   const panel = page.locator('.city-hero__panel');
@@ -34,4 +33,9 @@ test('CityHero content remains complete when Manhattan images fail', async ({ pa
   await expect(panel.getByRole('heading', { level: 1, name: 'Serious counsel for consequential matters.' })).toBeVisible();
   await expect(panel.getByRole('link', { name: 'Request a consultation' })).toBeVisible();
   await expect(panel.getByRole('link', { name: 'Explore the firm' })).toBeVisible();
+
+  await page.goto('/practice-areas/corporate-law');
+  const internalHero = page.locator('.page-hero');
+  await expect(internalHero).toHaveCSS('background-color', 'rgb(8, 20, 38)');
+  await expect(internalHero.getByRole('heading', { level: 1 })).toBeVisible();
 });

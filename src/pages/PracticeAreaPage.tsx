@@ -30,7 +30,7 @@ export default function PracticeAreaPage({ slug, canonicalPath }: { slug: string
   return (
     <main>
       <SEOHead title={area.titleTag} description={area.metaDescription} canonical={`${SITE_URL}${canonicalPath}`} schema={schema} />
-      <PageHero visual="city" eyebrow="Practice area" title={area.heroHeadline} description={area.heroDescription} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Practice Areas', href: '/#practice-areas' }, { label: area.name }]} aside={<><p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-light">Who we advise</p><p className="mt-3 text-sm leading-7">{area.whoThisHelps.join(' · ')}</p></>} />
+      <PageHero visual="city" eyebrow="Practice area" title={area.heroHeadline} description={area.heroDescription} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Practice Areas', href: '/#practice-areas' }, { label: area.name }]} aside={<><p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-light">Pennsylvania-licensed counsel</p><div className="mt-5 border-t border-gold/40 pt-5"><p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-light">Who we advise</p><p className="mt-3 text-sm leading-7">{area.whoThisHelps.join(' · ')}</p></div></>} />
 
       <section className="section-shell bg-paper">
         <Container className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24">

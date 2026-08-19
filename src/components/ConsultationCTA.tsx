@@ -14,7 +14,7 @@ export default function ConsultationCTA(): JSX.Element {
         </div>
         <div className="flex flex-col items-stretch gap-4">
           <ActionLink to="/contact" ariaLabel="Request a consultation">Request a consultation</ActionLink>
-          <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel="Call Murray Legal" variant="outline">{PHONE_DISPLAY}</ActionLink>
+          <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel={`Call Murray Legal at ${PHONE_DISPLAY}`} variant="outline">{PHONE_DISPLAY}</ActionLink>
         </div>
       </Container>
     </section>

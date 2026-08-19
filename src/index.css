@@ -8,9 +8,12 @@
   --ml-navy-mid: #132641;
   --ml-gold: #b08a32;
   --ml-gold-light: #d0b467;
+  --ml-gold-readable: #806020;
   --ml-ivory: #f7f4ed;
   --ml-paper: #fcfaf5;
   --ml-muted: #68707b;
+  --ml-muted-on-stone: #5c6470;
+  --ml-control: #848a93;
   --ml-text-dark: #111a28;
 }
 
@@ -93,7 +96,11 @@
   :where(h1, h2) { text-wrap: balance; }
 
   .eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.18em] text-gold;
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-gold-readable;
+  }
+
+  :is(.city-hero, .page-hero, .counsel-section, .bg-navy-deep, .bg-navy, .bg-ink) .eyebrow {
+    @apply text-gold-light;
   }
 
   .btn-primary,
@@ -103,7 +110,7 @@
   }
 
   .btn-primary { @apply border border-gold bg-gold text-ink shadow-none; }
-  .btn-primary:hover { @apply -translate-y-0.5 border-gold-dark bg-gold-dark text-paper shadow-gold; }
+  .btn-primary:hover { @apply -translate-y-0.5 border-gold-readable bg-gold-readable text-paper shadow-gold; }
   .btn-secondary { @apply border border-ink bg-transparent text-ink; }
   .btn-secondary:hover { @apply border-gold bg-ink text-paper; }
   .btn-outline { @apply border border-paper/40 bg-transparent text-paper; }
@@ -113,7 +120,7 @@
     @apply inline-flex min-h-11 items-center gap-2 border-b border-gold pb-0.5 text-sm font-bold text-ink transition-colors;
   }
 
-  .btn-text:hover { @apply text-gold-dark; }
+  .btn-text:hover { @apply text-gold-readable; }
 
   .action-link {
     @apply inline-flex min-h-12 items-center justify-between gap-4 border px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] transition duration-200 ease-premium;
@@ -124,7 +131,7 @@
   }
 
   .action-link--primary:hover {
-    @apply border-gold-dark bg-gold-dark shadow-gold;
+    @apply border-gold-readable bg-gold-readable shadow-gold;
   }
 
   .action-link--secondary {
@@ -253,12 +260,23 @@
   }
 
   .field {
-    @apply mt-2 min-h-12 w-full rounded-none border border-ink/20 bg-paper px-4 py-3 text-base text-ink shadow-none outline-none transition;
+    @apply mt-2 min-h-12 w-full rounded-none border border-control bg-paper px-4 py-3 text-base text-ink shadow-none outline-none transition;
   }
 
-  .field:hover { @apply border-ink/40; }
+  .field:hover { @apply border-ink/60; }
   .field:focus { @apply border-gold ring-2 ring-gold/20; }
   .field[aria-invalid='true'] { @apply border-red-700 ring-1 ring-red-700/20; }
+
+  .form-consent {
+    @apply appearance-none border-2 border-control bg-paper transition;
+  }
+
+  .form-consent:checked {
+    @apply border-gold bg-gold;
+    box-shadow: inset 0 0 0 3px var(--ml-paper);
+  }
+
+  .form-consent[aria-invalid='true'] { @apply border-red-700; }
 
   button:disabled { @apply cursor-wait opacity-70; }
 

@@ -2,6 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import App from '../App';
 import ConsultationCTA from '../components/ConsultationCTA';
+import { practiceAreas } from '../data/practiceAreas';
 import { BrowserRouter } from '../lib/router';
 import { PHONE_TEL } from '../lib/firm';
 
@@ -17,7 +18,7 @@ describe('editorial content templates', () => {
     const consultationLink = within(callToAction).getByRole('link', { name: 'Request a consultation' });
     expect(consultationLink).toHaveAttribute('href', '/contact');
     expect(consultationLink).toHaveClass('action-link--primary');
-    const phoneLink = within(callToAction).getByRole('link', { name: 'Call Murray Legal' });
+    const phoneLink = within(callToAction).getByRole('link', { name: 'Call Murray Legal at (914) 214-1880' });
     expect(phoneLink).toHaveAttribute('href', `tel:${PHONE_TEL}`);
     expect(phoneLink).toHaveClass('action-link--outline');
   });
@@ -55,6 +56,12 @@ describe('editorial content templates', () => {
       'href',
       '/practice-areas/civil-litigation',
     );
+  });
+
+  it.each(practiceAreas)('keeps Pennsylvania licensure prominent in the $name hero', (area) => {
+    renderPath(`/practice-areas/${area.slug}`);
+    const hero = screen.getByRole('region', { name: area.heroHeadline });
+    expect(within(hero).getByText('Pennsylvania-licensed counsel')).toBeVisible();
   });
 
   it('renders industry priorities and related capabilities', () => {
@@ -103,6 +110,7 @@ describe('editorial content templates', () => {
     const consultationLink = within(notFound).getByRole('link', { name: 'Request a consultation' });
     expect(consultationLink).toHaveAttribute('href', '/contact');
     expect(consultationLink).toHaveClass('action-link--outline');
+    expect(within(notFound).getByRole('link', { name: 'Explore practice areas' })).toHaveAttribute('href', '/practice-areas/corporate-law');
     expect(document.querySelector('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
   });
 

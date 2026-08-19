@@ -27,7 +27,7 @@ function Dropdown({
     <div className="relative">
       <button
         type="button"
-        className="flex min-h-12 items-center gap-1.5 text-xs font-bold uppercase tracking-[0.09em] text-ink hover:text-gold-dark"
+        className="flex min-h-12 items-center gap-1.5 text-xs font-bold uppercase tracking-[0.09em] text-ink hover:text-gold-readable"
         aria-expanded={open}
         aria-controls={id}
         onClick={onToggle}
@@ -41,7 +41,7 @@ function Dropdown({
               key={item.href}
               to={item.href}
               ariaLabel={item.label}
-              className={`block border-b border-ink/8 px-4 py-3 text-sm font-semibold transition last:border-0 hover:bg-ivory hover:text-gold-dark ${pathname === item.href ? 'text-gold-dark' : 'text-ink'}`}
+              className={`block border-b border-ink/8 px-4 py-3 text-sm font-semibold transition last:border-0 hover:bg-ivory hover:text-gold-readable ${pathname === item.href ? 'text-gold-readable' : 'text-ink'}`}
             >
               {item.label}
             </Link>
@@ -58,6 +58,7 @@ export default function Header(): JSX.Element {
   const [desktopMenu, setDesktopMenu] = useState<DesktopMenu>(null);
   const headerRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileNavRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -66,11 +67,29 @@ export default function Header(): JSX.Element {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return;
-      const shouldRestoreFocus = mobileOpen;
-      setMobileOpen(false);
-      setDesktopMenu(null);
-      if (shouldRestoreFocus) menuButtonRef.current?.focus();
+      if (event.key === 'Escape') {
+        const shouldRestoreFocus = mobileOpen;
+        setMobileOpen(false);
+        setDesktopMenu(null);
+        if (shouldRestoreFocus) menuButtonRef.current?.focus();
+        return;
+      }
+      if (event.key !== 'Tab' || !mobileOpen || !mobileNavRef.current) return;
+
+      const focusable = Array.from(mobileNavRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      } else if (!mobileNavRef.current.contains(document.activeElement)) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     const handlePointerDown = (event: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(event.target as Node)) setDesktopMenu(null);
@@ -86,11 +105,29 @@ export default function Header(): JSX.Element {
   useEffect(() => {
     if (!mobileOpen) return;
     const previous = document.body.style.overflow;
+    const covered = [
+      document.querySelector<HTMLElement>('.skip-link'),
+      document.getElementById('main-content'),
+      document.querySelector<HTMLElement>('footer'),
+    ].filter((element): element is HTMLElement => element !== null);
     document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = previous; };
+    covered.forEach((element) => element.setAttribute('inert', ''));
+    window.requestAnimationFrame(() => mobileNavRef.current?.querySelector<HTMLElement>('a[href], button:not([disabled])')?.focus());
+    return () => {
+      document.body.style.overflow = previous;
+      covered.forEach((element) => element.removeAttribute('inert'));
+    };
   }, [mobileOpen]);
 
   const closeMobile = () => setMobileOpen(false);
+  const toggleMobile = (): void => {
+    if (mobileOpen) {
+      setMobileOpen(false);
+      window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+    } else {
+      setMobileOpen(true);
+    }
+  };
 
   return (
     <header ref={headerRef} className="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 font-body backdrop-blur-md">
@@ -110,14 +147,14 @@ export default function Header(): JSX.Element {
           <Dropdown id="practice-menu" label="Practices" items={practiceNavigation} open={desktopMenu === 'practices'} onToggle={() => setDesktopMenu((value) => value === 'practices' ? null : 'practices')} pathname={pathname} />
           <Dropdown id="industry-menu" label="Industries" items={industryNavigation} open={desktopMenu === 'industries'} onToggle={() => setDesktopMenu((value) => value === 'industries' ? null : 'industries')} pathname={pathname} />
           {primaryNavigation.slice(0, 2).map((item) => (
-            <Link key={item.href} to={item.href} ariaLabel={item.label} className={`flex min-h-12 items-center text-xs font-bold uppercase tracking-[0.09em] hover:text-gold-dark ${pathname === item.href ? 'text-gold-dark' : 'text-ink'}`}>
+            <Link key={item.href} to={item.href} ariaLabel={item.label} className={`flex min-h-12 items-center text-xs font-bold uppercase tracking-[0.09em] hover:text-gold-readable ${pathname === item.href ? 'text-gold-readable' : 'text-ink'}`}>
               {item.label}
             </Link>
           ))}
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel="Call Murray Legal" variant="secondary" showIcon={false}>{PHONE_DISPLAY}</ActionLink>
+          <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel={`Call Murray Legal at ${PHONE_DISPLAY}`} variant="secondary" showIcon={false}>{PHONE_DISPLAY}</ActionLink>
           <ActionLink to="/contact" ariaLabel="Request a consultation">Request a consultation</ActionLink>
         </div>
 
@@ -127,7 +164,7 @@ export default function Header(): JSX.Element {
           ref={menuButtonRef}
           type="button"
           className="grid h-12 w-12 place-items-center border border-ink text-ink lg:hidden"
-          onClick={() => setMobileOpen((value) => !value)}
+          onClick={toggleMobile}
           aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
           aria-expanded={mobileOpen}
           aria-controls="mobile-navigation"
@@ -137,26 +174,26 @@ export default function Header(): JSX.Element {
       </Container>
 
       {mobileOpen && (
-        <nav id="mobile-navigation" className="fixed inset-x-0 bottom-0 top-[4.8rem] overflow-y-auto border-t border-ink/10 bg-paper px-5 pb-12 pt-7 md:top-[7rem] sm:px-8 lg:hidden" aria-label="Mobile navigation">
+        <nav ref={mobileNavRef} id="mobile-navigation" className="fixed inset-x-0 bottom-0 top-[4.8rem] overflow-y-auto border-t border-ink/10 bg-paper px-5 pb-12 pt-7 md:top-[7rem] sm:px-8 lg:hidden" aria-label="Mobile navigation">
           <div data-mobile-conversion-actions className="mx-auto mb-9 grid max-w-3xl gap-3 sm:grid-cols-2">
-            <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel="Call Murray Legal" variant="secondary" showIcon={false} className="w-full">{PHONE_DISPLAY}</ActionLink>
+            <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel={`Call Murray Legal at ${PHONE_DISPLAY}`} variant="secondary" showIcon={false} className="w-full">{PHONE_DISPLAY}</ActionLink>
             <ActionLink to="/contact" ariaLabel="Request a consultation" className="w-full">Request a consultation</ActionLink>
           </div>
           <div className="mx-auto grid max-w-3xl gap-9 sm:grid-cols-2">
             <div>
               <p className="eyebrow mb-3">Practice Areas</p>
               {practiceNavigation.map((item) => (
-                <Link key={item.href} to={item.href} onClick={closeMobile} ariaLabel={item.label} className="block border-b border-ink/10 py-3 text-sm font-semibold text-ink hover:text-gold-dark">{item.label}</Link>
+                <Link key={item.href} to={item.href} onClick={closeMobile} ariaLabel={item.label} className="block border-b border-ink/10 py-3 text-sm font-semibold text-ink hover:text-gold-readable">{item.label}</Link>
               ))}
             </div>
             <div>
               <p className="eyebrow mb-3">Industries</p>
               {industryNavigation.map((item) => (
-                <Link key={item.href} to={item.href} onClick={closeMobile} ariaLabel={item.label} className="block border-b border-ink/10 py-3 text-sm font-semibold text-ink hover:text-gold-dark">{item.label}</Link>
+                <Link key={item.href} to={item.href} onClick={closeMobile} ariaLabel={item.label} className="block border-b border-ink/10 py-3 text-sm font-semibold text-ink hover:text-gold-readable">{item.label}</Link>
               ))}
               <p className="eyebrow mb-3 mt-8">Firm</p>
               {primaryNavigation.map((item) => (
-                <Link key={item.href} to={item.href} onClick={closeMobile} ariaLabel={item.label} className="block border-b border-ink/10 py-3 text-sm font-semibold text-ink hover:text-gold-dark">{item.label}</Link>
+                <Link key={item.href} to={item.href} onClick={closeMobile} ariaLabel={item.label} className="block border-b border-ink/10 py-3 text-sm font-semibold text-ink hover:text-gold-readable">{item.label}</Link>
               ))}
             </div>
           </div>

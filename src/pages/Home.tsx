@@ -44,7 +44,7 @@ export default function Home(): JSX.Element {
           <div className="mt-12 grid border-y border-ink/15 md:grid-cols-3">
             {credibility.map((item, index) => (
               <div key={item.label} className={`py-7 md:px-8 ${index > 0 ? 'border-t border-ink/15 md:border-l md:border-t-0' : ''} ${index === 0 ? 'md:pl-0' : ''}`}>
-                <p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-dark">{item.label}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-readable">{item.label}</p>
                 <p className="mt-2 text-sm leading-7 text-muted">{item.body}</p>
               </div>
             ))}
@@ -92,7 +92,7 @@ export default function Home(): JSX.Element {
 
       <section id="who-we-serve" className="section-shell bg-stone/70" aria-label="Client groups">
         <Container>
-          <SectionHeading eyebrow="Who we serve" title="Advice shaped around the client, the context, and the consequence." description="Legal risk does not look the same from every seat. Explore counsel organized around the people and organizations Murray Legal serves." />
+          <SectionHeading className="[&>p:last-child]:text-muted-on-stone" eyebrow="Who we serve" title="Advice shaped around the client, the context, and the consequence." description="Legal risk does not look the same from every seat. Explore counsel organized around the people and organizations Murray Legal serves." />
           <div className="mt-12 grid border-t border-ink/20 md:grid-cols-2 lg:grid-cols-5">
             {industryNavigation.map((item) => (
               <Link key={item.href} to={item.href} ariaLabel={item.label} className="group flex min-h-40 items-end justify-between gap-4 border-b border-ink/20 p-5 transition hover:bg-paper md:border-r lg:min-h-52">
@@ -114,7 +114,7 @@ export default function Home(): JSX.Element {
           <div className="mt-12 grid gap-px bg-ink/15 border border-ink/15 lg:grid-cols-3">
             {insights.slice(0, 3).map((post) => (
               <article key={post.slug} className="flex min-h-80 flex-col bg-ivory p-7 sm:p-9">
-                <p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-dark">{post.category}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-readable">{post.category}</p>
                 <h3 className="mt-5 font-display text-3xl font-semibold leading-tight text-ink">{post.title}</h3>
                 <p className="mt-5 text-sm leading-7 text-muted">{post.description}</p>
                 <Link to={`/insights/${post.slug}`} className="btn-text mt-auto self-start pt-7" ariaLabel={`Read ${post.title}`}>Read briefing <ArrowRight aria-hidden="true" size={16} /></Link>

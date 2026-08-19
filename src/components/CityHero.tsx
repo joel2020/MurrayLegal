@@ -5,12 +5,20 @@ export default function CityHero(): JSX.Element {
   return (
     <section className="city-hero" data-hero-visual="city" aria-labelledby="home-title">
       <picture className="city-hero__media">
-        <source srcSet="/images/murray-legal-manhattan.webp" type="image/webp" />
+        <source
+          srcSet="/images/murray-legal-manhattan-600.webp 600w, /images/murray-legal-manhattan-1200.webp 1200w, /images/murray-legal-manhattan-2400.webp 2400w"
+          sizes="100vw"
+          type="image/webp"
+        />
         <img
-          src="/images/murray-legal-manhattan.jpg"
+          src="/images/murray-legal-manhattan-1200.jpg"
+          srcSet="/images/murray-legal-manhattan-600.jpg 600w, /images/murray-legal-manhattan-1200.jpg 1200w, /images/murray-legal-manhattan-2400.jpg 2400w"
+          sizes="100vw"
           alt="Monochrome view of the Lower Manhattan skyline"
           width="2400"
           height="1600"
+          loading="eager"
+          decoding="async"
           className="hero-image"
         />
       </picture>

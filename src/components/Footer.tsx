@@ -23,7 +23,7 @@ export default function Footer(): JSX.Element {
           <p className="font-display text-4xl text-paper">{FIRM_NAME}</p>
           <p className="mt-5 max-w-md text-sm leading-7 text-stone">Strategic legal counsel for businesses, investors, executives, creators, athletes, families, and private clients navigating consequential decisions.</p>
           <div className="mt-7 flex flex-col items-start gap-2 text-sm">
-            <a href={`tel:${PHONE_TEL}`} className="inline-flex min-h-11 items-center font-semibold text-paper hover:text-gold-light">{PHONE_DISPLAY}</a>
+            <a href={`tel:${PHONE_TEL}`} aria-label={`Call Murray Legal at ${PHONE_DISPLAY}`} className="inline-flex min-h-11 items-center font-semibold text-paper hover:text-gold-light">{PHONE_DISPLAY}</a>
             <a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center font-semibold text-paper hover:text-gold-light">{EMAIL}</a>
           </div>
         </div>

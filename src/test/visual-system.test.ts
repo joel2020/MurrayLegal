@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -15,9 +15,15 @@ describe('NYC visual foundation', () => {
     expect(read('tailwind.config.js')).toContain("'navy-mid': '#132641'");
   });
 
-  it('ships local Manhattan hero sources', () => {
-    expect(existsSync(resolve(root, 'public/images/murray-legal-manhattan.webp'))).toBe(true);
-    expect(existsSync(resolve(root, 'public/images/murray-legal-manhattan.jpg'))).toBe(true);
+  it('ships efficient responsive grayscale Manhattan sources', () => {
+    for (const width of [600, 1200, 2400]) {
+      const webp = resolve(root, `public/images/murray-legal-manhattan-${width}.webp`);
+      const jpeg = resolve(root, `public/images/murray-legal-manhattan-${width}.jpg`);
+      expect(existsSync(webp), `missing ${width}px WebP`).toBe(true);
+      expect(existsSync(jpeg), `missing ${width}px JPEG`).toBe(true);
+      expect(statSync(webp).size, `${width}px WebP should be at least 10% smaller than JPEG`).toBeLessThan(statSync(jpeg).size * 0.9);
+      expect(statSync(webp).size, `${width}px WebP should stay below the previous 1.50MB asset`).toBeLessThan(1_500_000);
+    }
   });
 
   it('renders reusable hero imagery in deterministic grayscale', () => {

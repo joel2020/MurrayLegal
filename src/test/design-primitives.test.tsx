@@ -45,10 +45,15 @@ describe('design primitives', () => {
     expect(cityPicture).toBeInTheDocument();
     expect(cityPicture?.querySelector('source')).toHaveAttribute(
       'srcset',
-      '/images/murray-legal-manhattan.webp',
+      '/images/murray-legal-manhattan-600.webp 600w, /images/murray-legal-manhattan-1200.webp 1200w, /images/murray-legal-manhattan-2400.webp 2400w',
     );
+    expect(cityPicture?.querySelector('source')).toHaveAttribute('sizes', '100vw');
     const cityImage = cityPicture?.querySelector('img');
-    expect(cityImage).toHaveAttribute('src', '/images/murray-legal-manhattan.jpg');
+    expect(cityImage).toHaveAttribute('src', '/images/murray-legal-manhattan-1200.jpg');
+    expect(cityImage).toHaveAttribute(
+      'srcset',
+      '/images/murray-legal-manhattan-600.jpg 600w, /images/murray-legal-manhattan-1200.jpg 1200w, /images/murray-legal-manhattan-2400.jpg 2400w',
+    );
     expect(cityImage).toHaveClass('hero-image');
     expect(stylesheet).toMatch(/\.hero-image\s*{[^}]*filter:\s*grayscale\(1\);/s);
     expect(cityHero.querySelector('[data-hero-overlay]')).toHaveClass(

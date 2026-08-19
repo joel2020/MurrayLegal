@@ -25,11 +25,11 @@ test('homepage visual contract holds at the four approved widths', async ({ page
       await expect(header.getByRole('link', { name: 'Request a consultation' })).toBeVisible();
       await header.getByRole('button', { name: 'Open navigation' }).click();
       const mobile = page.getByRole('navigation', { name: 'Mobile navigation' });
-      await expect(mobile.getByRole('link', { name: 'Call Murray Legal' })).toHaveAttribute('href', 'tel:+19142141880');
+      await expect(mobile.getByRole('link', { name: 'Call Murray Legal at (914) 214-1880' })).toHaveAttribute('href', 'tel:+19142141880');
       await header.getByRole('button', { name: 'Close navigation' }).click();
     } else {
       await expect(header.getByRole('link', { name: 'Request a consultation' })).toBeVisible();
-      await expect(header.getByRole('link', { name: 'Call Murray Legal' })).toHaveAttribute('href', 'tel:+19142141880');
+      await expect(header.getByRole('link', { name: 'Call Murray Legal at (914) 214-1880' })).toHaveAttribute('href', 'tel:+19142141880');
     }
 
     const heroAction = page.locator('.city-hero__panel').getByRole('link', { name: 'Request a consultation' });
@@ -63,6 +63,30 @@ test('homepage interaction and content evidence match the approved visual contra
   expect(bodyText).not.toMatch(/testimonial|five[- ]star|years of experience|case results|award-winning/i);
   await expect(page.locator('main img')).toHaveCount(1);
   await expect(page.getByAltText('Monochrome view of the Lower Manhattan skyline')).toBeVisible();
+});
+
+test('responsive heroes select bounded grayscale image candidates', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-chromium', 'One DPR-1 project verifies width selection.');
+  const candidates = [
+    [375, 'murray-legal-manhattan-600.webp'],
+    [768, 'murray-legal-manhattan-1200.webp'],
+    [1440, 'murray-legal-manhattan-2400.webp'],
+  ] as const;
+
+  for (const [width, file] of candidates) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const homeImage = page.getByAltText('Monochrome view of the Lower Manhattan skyline');
+    await expect(homeImage).toBeVisible();
+    expect(await homeImage.evaluate((image: HTMLImageElement) => image.currentSrc)).toContain(file);
+    expect(await homeImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+
+    await page.goto('/practice-areas/corporate-law');
+    const internalImage = page.locator('.page-hero picture img');
+    await expect(internalImage).toBeVisible();
+    expect(await internalImage.evaluate((image: HTMLImageElement) => image.currentSrc)).toContain(file);
+    expect(await internalImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  }
 });
 
 test('footer route groups remain separated 44px targets', async ({ page }) => {
@@ -111,6 +135,7 @@ test('unknown routes render a complete branded recovery page', async ({ page }) 
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
   await expect(page.getByRole('link', { name: 'Return home' })).toHaveAttribute('href', '/');
   await expect(page.getByRole('link', { name: 'Request a consultation' }).last()).toHaveAttribute('href', '/contact');
+  await expect(page.getByRole('link', { name: 'Explore practice areas' })).toHaveAttribute('href', '/practice-areas/corporate-law');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
   expect(consoleErrors).toEqual([]);
 });

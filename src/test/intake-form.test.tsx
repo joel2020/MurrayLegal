@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import IntakeForm from '../components/IntakeForm';
@@ -23,6 +23,7 @@ describe('consultation intake form', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('highlighted fields');
     expect(screen.getByText(/does not create an attorney-client relationship/i)).toBeVisible();
     expect(screen.getByRole('button', { name: 'Request a consultation' })).toBeEnabled();
+    await waitFor(() => expect(screen.getByRole('textbox', { name: /Full name/i })).toHaveFocus());
   });
 
   it('shows field-specific errors for an incomplete request', async () => {
@@ -38,20 +39,54 @@ describe('consultation intake form', () => {
     vi.stubGlobal('fetch', fetchMock);
     render(<IntakeForm />);
     await completeRequiredFields();
+    fireEvent.change(screen.getByLabelText('Website'), { target: { value: 'bot-field.example' } });
     await userEvent.click(screen.getByRole('button', { name: /Request a consultation/i }));
     expect(await screen.findByRole('status')).toHaveTextContent(/request has been received/i);
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const request = fetchMock.mock.calls[0];
     expect(request[0]).toBe('/api/intake');
-    expect(JSON.parse(request[1].body)).toMatchObject({ name: 'Jordan Client', email: 'jordan@example.com', consent: true, practiceArea: 'Corporate Law' });
+    expect(JSON.parse(request[1].body)).toMatchObject({ name: 'Jordan Client', email: 'jordan@example.com', consent: true, practiceArea: 'Corporate Law', website: 'bot-field.example' });
   });
 
-  it('preserves entered information when delivery fails', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }));
+  it('blocks duplicate submits while a request is pending', async () => {
+    let resolveFetch!: (value: { ok: boolean }) => void;
+    const fetchMock = vi.fn(() => new Promise<{ ok: boolean }>((resolve) => { resolveFetch = resolve; }));
+    vi.stubGlobal('fetch', fetchMock);
+    render(<IntakeForm />);
+    await completeRequiredFields();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Request a consultation' }));
+    const pendingButton = await screen.findByRole('button', { name: 'Sending request…' });
+    expect(pendingButton).toBeDisabled();
+    const form = pendingButton.closest('form');
+    expect(form).not.toBeNull();
+    fireEvent.submit(form!);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+
+    resolveFetch({ ok: true });
+    expect(await screen.findByRole('status')).toHaveTextContent(/request has been received/i);
+  });
+
+  it('preserves entered information after failure and retries successfully', async () => {
+    const fetchMock = vi.fn().mockResolvedValueOnce({ ok: false }).mockResolvedValueOnce({ ok: true });
+    vi.stubGlobal('fetch', fetchMock);
     render(<IntakeForm />);
     await completeRequiredFields();
     await userEvent.click(screen.getByRole('button', { name: /Request a consultation/i }));
     expect(await screen.findByRole('alert')).toHaveTextContent(/could not send/i);
     await waitFor(() => expect(screen.getByLabelText(/Full name/i)).toHaveValue('Jordan Client'));
+    const retryButton = screen.getByRole('button', { name: 'Request a consultation' });
+    expect(retryButton).toBeEnabled();
+
+    await userEvent.click(retryButton);
+    expect(await screen.findByRole('status')).toHaveTextContent(/request has been received/i);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(JSON.parse(fetchMock.mock.calls[1][1].body)).toMatchObject({
+      name: 'Jordan Client',
+      email: 'jordan@example.com',
+      practiceArea: 'Corporate Law',
+      jurisdiction: 'Pennsylvania',
+      consent: true,
+    });
   });
 });

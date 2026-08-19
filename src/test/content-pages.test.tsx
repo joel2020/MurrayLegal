@@ -1,7 +1,9 @@
 import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import App from '../App';
+import ConsultationCTA from '../components/ConsultationCTA';
 import { BrowserRouter } from '../lib/router';
+import { PHONE_TEL } from '../lib/firm';
 
 const renderPath = (path: string): void => {
   window.history.replaceState({}, '', path);
@@ -9,6 +11,17 @@ const renderPath = (path: string): void => {
 };
 
 describe('editorial content templates', () => {
+  it('uses the approved primary and telephone consultation actions', () => {
+    render(<BrowserRouter><ConsultationCTA /></BrowserRouter>);
+    const callToAction = screen.getByRole('region', { name: 'Consultation call to action' });
+    const consultationLink = within(callToAction).getByRole('link', { name: 'Request a consultation' });
+    expect(consultationLink).toHaveAttribute('href', '/contact');
+    expect(consultationLink).toHaveClass('action-link--primary');
+    const phoneLink = within(callToAction).getByRole('link', { name: 'Call Murray Legal' });
+    expect(phoneLink).toHaveAttribute('href', `tel:${PHONE_TEL}`);
+    expect(phoneLink).toHaveClass('action-link--outline');
+  });
+
   it('renders a structured practice-area page with safe jurisdiction copy', () => {
     renderPath('/practice-areas/corporate-law');
     expect(screen.getByRole('heading', { level: 1, name: /Corporate Law Attorney/i })).toBeInTheDocument();
@@ -82,7 +95,14 @@ describe('editorial content templates', () => {
 
   it('returns an index-safe 404 for an unknown insight slug', () => {
     renderPath('/insights/not-a-real-article');
-    expect(screen.getByRole('heading', { level: 1, name: 'Page Not Found' })).toBeInTheDocument();
+    const notFound = screen.getByRole('main');
+    expect(within(notFound).getByRole('heading', { level: 1, name: 'Page Not Found' })).toBeInTheDocument();
+    const returnHome = within(notFound).getByRole('link', { name: 'Return home' });
+    expect(returnHome).toHaveAttribute('href', '/');
+    expect(returnHome).toHaveClass('action-link--primary');
+    const consultationLink = within(notFound).getByRole('link', { name: 'Request a consultation' });
+    expect(consultationLink).toHaveAttribute('href', '/contact');
+    expect(consultationLink).toHaveClass('action-link--outline');
     expect(document.querySelector('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
   });
 

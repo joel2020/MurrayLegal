@@ -27,6 +27,16 @@ describe('intake API', () => {
     expect(res.statusCode).toBe(400);
   });
 
+  it('suppresses honeypot submissions without attempting delivery', async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+    const res = response();
+    await handler({ method: 'POST', headers: { 'content-type': 'application/json' }, body: { ...validBody, website: 'bot-field.example' } }, res);
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual({ ok: true });
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
   it('delivers a validated request without exposing the API key', async () => {
     process.env.RESEND_API_KEY = 'test-key';
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });

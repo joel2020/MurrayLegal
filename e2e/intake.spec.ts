@@ -8,7 +8,9 @@ test('consultation request validates and submits successfully', async ({ page },
   });
   await page.goto('/contact');
   await expect(page.locator('[data-hero-visual="solid"]')).toBeVisible();
-  await expect(page.locator('main').getByRole('link', { name: 'Call Murray Legal' })).toHaveAttribute('href', 'tel:+19142141880');
+  const phoneLink = page.locator('main').getByRole('link', { name: 'Call Murray Legal' });
+  await expect(phoneLink).toBeVisible();
+  await expect(phoneLink).toHaveAttribute('href', 'tel:+19142141880');
   await page.screenshot({ path: `artifacts/site-audit/contact-${testInfo.project.name}.png`, fullPage: true });
   await page.getByRole('button', { name: /Request a consultation/i }).click();
   await expect(page.getByRole('alert')).toContainText('highlighted fields');

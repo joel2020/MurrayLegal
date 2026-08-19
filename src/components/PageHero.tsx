@@ -39,6 +39,7 @@ export default function PageHero({
         </picture>
       )}
       <div
+        data-hero-overlay
         className={`pointer-events-none absolute inset-0 -z-10 ${visual === 'city' ? 'bg-gradient-to-r from-navy-deep via-navy-deep/85 to-navy-deep/60' : 'bg-navy-deep'}`}
         aria-hidden="true"
       />

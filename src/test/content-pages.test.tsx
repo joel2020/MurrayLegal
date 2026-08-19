@@ -36,6 +36,7 @@ describe('editorial content templates', () => {
   it('uses Counsel Grid cards for related practice links', () => {
     renderPath('/practice-areas/corporate-law');
     const related = screen.getByRole('region', { name: 'Related practice areas' });
+    expect(within(related).getByRole('heading', { level: 2, name: 'Connected capabilities' })).toBeInTheDocument();
     expect(related.querySelectorAll('[data-counsel-card]')).toHaveLength(2);
     expect(within(related).getByRole('link', { name: 'Explore Civil Litigation' })).toHaveAttribute(
       'href',
@@ -46,8 +47,14 @@ describe('editorial content templates', () => {
   it('renders industry priorities and related capabilities', () => {
     renderPath('/industries/businesses-founders');
     expect(screen.getByRole('heading', { level: 1, name: 'Businesses & Founders' })).toBeInTheDocument();
-    expect(screen.getByText('Company formation and governance')).toBeInTheDocument();
-    expect(screen.getByRole('region', { name: 'Relevant practice areas' })).toBeInTheDocument();
+    const priorities = screen.getByText('Company formation and governance').closest('ul');
+    expect(priorities).not.toBeNull();
+    expect(within(priorities!).queryByText('01')).not.toBeInTheDocument();
+    const related = screen.getByRole('region', { name: 'Relevant practice areas' });
+    expect(within(related).getByRole('link', { name: 'Explore Corporate Law' })).toHaveAttribute(
+      'href',
+      '/practice-areas/corporate-law',
+    );
   });
 
   it('renders the insight index as an article library', () => {
@@ -60,6 +67,9 @@ describe('editorial content templates', () => {
   it('keeps About firm-focused without an attorney portrait', () => {
     renderPath('/about');
     expect(screen.getByRole('heading', { level: 1, name: 'About Murray Legal' })).toBeInTheDocument();
+    const principles = screen.getByText('Working principles').closest('section');
+    expect(principles).not.toBeNull();
+    expect(within(principles!).queryByText('01')).not.toBeInTheDocument();
     expect(screen.queryByRole('img', { name: /attorney|lawyer|counsel|portrait|headshot/i })).not.toBeInTheDocument();
   });
 

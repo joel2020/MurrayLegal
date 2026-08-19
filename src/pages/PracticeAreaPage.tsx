@@ -49,7 +49,7 @@ export default function PracticeAreaPage({ slug, canonicalPath }: { slug: string
         </Container>
       </section>
 
-      {area.relatedPracticeSlugs.length > 0 && <section className="counsel-section py-16 sm:py-20" aria-label="Related practice areas"><Container><p className="eyebrow text-gold-light">Connected capabilities</p><div className="counsel-grid mt-7 md:grid-cols-2">{area.relatedPracticeSlugs.map((slug) => { const related = practiceAreaBySlug[slug]; return <PracticeAreaCard key={slug} category={related.category} title={related.name} description={related.cardDescription} href={`/practice-areas/${slug}`} />; })}</div></Container></section>}
+      {area.relatedPracticeSlugs.length > 0 && <section className="counsel-section py-16 sm:py-20" aria-label="Related practice areas"><Container><h2 className="font-display text-display-md text-paper">Connected capabilities</h2><div className="counsel-grid mt-7 md:grid-cols-2">{area.relatedPracticeSlugs.map((slug) => { const related = practiceAreaBySlug[slug]; return <PracticeAreaCard key={slug} category={related.category} title={related.name} description={related.cardDescription} href={`/practice-areas/${slug}`} />; })}</div></Container></section>}
 
       <section className="section-shell bg-paper">
         <Container className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24"><div><p className="eyebrow">Frequently asked</p><h2 className="mt-5 font-display text-display-lg text-ink">A practical starting point.</h2><p className="mt-6 text-sm leading-7 text-muted">Answers are general information. A consultation is required for advice about a particular matter.</p></div><FAQAccordion items={faqs} /></Container>

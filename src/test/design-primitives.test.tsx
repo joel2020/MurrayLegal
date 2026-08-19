@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { readFileSync } from 'node:fs';
 import type { ReactNode } from 'react';
 import { describe, expect, it } from 'vitest';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -6,6 +7,8 @@ import Container from '../components/Container';
 import PageHero from '../components/PageHero';
 import SectionHeading from '../components/SectionHeading';
 import { BrowserRouter } from '../lib/router';
+
+const stylesheet = readFileSync('src/index.css', 'utf8');
 
 function withRouter(children: ReactNode) {
   return render(<BrowserRouter>{children}</BrowserRouter>);
@@ -38,7 +41,22 @@ describe('design primitives', () => {
 
     const cityHero = screen.getByRole('region', { name: 'Corporate Law' });
     expect(cityHero).toHaveAttribute('data-hero-visual', 'city');
-    expect(cityHero.querySelector('picture')).toBeInTheDocument();
+    const cityPicture = cityHero.querySelector('picture');
+    expect(cityPicture).toBeInTheDocument();
+    expect(cityPicture?.querySelector('source')).toHaveAttribute(
+      'srcset',
+      '/images/murray-legal-manhattan.webp',
+    );
+    const cityImage = cityPicture?.querySelector('img');
+    expect(cityImage).toHaveAttribute('src', '/images/murray-legal-manhattan.jpg');
+    expect(cityImage).toHaveClass('hero-image');
+    expect(stylesheet).toMatch(/\.hero-image\s*{[^}]*filter:\s*grayscale\(1\);/s);
+    expect(cityHero.querySelector('[data-hero-overlay]')).toHaveClass(
+      'from-navy-deep',
+      'via-navy-deep/85',
+      'to-navy-deep/60',
+    );
+    expect(cityHero.querySelector('.border-gold')).toHaveClass('border-l-[5px]', 'border-gold');
 
     rerender(
       <BrowserRouter>
@@ -49,6 +67,7 @@ describe('design primitives', () => {
     const solidHero = screen.getByRole('region', { name: 'Contact' });
     expect(solidHero).toHaveAttribute('data-hero-visual', 'solid');
     expect(solidHero.querySelector('picture')).not.toBeInTheDocument();
+    expect(solidHero.querySelector('[data-hero-overlay]')).toHaveClass('bg-navy-deep');
   });
 
   it('renders SectionHeading as an h2 and preserves classes', () => {

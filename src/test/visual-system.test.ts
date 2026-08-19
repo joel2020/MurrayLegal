@@ -19,4 +19,8 @@ describe('NYC visual foundation', () => {
     expect(existsSync(resolve(root, 'public/images/murray-legal-manhattan.webp'))).toBe(true);
     expect(existsSync(resolve(root, 'public/images/murray-legal-manhattan.jpg'))).toBe(true);
   });
+
+  it('renders reusable hero imagery in deterministic grayscale', () => {
+    expect(read('src/index.css')).toMatch(/\.hero-image\s*\{[^}]*filter:\s*grayscale\(1\);/);
+  });
 });

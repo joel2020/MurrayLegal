@@ -125,7 +125,10 @@
   .counsel-grid { @apply grid border-l border-t border-ink/15; }
   .counsel-grid > * { @apply border-b border-r border-ink/15 bg-paper; }
 
-  .hero-image { background-color: var(--ml-navy-deep); }
+  .hero-image {
+    background-color: var(--ml-navy-deep);
+    filter: grayscale(1);
+  }
 
   .field {
     @apply mt-2 min-h-12 w-full rounded-none border border-ink/20 bg-paper px-4 py-3 text-base text-ink shadow-none outline-none transition;

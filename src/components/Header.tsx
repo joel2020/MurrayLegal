@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { industryNavigation, practiceNavigation, primaryNavigation, type NavigationItem } from '../data/navigation';
 import { PHONE_DISPLAY, PHONE_TEL } from '../lib/firm';
 import { Link, usePathname } from '../lib/router';
+import ActionLink from './ActionLink';
 import Container from './Container';
 
 type DesktopMenu = 'practices' | 'industries' | null;
@@ -92,7 +93,7 @@ export default function Header(): JSX.Element {
   const closeMobile = () => setMobileOpen(false);
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur-md">
+    <header ref={headerRef} className="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 font-body backdrop-blur-md">
       <div className="hidden bg-ink text-paper md:block">
         <Container className="flex min-h-9 items-center justify-between text-[0.68rem] font-semibold uppercase tracking-[0.12em]">
           <p>Pennsylvania-licensed counsel</p>
@@ -115,9 +116,9 @@ export default function Header(): JSX.Element {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-5 xl:flex">
-          <a href={`tel:${PHONE_TEL}`} className="text-xs font-bold tracking-[0.04em] text-ink hover:text-gold-dark">{PHONE_DISPLAY}</a>
-          <Link to="/contact" ariaLabel="Schedule a Consultation" className="btn-primary">Consultation</Link>
+        <div className="hidden items-center gap-3 lg:flex">
+          <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel="Call Murray Legal" variant="secondary" showIcon={false}>{PHONE_DISPLAY}</ActionLink>
+          <ActionLink to="/contact" ariaLabel="Request a consultation">Request a consultation</ActionLink>
         </div>
 
         <button
@@ -151,7 +152,10 @@ export default function Header(): JSX.Element {
               {primaryNavigation.map((item) => (
                 <Link key={item.href} to={item.href} onClick={closeMobile} ariaLabel={item.label} className="block border-b border-ink/10 py-3 text-sm font-semibold text-ink hover:text-gold-dark">{item.label}</Link>
               ))}
-              <a href={`tel:${PHONE_TEL}`} className="btn-primary mt-7 w-full">Call {PHONE_DISPLAY}</a>
+              <div className="mt-7 grid gap-3">
+                <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel="Call Murray Legal" variant="secondary" showIcon={false} className="w-full">{PHONE_DISPLAY}</ActionLink>
+                <ActionLink to="/contact" ariaLabel="Request a consultation" className="w-full">Request a consultation</ActionLink>
+              </div>
             </div>
           </div>
         </nav>

@@ -17,7 +17,7 @@ const footerLinkClass = 'block min-h-8 text-sm text-stone transition hover:text-
 
 export default function Footer(): JSX.Element {
   return (
-    <footer className="bg-navy-deep text-stone">
+    <footer className="bg-navy-deep font-body text-stone">
       <Container className="grid gap-12 border-b border-paper/10 py-16 md:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_1fr_1fr] lg:py-20">
         <div>
           <p className="font-display text-4xl text-paper">{FIRM_NAME}</p>

@@ -31,6 +31,19 @@ describe('site navigation', () => {
     expect(screen.queryByRole('navigation', { name: 'Mobile navigation' })).not.toBeInTheDocument();
   });
 
+  it('keeps consultation and verified phone paths in the global header', async () => {
+    const user = userEvent.setup();
+    render(<BrowserRouter><Header /></BrowserRouter>);
+
+    expect(screen.getByRole('link', { name: 'Request a consultation' })).toHaveAttribute('href', '/contact');
+    expect(screen.getByRole('link', { name: 'Call Murray Legal' })).toHaveAttribute('href', 'tel:+19142141880');
+
+    await user.click(screen.getByRole('button', { name: 'Open navigation' }));
+    const mobile = screen.getByRole('navigation', { name: 'Mobile navigation' });
+    expect(within(mobile).getByRole('link', { name: 'Request a consultation' })).toBeVisible();
+    expect(within(mobile).getByRole('link', { name: 'Call Murray Legal' })).toBeVisible();
+  });
+
   it('publishes complete firm and legal information in the footer', () => {
     render(<BrowserRouter><Footer /></BrowserRouter>);
     expect(screen.getByText((_, element) => element?.tagName === 'P' && element.textContent?.includes('465 Tuckahoe Road #1246') === true)).toBeInTheDocument();

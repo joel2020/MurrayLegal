@@ -228,7 +228,10 @@
   }
 
   .city-hero__panel h1 {
-    @apply mt-5 max-w-xl font-display text-display-xl text-paper;
+    @apply mt-5 max-w-xl font-display text-paper;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 0.97;
+    letter-spacing: -0.035em;
   }
 
   .city-hero__panel > p:last-of-type {

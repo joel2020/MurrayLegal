@@ -13,7 +13,7 @@ import {
 import { Link } from '../lib/router';
 import Container from './Container';
 
-const footerLinkClass = 'inline-flex min-h-11 items-center text-sm text-stone transition hover:text-gold-light';
+const footerLinkClass = 'flex min-h-11 w-full items-center text-sm text-stone transition hover:text-gold-light';
 
 export default function Footer(): JSX.Element {
   return (
@@ -28,20 +28,24 @@ export default function Footer(): JSX.Element {
           </div>
         </div>
         <div>
-          <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-gold-light">Explore</h2>
-          <div className="mt-5">
-            {[...primaryNavigation, ...industryNavigation.slice(0, 2)].map((item) => (
-              <Link key={item.href} to={item.href} ariaLabel={item.label} className={footerLinkClass}>{item.label}</Link>
-            ))}
-          </div>
+          <h2 id="footer-explore-heading" className="text-xs font-bold uppercase tracking-[0.15em] text-gold-light">Explore</h2>
+          <nav className="mt-5" aria-label="Footer explore links">
+            <ul className="flex flex-col gap-1">
+              {[...primaryNavigation, ...industryNavigation.slice(0, 2)].map((item) => (
+                <li key={item.href}><Link to={item.href} ariaLabel={item.label} className={footerLinkClass}>{item.label}</Link></li>
+              ))}
+            </ul>
+          </nav>
         </div>
         <div>
-          <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-gold-light">Practice Areas</h2>
-          <div className="mt-5">
-            {practiceNavigation.map((item) => (
-              <Link key={item.href} to={item.href} ariaLabel={item.label} className={footerLinkClass}>{item.label}</Link>
-            ))}
-          </div>
+          <h2 id="footer-practices-heading" className="text-xs font-bold uppercase tracking-[0.15em] text-gold-light">Practice Areas</h2>
+          <nav className="mt-5" aria-label="Footer practice links">
+            <ul className="flex flex-col gap-1">
+              {practiceNavigation.map((item) => (
+                <li key={item.href}><Link to={item.href} ariaLabel={item.label} className={footerLinkClass}>{item.label}</Link></li>
+              ))}
+            </ul>
+          </nav>
         </div>
         <div>
           <h2 className="text-xs font-bold uppercase tracking-[0.15em] text-gold-light">Offices</h2>

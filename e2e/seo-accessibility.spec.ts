@@ -16,7 +16,10 @@ test('all canonical routes expose a stable accessible document shell', async ({ 
     await page.goto(route);
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.locator('meta[name="description"]')).toHaveCount(1);
+    await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
     await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://murraylegalfirm.com${route}`);
+    await expect(page.locator('[data-hero-visual]').first()).toBeVisible();
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
     expect(overflow, `horizontal overflow on ${route}`).toBe(false);
     const unlabeledControls = await page.locator('input:not([type="hidden"]), select, textarea').evaluateAll((controls) => controls.filter((control) => {

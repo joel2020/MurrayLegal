@@ -1,4 +1,12 @@
-type PracticeAreaCategory = (typeof approvedCategories)[keyof typeof approvedCategories];
+type PracticeAreaCategory =
+  | 'Business'
+  | 'Property'
+  | 'Disputes'
+  | 'Creative'
+  | 'Sports'
+  | 'Brands & Rights'
+  | 'Private Client'
+  | 'Family';
 
 export type PracticeArea = {
   slug: string;
@@ -20,17 +28,6 @@ export type PracticeArea = {
   cta: string;
   faqs: { question: string; answer: string }[];
 };
-
-const approvedCategories = {
-  'corporate-law': 'Business',
-  'real-estate': 'Property',
-  'civil-litigation': 'Disputes',
-  'entertainment-transactions': 'Creative',
-  'sports-transactions': 'Sports',
-  'intellectual-property': 'Brands & Rights',
-  'trusts-wills-estates': 'Private Client',
-  'divorce-family-law': 'Family',
-} as const;
 
 export const practiceAreas: PracticeArea[] = [
   { slug:'corporate-law', category:'Business', legacyPaths:['/corporate-law','/business-attorney'], name:'Corporate Law', primaryKeyword:'corporate law attorney', secondaryKeywords:['business attorney','corporate lawyer'], titleTag:'Corporate Law Attorney for Businesses, Founders & Executives | Murray Legal', metaDescription:'Murray Legal advises businesses, founders, executives, and corporate clients on contracts, governance, transactions, and commercial risk. Schedule a consultation.', heroHeadline:'Corporate Law Attorney for Businesses, Founders, and Executives', heroDescription:'Murray Legal provides strategic legal counsel for companies, founders, executives, and investors navigating contracts, governance, transactions, and business risk.', cardDescription:'Legal counsel for business formation, governance, contracts, transactions, and commercial risk.', mattersHandled:['Business formation','Operating agreements','Shareholder agreements','Vendor and customer contracts','Commercial agreements','Corporate governance','Mergers and acquisitions support','Business disputes','Risk reviews','Contract negotiation'], whoThisHelps:['Businesses','Founders','Executives','Investors'], riskFraming:'Business legal issues compound when agreements are unclear, obligations are missed, or disputes are handled informally. Early legal review can preserve leverage and reduce exposure.', process:['Initial consultation','Risk and document review','Strategy and negotiation','Execution support'], relatedPracticeSlugs:['civil-litigation','intellectual-property'], cta:'Speak With a Corporate Attorney', faqs:[{question:'When should a business hire a corporate attorney?',answer:'Before signing major agreements, raising capital, or entering high-risk transactions.'}] },

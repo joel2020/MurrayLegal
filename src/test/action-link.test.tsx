@@ -16,4 +16,11 @@ describe('ActionLink', () => {
     render(<ActionLink href="tel:+19142141880" ariaLabel="Call Murray Legal" variant="outline">(914) 214-1880</ActionLink>);
     expect(screen.getByRole('link', { name: 'Call Murray Legal' })).toHaveAttribute('href', 'tel:+19142141880');
   });
+
+  it('renders a secondary action without an icon when requested', () => {
+    render(<ActionLink href="tel:+19142141880" ariaLabel="Call Murray Legal" variant="secondary" showIcon={false}>(914) 214-1880</ActionLink>);
+    const link = screen.getByRole('link', { name: 'Call Murray Legal' });
+    expect(link).toHaveClass('action-link--secondary');
+    expect(link.querySelector('.action-link__icon')).toBeNull();
+  });
 });

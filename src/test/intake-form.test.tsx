@@ -46,6 +46,15 @@ describe('consultation intake form', () => {
     const request = fetchMock.mock.calls[0];
     expect(request[0]).toBe('/api/intake');
     expect(JSON.parse(request[1].body)).toMatchObject({ name: 'Jordan Client', email: 'jordan@example.com', consent: true, practiceArea: 'Corporate Law', website: 'bot-field.example' });
+
+    await userEvent.click(screen.getByRole('button', { name: 'Submit another request' }));
+    expect(screen.getByRole('textbox', { name: /Full name/i })).toHaveValue('');
+    expect(screen.getByRole('textbox', { name: /Email address/i })).toHaveValue('');
+    expect(screen.getByRole('textbox', { name: /Phone number/i })).toHaveValue('');
+    expect(screen.getByRole('combobox', { name: /Practice area/i })).toHaveValue('');
+    expect(screen.getByRole('textbox', { name: /State or jurisdiction/i })).toHaveValue('');
+    expect(screen.getByRole('textbox', { name: /Brief description/i })).toHaveValue('');
+    expect(screen.getByRole('checkbox', { name: /I understand that submitting/i })).not.toBeChecked();
   });
 
   it('blocks duplicate submits while a request is pending', async () => {

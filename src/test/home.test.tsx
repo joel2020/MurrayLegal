@@ -12,7 +12,9 @@ describe('redesigned homepage', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Serious counsel for consequential matters.' })).toBeInTheDocument();
     expect(screen.getByText('Murray Legal · Yonkers office')).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Monochrome view of the Lower Manhattan skyline' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Request a consultation' })).toHaveAttribute('href', '/contact');
+    const consultationLinks = screen.getAllByRole('link', { name: 'Request a consultation' });
+    expect(consultationLinks).toHaveLength(2);
+    consultationLinks.forEach((link) => expect(link).toHaveAttribute('href', '/contact'));
     expect(screen.getByRole('link', { name: 'Explore the firm' })).toHaveAttribute('href', '/about');
 
     const practices = screen.getByRole('region', { name: 'Practice areas' });

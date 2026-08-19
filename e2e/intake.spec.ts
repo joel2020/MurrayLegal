@@ -7,6 +7,8 @@ test('consultation request validates and submits successfully', async ({ page },
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) });
   });
   await page.goto('/contact');
+  await expect(page.locator('[data-hero-visual="solid"]')).toBeVisible();
+  await expect(page.locator('main').getByRole('link', { name: 'Call Murray Legal' })).toHaveAttribute('href', 'tel:+19142141880');
   await page.screenshot({ path: `artifacts/site-audit/contact-${testInfo.project.name}.png`, fullPage: true });
   await page.getByRole('button', { name: /Request a consultation/i }).click();
   await expect(page.getByRole('alert')).toContainText('highlighted fields');
@@ -19,5 +21,18 @@ test('consultation request validates and submits successfully', async ({ page },
   await page.getByLabel(/I understand that submitting/i).check();
   await page.getByRole('button', { name: /Request a consultation/i }).click();
   await expect(page.getByRole('status')).toContainText('request has been received');
-  expect(submittedBody).toMatchObject({ name: 'Jordan Client', consent: true, jurisdiction: 'Pennsylvania' });
+  expect(submittedBody).toMatchObject({
+    name: 'Jordan Client',
+    email: 'jordan@example.com',
+    phone: '215-555-0123',
+    company: '',
+    practiceArea: 'Corporate Law',
+    jurisdiction: 'Pennsylvania',
+    urgency: '',
+    contactMethod: '',
+    matterDescription: 'Contract review for a proposed business transaction.',
+    consent: true,
+    website: '',
+  });
+  expect(submittedBody?.pageUrl).toMatch(/\/contact$/);
 });

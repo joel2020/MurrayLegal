@@ -93,11 +93,11 @@ export default function IntakeForm(): JSX.Element {
   const ErrorText = ({ name }: { name: keyof FormFields }): JSX.Element | null => errors[name] ? <p id={`${name}-error`} className="mt-2 text-sm font-semibold text-red-800">{errors[name]}</p> : null;
 
   if (status === 'success') {
-    return <div className="border border-gold/40 bg-paper p-8 sm:p-10" role="status" aria-live="polite"><CheckCircle2 className="text-gold-dark" size={34} aria-hidden="true" /><h2 className="mt-6 font-display text-4xl text-ink">Your request has been received.</h2><p className="mt-5 text-base leading-8 text-muted">Murray Legal will review the information for fit, conflicts, and jurisdiction. No attorney-client relationship exists unless the firm confirms an engagement in writing.</p><button className="btn-secondary mt-7" type="button" onClick={() => setStatus('idle')}>Submit another request</button></div>;
+    return <div className="border border-ink/15 border-t-[6px] border-t-gold bg-paper p-8 sm:p-10" role="status" aria-live="polite"><CheckCircle2 className="text-gold-dark" size={34} aria-hidden="true" /><h2 className="mt-6 font-display text-display-md text-ink">Your request has been received.</h2><p className="mt-5 text-base leading-8 text-muted">Murray Legal will review the information for fit, conflicts, and jurisdiction. No attorney-client relationship exists unless the firm confirms an engagement in writing.</p><button className="action-link action-link--secondary mt-7" type="button" onClick={() => setStatus('idle')}>Submit another request</button></div>;
   }
 
-  return <form className="border border-ink/15 bg-paper p-6 sm:p-9" onSubmit={submit} noValidate>
-    <div><p className="eyebrow">Consultation request</p><h2 className="mt-4 font-display text-4xl text-ink sm:text-5xl">Tell us what is at stake.</h2><p className="mt-4 text-sm leading-7 text-muted"><span aria-hidden="true">*</span> Required fields. Do not include confidential or time-sensitive information.</p></div>
+  return <form className="border border-ink/15 border-t-[6px] border-t-gold bg-paper p-6 sm:p-10" onSubmit={submit} noValidate>
+    <div><p className="eyebrow">Consultation request</p><h2 className="mt-4 font-display text-display-md text-ink">Tell us what is at stake.</h2><p className="mt-4 max-w-2xl text-sm leading-7 text-muted"><span aria-hidden="true">*</span> Required fields. Do not include confidential or time-sensitive information.</p></div>
     {status === 'error' && Object.keys(errors).length === 0 && <p className="mt-6 border-l-2 border-red-800 bg-red-50 p-4 text-sm font-semibold text-red-900" role="alert">We could not send your request. Your information is still here—please try again or call the firm.</p>}
     {status === 'error' && Object.keys(errors).length > 0 && <p className="mt-6 border-l-2 border-red-800 bg-red-50 p-4 text-sm font-semibold text-red-900" role="alert">Review the highlighted fields before sending your request.</p>}
     <div className="mt-8 grid gap-x-6 gap-y-5 sm:grid-cols-2">
@@ -113,6 +113,9 @@ export default function IntakeForm(): JSX.Element {
       <div className="hidden" aria-hidden="true"><label htmlFor="website">Website</label><input id="website" name="website" tabIndex={-1} autoComplete="off" value={fields.website} onChange={(event) => update('website', event.target.value)} /></div>
       <div className="sm:col-span-2"><label className="flex cursor-pointer items-start gap-3 text-sm leading-7 text-muted" htmlFor="consent"><input id="consent" name="consent" type="checkbox" className="mt-1.5 h-4 w-4 shrink-0 accent-[#b08a32]" checked={fields.consent} aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? 'consent-error' : undefined} onChange={(event) => update('consent', event.target.checked)} /><span>I understand that submitting this form does not create an attorney-client relationship and that I should not send confidential information. *</span></label><ErrorText name="consent" /></div>
     </div>
-    <button className="btn-primary mt-8 w-full justify-between sm:w-auto" type="submit" disabled={status === 'submitting'}>{status === 'submitting' ? 'Sending request…' : 'Request a consultation'}<ArrowRight size={17} aria-hidden="true" /></button>
+    <button className="action-link action-link--primary mt-8 w-full sm:w-auto" type="submit" disabled={status === 'submitting'}>
+      <span>{status === 'submitting' ? 'Sending request…' : 'Request a consultation'}</span>
+      <span className="action-link__icon" aria-hidden="true"><ArrowRight size={15} /></span>
+    </button>
   </form>;
 }

@@ -17,6 +17,14 @@ async function completeRequiredFields(): Promise<void> {
 }
 
 describe('consultation intake form', () => {
+  it('keeps the approved action label and legal warning after validation failure', async () => {
+    render(<IntakeForm />);
+    await userEvent.click(screen.getByRole('button', { name: 'Request a consultation' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('highlighted fields');
+    expect(screen.getByText(/does not create an attorney-client relationship/i)).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Request a consultation' })).toBeEnabled();
+  });
+
   it('shows field-specific errors for an incomplete request', async () => {
     render(<IntakeForm />);
     await userEvent.click(screen.getByRole('button', { name: /Request a consultation/i }));

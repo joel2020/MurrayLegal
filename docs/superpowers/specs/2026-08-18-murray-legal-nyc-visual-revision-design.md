@@ -6,6 +6,8 @@
 
 **Primary reference:** [A. Vaughn Law](https://avaughnlaw.com/) for its strong city presence, high-contrast legal presentation, image-led hierarchy, and decisive calls to action. Murray Legal will not copy its branding, content, or composition verbatim.
 
+**Secondary reference:** [Putterman Legal](https://puttermanlegal.com/) for plain-language headlines, persistent consultation and telephone access, early geographic and practice specificity, and clear alternation between image-led and reading sections. Murray Legal will not adopt its attorney-centered portrait treatment or any unsupported proof claims.
+
 **Component reference:** 21st.dev's [expandable-icon button](https://21st.dev/community/components/jakobhoeg/button) and [hover-card](https://21st.dev/community/components/ui-layouts/card-hover/default) patterns, adapted to Murray Legal's visual language rather than installed as an opaque dependency.
 
 ## Relationship to the Existing Redesign
@@ -30,6 +32,8 @@ The selected direction is **Downtown Litigation with Counsel Grid components**:
 - Bodoni Moda provides high-contrast display typography; Instrument Sans handles navigation, body copy, controls, and metadata.
 - Paper white and warm ivory replace stark white in reading areas.
 - Modern expandable-arrow buttons and dossier-style practice cards provide interaction without excessive effects.
+- Conversion paths stay visible through a paired consultation action and verified telephone link.
+- Headlines use short, specific language that identifies the matter, audience, or location instead of generic marketing phrases.
 - The brand remains firm-focused. No fabricated attorney portrait, biography, credential, award, result, testimonial, or team photography will be introduced.
 
 ## Visual Tokens
@@ -65,9 +69,9 @@ Electric blue is removed. Gradients may only be used as restrained photographic 
 
 ### Header and Navigation
 
-Desktop uses a paper-white header with the Bodoni wordmark, a thin gold-outlined monogram, restrained uppercase Instrument Sans navigation, and a consultation action. The header may compact on scroll while preserving target size and focus visibility.
+Desktop uses a paper-white header with the Bodoni wordmark, a thin gold-outlined monogram, restrained uppercase Instrument Sans navigation, and a paired conversion control: “Request a consultation” plus the verified phone number from `src/lib/firm.ts`. The phone number is a functional `tel:` link. The header may compact on scroll while preserving both paths, target size, and focus visibility.
 
-Mobile uses a clear menu control and a navy navigation surface. The consultation action remains visible without crowding the viewport. Current-route, expanded-menu, keyboard, and screen-reader states remain explicit.
+Mobile uses a clear menu control and a navy navigation surface. The consultation action remains visible in the collapsed header; the verified telephone link remains immediately available in the menu. Current-route, expanded-menu, keyboard, and screen-reader states remain explicit.
 
 ### Footer
 
@@ -81,9 +85,9 @@ Legal pages and form-heavy pages may use a typography-led navy hero rather than 
 
 ## Homepage Composition
 
-1. **Header:** paper-white navigation with the firm mark and consultation path.
+1. **Header:** paper-white navigation with the firm mark, consultation action, and verified telephone path.
 2. **City hero:** full-bleed monochrome Manhattan image with a left-aligned navy panel, gold architectural edge, firm-location label, headline, supporting statement, and two actions. The approved label is “Murray Legal · Yonkers office,” the headline is “Serious counsel for consequential matters,” and the supporting statement is “Strategic legal advice for businesses, investors, executives, creators, athletes, families, and private clients.” The primary action is “Request a consultation”; the secondary action is “Explore the firm.”
-3. **Firm statement:** ivory or paper-white section explaining the firm's direct, strategic approach.
+3. **Firm statement:** ivory or paper-white section stating the firm's verified service area, primary practices, client groups, and direct strategic approach. The heading and opening paragraph must be specific enough to tell a visitor who the firm helps and what matters it handles without requiring another click.
 4. **Practice section:** midnight-navy field containing the Counsel Grid cards.
 5. **Audience and positioning:** structured light section for the verified client groups and matters the firm serves.
 6. **Insights:** selective articles presented with disciplined editorial typography and consistent metadata.
@@ -91,6 +95,8 @@ Legal pages and form-heavy pages may use a typography-led navy hero rather than 
 8. **Footer:** firm, route, contact, and jurisdiction information.
 
 The hero is the visual thesis. It should create immediate metropolitan identity without adding decorative metrics, unsupported credibility claims, or generic legal symbols.
+
+Section headings below the hero use direct, client-recognizable language. Each heading names the practice, problem, audience, or decision addressed by the section. Generic headings such as “Excellence,” “Our Difference,” or “Welcome” are not used unless the following copy makes the meaning explicit.
 
 ## Counsel Grid Component System
 
@@ -151,6 +157,7 @@ Use the shared shell and typography without reducing readability. The Pennsylvan
 - Refer to the Yonkers office factually. Do not state or imply New York bar admission.
 - Keep the verified Pennsylvania licensing and multi-jurisdiction coordination language visible where the existing site requires it.
 - Do not add testimonials, client logos, ratings, rankings, case outcomes, monetary results, awards, years of experience, or credentials without client-supplied verification.
+- Do not adopt the Putterman reference site's portrait, signature, star-rating, testimonial, or experience-claim treatments. Their approved influence is limited to conversion visibility, messaging directness, local specificity, and section pacing.
 
 ## Technical and Interaction Boundaries
 
@@ -185,10 +192,10 @@ Use the shared shell and typography without reducing readability. The Pennsylvan
 
 1. `npm run typecheck`, `npm run lint`, the relevant test command, and `npm run build` succeed.
 2. Homepage, representative practice, industry, insight, About, Contact, legal, and 404 routes receive desktop and mobile visual checks.
-3. Header, mobile navigation, Counsel Grid links, buttons, internal routing, form controls, and contact links work with keyboard and pointer input.
+3. Header, mobile navigation, Counsel Grid links, buttons, internal routing, form controls, and contact links work with keyboard and pointer input. The header consultation action and verified `tel:` link remain available at desktop and mobile widths.
 4. Hover, focus, active, disabled, loading, validation, success, error, image-fallback, font-fallback, and reduced-motion states are checked.
 5. Titles, descriptions, canonical URLs, robots behavior, sitemap output, and JSON-LD remain correct for representative routes.
-6. No unsupported claim or invented credential appears. Pennsylvania licensing language remains accurate and visible.
+6. No unsupported claim, testimonial, rating, experience statement, portrait identity, or invented credential appears. Pennsylvania licensing language remains accurate and visible.
 7. No horizontal overflow, clipped focus rings, illegible overlay text, inaccessible touch-only interaction, or layout shift from fonts and images remains.
 8. Final screenshots at desktop and mobile widths are saved under `artifacts/site-audit/` for the homepage and representative internal pages.
 9. The completed implementation is compared visually with the approved Counsel Grid mockup and checked for consistent tokens across the route set.

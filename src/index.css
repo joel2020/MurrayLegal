@@ -115,6 +115,50 @@
 
   .btn-text:hover { @apply text-gold-dark; }
 
+  .action-link {
+    @apply inline-flex min-h-12 items-center justify-between gap-4 border px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] transition duration-200 ease-premium;
+  }
+
+  .action-link--primary {
+    @apply border-gold bg-gold text-ink;
+  }
+
+  .action-link--primary:hover {
+    @apply border-gold-dark bg-gold-dark shadow-gold;
+  }
+
+  .action-link--secondary {
+    @apply border-ink bg-transparent text-ink;
+  }
+
+  .action-link--secondary:hover {
+    @apply border-gold bg-ink text-paper;
+  }
+
+  .action-link--outline {
+    @apply border-paper/40 bg-transparent text-paper;
+  }
+
+  .action-link--outline:hover {
+    @apply border-gold text-gold;
+  }
+
+  .action-link__icon {
+    @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-paper transition-transform duration-200 ease-premium;
+  }
+
+  .action-link:hover .action-link__icon { @apply translate-x-[3px]; }
+
+  .action-link:focus-visible {
+    outline: 3px solid var(--ml-gold);
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .action-link, .action-link__icon { transition: none; }
+    .action-link:hover .action-link__icon { transform: none; }
+  }
+
   .surface-card {
     @apply border border-ink/10 bg-paper p-7 transition duration-300 ease-premium sm:p-8;
   }

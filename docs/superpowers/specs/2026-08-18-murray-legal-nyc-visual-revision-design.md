@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-18
 
-**Status:** User-approved design; awaiting written-spec review
+**Status:** Approved for implementation planning
 
 **Primary reference:** [A. Vaughn Law](https://avaughnlaw.com/) for its strong city presence, high-contrast legal presentation, image-led hierarchy, and decisive calls to action. Murray Legal will not copy its branding, content, or composition verbatim.
 

@@ -15,7 +15,7 @@ describe('redesigned homepage', () => {
 
     const practices = screen.getByRole('region', { name: 'Practice areas' });
     expect(within(practices).getAllByRole('article')).toHaveLength(8);
-    expect(within(practices).getByRole('link', { name: 'View Corporate Law' })).toBeInTheDocument();
+    expect(within(practices).getByRole('link', { name: 'Explore Corporate Law' })).toBeInTheDocument();
 
     for (const audience of ['Businesses & Founders', 'Real Estate Investors', 'Entertainment Professionals', 'Athletes & Sports Organizations', 'High-Net-Worth Individuals']) {
       expect(screen.getByRole('link', { name: audience })).toBeInTheDocument();

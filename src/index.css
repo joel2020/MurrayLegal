@@ -169,6 +169,29 @@
   .counsel-grid { @apply grid border-l border-t border-ink/15; }
   .counsel-grid > * { @apply border-b border-r border-ink/15 bg-paper; }
 
+  .counsel-card { @apply min-h-72 bg-paper; }
+  .counsel-card__link { @apply relative flex min-h-72 flex-col p-6 text-ink transition duration-200 ease-premium sm:p-7; }
+  .counsel-card__category { @apply text-xs font-bold uppercase tracking-[0.14em] text-gold-dark; }
+  .counsel-card__arrow { @apply absolute right-6 top-6 inline-flex h-9 w-9 items-center justify-center border border-ink/15 text-ink transition duration-200 ease-premium sm:right-7 sm:top-7; }
+  .counsel-card__content { @apply mt-auto block pt-14; }
+  .counsel-card__content h3 { @apply text-2xl font-semibold text-ink; }
+  .counsel-card__content p { @apply mt-3 text-sm leading-7 text-muted; }
+  .counsel-card:hover .counsel-card__link { @apply -translate-y-0.5 bg-ink; }
+  .counsel-card:hover .counsel-card__category,
+  .counsel-card:hover .counsel-card__content h3 { @apply text-paper; }
+  .counsel-card:hover .counsel-card__content p { @apply text-stone; }
+  .counsel-card:hover .counsel-card__arrow { @apply border-gold bg-gold text-ink translate-x-0.5 -translate-y-0.5; }
+  .counsel-card:focus-within { @apply relative z-10; }
+  .counsel-card:focus-within .counsel-card__link { @apply bg-ink; }
+  .counsel-card:focus-within .counsel-card__category,
+  .counsel-card:focus-within .counsel-card__content h3 { @apply text-paper; }
+  .counsel-card:focus-within .counsel-card__content p { @apply text-stone; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .counsel-card__link, .counsel-card__arrow { transition: none; }
+    .counsel-card:hover .counsel-card__link, .counsel-card:hover .counsel-card__arrow { transform: none; }
+  }
+
   .hero-image {
     background-color: var(--ml-navy-deep);
     filter: grayscale(1);

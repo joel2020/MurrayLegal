@@ -31,6 +31,26 @@ describe('design primitives', () => {
     expect(screen.getByText('Strategic counsel for consequential business decisions.')).toBeInTheDocument();
   });
 
+  it('renders explicit city and solid hero treatments', () => {
+    const { rerender } = withRouter(
+      <PageHero visual="city" title="Corporate Law" description="Description" />,
+    );
+
+    const cityHero = screen.getByRole('region', { name: 'Corporate Law' });
+    expect(cityHero).toHaveAttribute('data-hero-visual', 'city');
+    expect(cityHero.querySelector('picture')).toBeInTheDocument();
+
+    rerender(
+      <BrowserRouter>
+        <PageHero visual="solid" title="Contact" description="Description" />
+      </BrowserRouter>,
+    );
+
+    const solidHero = screen.getByRole('region', { name: 'Contact' });
+    expect(solidHero).toHaveAttribute('data-hero-visual', 'solid');
+    expect(solidHero.querySelector('picture')).not.toBeInTheDocument();
+  });
+
   it('renders SectionHeading as an h2 and preserves classes', () => {
     render(<SectionHeading title="Practice Areas" className="custom-heading" />);
     expect(screen.getByRole('heading', { level: 2, name: 'Practice Areas' }).parentElement).toHaveClass('custom-heading');

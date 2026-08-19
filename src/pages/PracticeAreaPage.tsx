@@ -3,10 +3,9 @@ import ConsultationCTA from '../components/ConsultationCTA';
 import Container from '../components/Container';
 import FAQAccordion from '../components/FAQAccordion';
 import PageHero from '../components/PageHero';
+import PracticeAreaCard from '../components/PracticeAreaCard';
 import { practiceAreaBySlug } from '../data/practiceAreas';
 import { JURISDICTION_NOTICE, SITE_URL } from '../lib/firm';
-import { Link } from '../lib/router';
-import { ArrowRight } from 'lucide-react';
 import { breadcrumbSchema, faqSchema, legalServiceSchema } from '../lib/schema';
 
 export default function PracticeAreaPage({ slug, canonicalPath }: { slug: string; canonicalPath: string }): JSX.Element {
@@ -31,14 +30,14 @@ export default function PracticeAreaPage({ slug, canonicalPath }: { slug: string
   return (
     <main>
       <SEOHead title={area.titleTag} description={area.metaDescription} canonical={`${SITE_URL}${canonicalPath}`} schema={schema} />
-      <PageHero eyebrow="Practice area" title={area.heroHeadline} description={area.heroDescription} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Practice Areas', href: '/#practice-areas' }, { label: area.name }]} aside={<><p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-light">Who we advise</p><p className="mt-3 text-sm leading-7">{area.whoThisHelps.join(' · ')}</p></>} />
+      <PageHero visual="city" eyebrow="Practice area" title={area.heroHeadline} description={area.heroDescription} breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Practice Areas', href: '/#practice-areas' }, { label: area.name }]} aside={<><p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-light">Who we advise</p><p className="mt-3 text-sm leading-7">{area.whoThisHelps.join(' · ')}</p></>} />
 
       <section className="section-shell bg-paper">
         <Container className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24">
           <div><p className="eyebrow">The stakes</p><h2 className="mt-5 font-display text-display-lg text-ink">Clarity before commitments compound.</h2><p className="mt-6 text-lg leading-8 text-muted">{area.riskFraming}</p></div>
           <div>
             <p className="eyebrow">Matters handled</p>
-            <ul className="mt-6 grid border-l border-t border-ink/15 sm:grid-cols-2">{area.mattersHandled.map((matter, index) => <li key={matter} className="flex min-h-24 items-start gap-4 border-b border-r border-ink/15 p-5"><span className="font-display text-xl text-gold-dark">{String(index + 1).padStart(2, '0')}</span><span className="font-semibold leading-7 text-ink">{matter}</span></li>)}</ul>
+            <ul className="mt-6 grid border-l border-t border-ink/15 sm:grid-cols-2">{area.mattersHandled.map((matter) => <li key={matter} className="relative flex min-h-24 items-start border-b border-r border-ink/15 p-5 pl-9 before:absolute before:left-5 before:top-7 before:h-px before:w-2.5 before:bg-gold"><span className="font-semibold leading-7 text-ink">{matter}</span></li>)}</ul>
           </div>
         </Container>
       </section>
@@ -50,7 +49,7 @@ export default function PracticeAreaPage({ slug, canonicalPath }: { slug: string
         </Container>
       </section>
 
-      {area.relatedPracticeSlugs.length > 0 && <section className="bg-stone/70 py-16 sm:py-20" aria-label="Related practice areas"><Container><p className="eyebrow">Connected capabilities</p><div className="mt-7 flex flex-wrap gap-3">{area.relatedPracticeSlugs.map((slug) => { const related = practiceAreaBySlug[slug]; return <Link key={slug} to={`/practice-areas/${slug}`} ariaLabel={`Explore ${related.name}`} className="btn-secondary">{related.name}<ArrowRight size={16} aria-hidden="true" /></Link>; })}</div></Container></section>}
+      {area.relatedPracticeSlugs.length > 0 && <section className="counsel-section py-16 sm:py-20" aria-label="Related practice areas"><Container><p className="eyebrow text-gold-light">Connected capabilities</p><div className="counsel-grid mt-7 md:grid-cols-2">{area.relatedPracticeSlugs.map((slug) => { const related = practiceAreaBySlug[slug]; return <PracticeAreaCard key={slug} category={related.category} title={related.name} description={related.cardDescription} href={`/practice-areas/${slug}`} />; })}</div></Container></section>}
 
       <section className="section-shell bg-paper">
         <Container className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24"><div><p className="eyebrow">Frequently asked</p><h2 className="mt-5 font-display text-display-lg text-ink">A practical starting point.</h2><p className="mt-6 text-sm leading-7 text-muted">Answers are general information. A consultation is required for advice about a particular matter.</p></div><FAQAccordion items={faqs} /></Container>

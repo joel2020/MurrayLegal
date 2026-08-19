@@ -8,13 +8,41 @@ export type PageHeroProps = {
   description: string;
   breadcrumbs?: BreadcrumbItem[];
   aside?: ReactNode;
+  visual?: 'city' | 'solid';
 };
 
-export default function PageHero({ eyebrow, title, description, breadcrumbs, aside }: PageHeroProps): JSX.Element {
+export default function PageHero({
+  eyebrow,
+  title,
+  description,
+  breadcrumbs,
+  aside,
+  visual = 'city',
+}: PageHeroProps): JSX.Element {
   return (
-    <section className="relative overflow-hidden bg-ink py-16 text-paper sm:py-20 lg:py-24">
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(135deg,transparent_45%,rgba(176,138,50,0.11)_45%,rgba(176,138,50,0.11)_45.6%,transparent_45.6%)]" aria-hidden="true" />
-      <Container className={`relative grid gap-12 ${aside ? 'lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)] lg:items-end' : ''}`}>
+    <section
+      className={`page-hero page-hero--${visual} relative isolate overflow-hidden bg-navy-deep py-16 text-paper sm:py-20 lg:py-24`}
+      data-hero-visual={visual}
+      aria-label={title}
+    >
+      {visual === 'city' && (
+        <picture className="pointer-events-none absolute inset-0 -z-20 block" aria-hidden="true">
+          <source srcSet="/images/murray-legal-manhattan.webp" type="image/webp" />
+          <img
+            src="/images/murray-legal-manhattan.jpg"
+            alt=""
+            width="2400"
+            height="1600"
+            decoding="async"
+            className="hero-image h-full w-full object-cover object-center"
+          />
+        </picture>
+      )}
+      <div
+        className={`pointer-events-none absolute inset-0 -z-10 ${visual === 'city' ? 'bg-gradient-to-r from-navy-deep via-navy-deep/85 to-navy-deep/60' : 'bg-navy-deep'}`}
+        aria-hidden="true"
+      />
+      <Container className={`relative grid gap-12 border-l-[5px] border-gold pl-6 sm:border-l-8 sm:pl-10 ${aside ? 'lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)] lg:items-end' : ''}`}>
         <div className="max-w-[52rem]">
           {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
           {eyebrow && <p className="eyebrow mt-8">{eyebrow}</p>}

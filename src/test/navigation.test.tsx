@@ -43,6 +43,9 @@ describe('site navigation', () => {
       .find((link) => link.classList.contains('lg:hidden'));
     expect(persistentMobileCta).toHaveAttribute('href', '/contact');
     expect(persistentMobileCta?.closest('#mobile-navigation')).toBeNull();
+    expect(persistentMobileCta).toHaveTextContent('Consult');
+    expect(persistentMobileCta?.querySelector('.action-link__icon')).toBeNull();
+    expect(screen.getByText('Murray Legal', { selector: 'span' })).toHaveClass('hidden', 'sm:inline');
 
     await user.click(screen.getByRole('button', { name: 'Open navigation' }));
     const mobile = screen.getByRole('navigation', { name: 'Mobile navigation' });

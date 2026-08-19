@@ -103,7 +103,7 @@ export default function Header(): JSX.Element {
       <Container className="flex min-h-[4.75rem] items-center justify-between gap-5">
         <Link to="/" ariaLabel="Murray Legal Home" className="group flex items-center gap-3 text-ink">
           <span aria-hidden="true" className="grid h-10 w-10 place-items-center border border-gold font-display text-2xl leading-none text-gold-dark">M</span>
-          <span className="font-display text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">Murray Legal</span>
+          <span className="hidden font-display text-2xl font-semibold tracking-[-0.02em] sm:inline sm:text-3xl">Murray Legal</span>
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
@@ -121,7 +121,7 @@ export default function Header(): JSX.Element {
           <ActionLink to="/contact" ariaLabel="Request a consultation">Request a consultation</ActionLink>
         </div>
 
-        <ActionLink to="/contact" ariaLabel="Request a consultation" className="lg:hidden">Request a consultation</ActionLink>
+        <ActionLink to="/contact" ariaLabel="Request a consultation" className="lg:hidden !px-3" showIcon={false}>Consult</ActionLink>
 
         <button
           ref={menuButtonRef}

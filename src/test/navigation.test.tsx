@@ -35,11 +35,18 @@ describe('site navigation', () => {
     const user = userEvent.setup();
     render(<BrowserRouter><Header /></BrowserRouter>);
 
-    expect(screen.getByRole('link', { name: 'Request a consultation' })).toHaveAttribute('href', '/contact');
+    expect(screen.getAllByRole('link', { name: 'Request a consultation' })
+      .some((link) => link.getAttribute('href') === '/contact')).toBe(true);
     expect(screen.getByRole('link', { name: 'Call Murray Legal' })).toHaveAttribute('href', 'tel:+19142141880');
+
+    const persistentMobileCta = screen.getAllByRole('link', { name: 'Request a consultation' })
+      .find((link) => link.classList.contains('lg:hidden'));
+    expect(persistentMobileCta).toHaveAttribute('href', '/contact');
+    expect(persistentMobileCta?.closest('#mobile-navigation')).toBeNull();
 
     await user.click(screen.getByRole('button', { name: 'Open navigation' }));
     const mobile = screen.getByRole('navigation', { name: 'Mobile navigation' });
+    expect(mobile.firstElementChild).toHaveAttribute('data-mobile-conversion-actions');
     expect(within(mobile).getByRole('link', { name: 'Request a consultation' })).toBeVisible();
     expect(within(mobile).getByRole('link', { name: 'Call Murray Legal' })).toBeVisible();
   });
@@ -52,6 +59,9 @@ describe('site navigation', () => {
     expect(screen.getByRole('link', { name: 'admin@murraylegalfirm.com' })).toHaveAttribute('href', 'mailto:admin@murraylegalfirm.com');
     expect(screen.getByRole('link', { name: 'Disclaimer' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Privacy Policy' })).toBeInTheDocument();
+    screen.getAllByRole('link').forEach((link) => {
+      expect(link.className).toMatch(/min-h-(11|12)/);
+    });
     expect(screen.getByText(JURISDICTION_NOTICE)).toBeInTheDocument();
   });
 });

@@ -121,6 +121,8 @@ export default function Header(): JSX.Element {
           <ActionLink to="/contact" ariaLabel="Request a consultation">Request a consultation</ActionLink>
         </div>
 
+        <ActionLink to="/contact" ariaLabel="Request a consultation" className="lg:hidden">Request a consultation</ActionLink>
+
         <button
           ref={menuButtonRef}
           type="button"
@@ -136,6 +138,10 @@ export default function Header(): JSX.Element {
 
       {mobileOpen && (
         <nav id="mobile-navigation" className="fixed inset-x-0 bottom-0 top-[4.8rem] overflow-y-auto border-t border-ink/10 bg-paper px-5 pb-12 pt-7 md:top-[7rem] sm:px-8 lg:hidden" aria-label="Mobile navigation">
+          <div data-mobile-conversion-actions className="mx-auto mb-9 grid max-w-3xl gap-3 sm:grid-cols-2">
+            <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel="Call Murray Legal" variant="secondary" showIcon={false} className="w-full">{PHONE_DISPLAY}</ActionLink>
+            <ActionLink to="/contact" ariaLabel="Request a consultation" className="w-full">Request a consultation</ActionLink>
+          </div>
           <div className="mx-auto grid max-w-3xl gap-9 sm:grid-cols-2">
             <div>
               <p className="eyebrow mb-3">Practice Areas</p>
@@ -152,10 +158,6 @@ export default function Header(): JSX.Element {
               {primaryNavigation.map((item) => (
                 <Link key={item.href} to={item.href} onClick={closeMobile} ariaLabel={item.label} className="block border-b border-ink/10 py-3 text-sm font-semibold text-ink hover:text-gold-dark">{item.label}</Link>
               ))}
-              <div className="mt-7 grid gap-3">
-                <ActionLink href={`tel:${PHONE_TEL}`} ariaLabel="Call Murray Legal" variant="secondary" showIcon={false} className="w-full">{PHONE_DISPLAY}</ActionLink>
-                <ActionLink to="/contact" ariaLabel="Request a consultation" className="w-full">Request a consultation</ActionLink>
-              </div>
             </div>
           </div>
         </nav>

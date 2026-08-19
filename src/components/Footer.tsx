@@ -13,7 +13,7 @@ import {
 import { Link } from '../lib/router';
 import Container from './Container';
 
-const footerLinkClass = 'block min-h-8 text-sm text-stone transition hover:text-gold-light';
+const footerLinkClass = 'inline-flex min-h-11 items-center text-sm text-stone transition hover:text-gold-light';
 
 export default function Footer(): JSX.Element {
   return (
@@ -23,8 +23,8 @@ export default function Footer(): JSX.Element {
           <p className="font-display text-4xl text-paper">{FIRM_NAME}</p>
           <p className="mt-5 max-w-md text-sm leading-7 text-stone">Strategic legal counsel for businesses, investors, executives, creators, athletes, families, and private clients navigating consequential decisions.</p>
           <div className="mt-7 flex flex-col items-start gap-2 text-sm">
-            <a href={`tel:${PHONE_TEL}`} className="font-semibold text-paper hover:text-gold-light">{PHONE_DISPLAY}</a>
-            <a href={`mailto:${EMAIL}`} className="font-semibold text-paper hover:text-gold-light">{EMAIL}</a>
+            <a href={`tel:${PHONE_TEL}`} className="inline-flex min-h-11 items-center font-semibold text-paper hover:text-gold-light">{PHONE_DISPLAY}</a>
+            <a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center font-semibold text-paper hover:text-gold-light">{EMAIL}</a>
           </div>
         </div>
         <div>
@@ -56,7 +56,7 @@ export default function Footer(): JSX.Element {
         <div className="mt-6 flex flex-col gap-3 border-t border-paper/10 pt-6 text-xs text-stone-dark sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {FIRM_NAME}. All rights reserved.</p>
           <div className="flex gap-5">
-            {legalNavigation.map((item) => <Link key={item.href} to={item.href} ariaLabel={item.label} className="hover:text-paper">{item.label}</Link>)}
+            {legalNavigation.map((item) => <Link key={item.href} to={item.href} ariaLabel={item.label} className="inline-flex min-h-11 items-center hover:text-paper">{item.label}</Link>)}
           </div>
         </div>
       </Container>

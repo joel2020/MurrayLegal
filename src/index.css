@@ -224,7 +224,7 @@
   }
 
   .city-hero__panel {
-    @apply w-full bg-navy-deep px-6 py-10 text-paper shadow-medium sm:max-w-[39rem] sm:px-10 sm:py-12 lg:px-14 lg:py-16;
+    @apply w-full border-l-[5px] border-gold bg-navy-deep px-6 py-10 text-paper shadow-medium sm:max-w-[39rem] sm:border-l-8 sm:px-10 sm:py-12 lg:px-14 lg:py-16;
   }
 
   .city-hero__panel h1 {

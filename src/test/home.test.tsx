@@ -9,13 +9,16 @@ describe('redesigned homepage', () => {
     render(<BrowserRouter><Home /></BrowserRouter>);
 
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
-    expect(screen.getByRole('heading', { level: 1, name: /Strategic Legal Counsel for Consequential Decisions/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Schedule a Consultation' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Explore Practice Areas' })).toHaveAttribute('href', '#practice-areas');
+    expect(screen.getByRole('heading', { level: 1, name: 'Serious counsel for consequential matters.' })).toBeInTheDocument();
+    expect(screen.getByText('Murray Legal · Yonkers office')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Monochrome view of the Lower Manhattan skyline' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Request a consultation' })).toHaveAttribute('href', '/contact');
+    expect(screen.getByRole('link', { name: 'Explore the firm' })).toHaveAttribute('href', '/about');
 
     const practices = screen.getByRole('region', { name: 'Practice areas' });
     expect(within(practices).getAllByRole('article')).toHaveLength(8);
     expect(within(practices).getByRole('link', { name: 'Explore Corporate Law' })).toBeInTheDocument();
+    expect(within(practices).queryByText('01')).not.toBeInTheDocument();
 
     for (const audience of ['Businesses & Founders', 'Real Estate Investors', 'Entertainment Professionals', 'Athletes & Sports Organizations', 'High-Net-Worth Individuals']) {
       expect(screen.getByRole('link', { name: audience })).toBeInTheDocument();

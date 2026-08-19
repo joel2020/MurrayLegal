@@ -202,6 +202,53 @@
     filter: grayscale(1);
   }
 
+  .city-hero {
+    @apply relative isolate min-h-[42rem] overflow-hidden bg-navy-deep;
+  }
+
+  .city-hero__media {
+    @apply absolute inset-0 block bg-navy-deep;
+  }
+
+  .city-hero__media::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-navy-deep/35 via-transparent to-navy-deep/10;
+  }
+
+  .city-hero__media img {
+    @apply h-full w-full object-cover object-center;
+  }
+
+  .city-hero__layout {
+    @apply relative z-10 flex min-h-[42rem] items-end py-8 sm:py-12 lg:items-center lg:py-20;
+  }
+
+  .city-hero__panel {
+    @apply w-full bg-navy-deep px-6 py-10 text-paper shadow-medium sm:max-w-[39rem] sm:px-10 sm:py-12 lg:px-14 lg:py-16;
+  }
+
+  .city-hero__panel h1 {
+    @apply mt-5 max-w-xl font-display text-display-xl text-paper;
+  }
+
+  .city-hero__panel > p:last-of-type {
+    @apply mt-6 max-w-xl text-base leading-8 text-stone sm:text-lg;
+  }
+
+  .city-hero__actions {
+    @apply mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center;
+  }
+
+  @media (max-width: 639px) {
+    .city-hero {
+      min-height: 48rem;
+    }
+
+    .city-hero__layout {
+      min-height: 48rem;
+    }
+  }
+
   .field {
     @apply mt-2 min-h-12 w-full rounded-none border border-ink/20 bg-paper px-4 py-3 text-base text-ink shadow-none outline-none transition;
   }

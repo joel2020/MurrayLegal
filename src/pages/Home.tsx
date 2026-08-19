@@ -1,4 +1,5 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import CityHero from '../components/CityHero';
 import ConsultationCTA from '../components/ConsultationCTA';
 import Container from '../components/Container';
 import FAQAccordion from '../components/FAQAccordion';
@@ -31,46 +32,23 @@ export default function Home(): JSX.Element {
     <main>
       <SEOHead title="Murray Legal | Premium Legal Counsel for Business, Real Estate & Litigation" description="Murray Legal advises businesses, investors, executives, creators, athletes, families, and high-net-worth clients on corporate, real estate, litigation, IP, estate, and family law matters." canonical={`${SITE_URL}/`} schema={schema} />
 
-      <section className="bg-paper pb-20 pt-6 sm:pb-24 sm:pt-8 lg:pb-32">
+      <CityHero />
+
+      <section className="section-shell bg-paper">
         <Container>
-          <picture className="block overflow-hidden bg-ink">
-            <source srcSet="/images/murray-legal-architecture.webp" type="image/webp" />
-            <img
-              src="/images/murray-legal-architecture.png"
-              width="1536"
-              height="1024"
-              alt="Contemporary limestone and bronze architecture in directional light"
-              className="h-[19rem] w-full object-cover object-[62%_58%] sm:h-[27rem] lg:h-[34rem]"
-            />
-          </picture>
-
-          <div className="mt-10 grid gap-8 border-t border-ink/15 pt-8 lg:grid-cols-[0.34fr_1fr] lg:gap-16">
-            <div>
-              <p className="eyebrow">Business. Property. Disputes. Private matters.</p>
-              <p className="mt-5 max-w-xs text-sm leading-7 text-muted">Pennsylvania-licensed counsel serving clients across the United States where permitted by law.</p>
-            </div>
-            <div>
-              <h1 className="max-w-5xl font-display text-display-xl text-ink">Strategic Legal Counsel for Consequential Decisions</h1>
-              <div className="mt-8 grid gap-7 md:grid-cols-[1fr_auto] md:items-end">
-                <p className="max-w-3xl text-lg leading-8 text-muted sm:text-xl">Murray Legal advises businesses, investors, executives, creators, athletes, families, and high-net-worth individuals across transactions, disputes, intellectual property, estate planning, and family law.</p>
-                <div className="flex flex-col items-start gap-3 sm:flex-row md:flex-col md:items-stretch">
-                  <Link to="/contact" className="btn-primary justify-between" ariaLabel="Schedule a Consultation">Schedule a Consultation <ArrowUpRight aria-hidden="true" size={17} /></Link>
-                  <Link to="#practice-areas" className="btn-secondary justify-between" ariaLabel="Explore Practice Areas">Explore Practice Areas <ArrowRight aria-hidden="true" size={17} /></Link>
-                </div>
+          <SectionHeading
+            eyebrow="The firm"
+            title="Counsel for business, property, disputes, and private matters."
+            description="From a Yonkers office, Murray Legal advises corporate and private clients across transactions, real estate, civil disputes, creative rights, estate planning, and family matters where representation is permitted by law."
+          />
+          <div className="mt-12 grid border-y border-ink/15 md:grid-cols-3">
+            {credibility.map((item, index) => (
+              <div key={item.label} className={`py-7 md:px-8 ${index > 0 ? 'border-t border-ink/15 md:border-l md:border-t-0' : ''} ${index === 0 ? 'md:pl-0' : ''}`}>
+                <p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-dark">{item.label}</p>
+                <p className="mt-2 text-sm leading-7 text-muted">{item.body}</p>
               </div>
-            </div>
+            ))}
           </div>
-        </Container>
-      </section>
-
-      <section className="bg-ink py-9 text-paper" aria-label="Firm strengths">
-        <Container className="grid gap-7 md:grid-cols-3 md:gap-0">
-          {credibility.map((item, index) => (
-            <div key={item.label} className={`md:px-8 ${index > 0 ? 'border-t border-paper/15 pt-7 md:border-l md:border-t-0 md:pt-0' : ''} ${index === 0 ? 'md:pl-0' : ''}`}>
-              <p className="text-xs font-bold uppercase tracking-[0.13em] text-gold-light">{item.label}</p>
-              <p className="mt-2 text-sm leading-7 text-stone">{item.body}</p>
-            </div>
-          ))}
         </Container>
       </section>
 
@@ -112,13 +90,12 @@ export default function Home(): JSX.Element {
         </Container>
       </section>
 
-      <section id="who-we-serve" className="section-shell bg-stone/70">
+      <section id="who-we-serve" className="section-shell bg-stone/70" aria-label="Client groups">
         <Container>
           <SectionHeading eyebrow="Who we serve" title="Advice shaped around the client, the context, and the consequence." description="Legal risk does not look the same from every seat. Explore counsel organized around the people and organizations Murray Legal serves." />
           <div className="mt-12 grid border-t border-ink/20 md:grid-cols-2 lg:grid-cols-5">
-            {industryNavigation.map((item, index) => (
-              <Link key={item.href} to={item.href} ariaLabel={item.label} className="group flex min-h-40 flex-col justify-between border-b border-ink/20 p-5 transition hover:bg-paper md:border-r lg:min-h-52">
-                <span className="text-xs font-semibold text-gold-dark">0{index + 1}</span>
+            {industryNavigation.map((item) => (
+              <Link key={item.href} to={item.href} ariaLabel={item.label} className="group flex min-h-40 items-end justify-between gap-4 border-b border-ink/20 p-5 transition hover:bg-paper md:border-r lg:min-h-52">
                 <span className="flex items-end justify-between gap-4 font-display text-2xl font-semibold leading-tight text-ink">
                   {item.label}<ArrowUpRight aria-hidden="true" size={19} className="shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
                 </span>

@@ -186,24 +186,42 @@ describe('intake API', () => {
     expect(fetchMock).toHaveBeenCalledTimes(6);
   });
 
-  it('evicts the oldest fresh IP bucket when saturation exceeds the hard maximum', async () => {
-    const oldestIp = '192.0.2.200';
+  it('preserves active counters at capacity and admits new IPs only after expiry', async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-08-19T03:00:00.000Z'));
+    vi.resetModules();
+    // @ts-expect-error The isolated serverless module is intentionally plain JavaScript.
+    const { default: isolatedHandler } = await import('../../api/intake.js');
+    const submitFrom = async (ip: string) => {
+      const res = response();
+      await isolatedHandler(request(validBody, { 'x-forwarded-for': ip }), res);
+      return res;
+    };
+
+    const oldestLimitedIp = '192.0.2.200';
     for (let attempt = 0; attempt < 5; attempt += 1) {
-      const res = response();
-      await handler(request(validBody, { 'x-forwarded-for': oldestIp }), res);
-      expectGenericFailure(res, 500);
+      expectGenericFailure(await submitFrom(oldestLimitedIp), 500);
     }
 
-    for (let index = 0; index < 1_000; index += 1) {
-      const res = response();
+    const trackedIp = '192.0.2.201';
+    for (let attempt = 0; attempt < 4; attempt += 1) {
+      expectGenericFailure(await submitFrom(trackedIp), 500);
+    }
+
+    for (let index = 0; index < 998; index += 1) {
       const uniqueIp = `198.18.${Math.floor(index / 256)}.${index % 256}`;
-      await handler(request(validBody, { 'x-forwarded-for': uniqueIp }), res);
-      expectGenericFailure(res, 500);
+      expectGenericFailure(await submitFrom(uniqueIp), 500);
     }
 
-    const afterSaturation = response();
-    await handler(request(validBody, { 'x-forwarded-for': oldestIp }), afterSaturation);
-    expectGenericFailure(afterSaturation, 500);
+    const overflow = await submitFrom('203.0.113.250');
+    expectGenericFailure(overflow, 429);
+    expect(overflow.headers['Retry-After']).toBeDefined();
+    expectGenericFailure(await submitFrom(oldestLimitedIp), 429);
+    expectGenericFailure(await submitFrom(trackedIp), 500);
+    expectGenericFailure(await submitFrom(trackedIp), 429);
+
+    vi.advanceTimersByTime(15 * 60 * 1_000 + 1);
+    expectGenericFailure(await submitFrom('203.0.113.251'), 500);
   });
 
   it('delivers a validated request without exposing the API key', async () => {

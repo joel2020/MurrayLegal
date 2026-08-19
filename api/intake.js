@@ -85,34 +85,31 @@ function rateLimit(req, res) {
   if (!ip) return false;
 
   const now = Date.now();
-  const current = rateLimitBuckets.get(ip);
-  const startsNewWindow = !current || now - current.startedAt >= RATE_LIMIT_WINDOW_MS;
-  const bucket = startsNewWindow
-    ? { count: 0, startedAt: now }
-    : current;
+  for (const [key, bucket] of rateLimitBuckets) {
+    if (now - bucket.startedAt < RATE_LIMIT_WINDOW_MS) break;
+    rateLimitBuckets.delete(key);
+  }
 
-  if (bucket.count >= RATE_LIMIT_MAX) {
-    const remainingMs = Math.max(1_000, RATE_LIMIT_WINDOW_MS - (now - bucket.startedAt));
+  const current = rateLimitBuckets.get(ip);
+  if (current && current.count >= RATE_LIMIT_MAX) {
+    const remainingMs = Math.max(1_000, RATE_LIMIT_WINDOW_MS - (now - current.startedAt));
     res.setHeader('Retry-After', String(Math.ceil(remainingMs / 1_000)));
     return true;
   }
 
-  bucket.count += 1;
-  if (startsNewWindow) rateLimitBuckets.delete(ip);
-  rateLimitBuckets.set(ip, bucket);
-
-  if (rateLimitBuckets.size > RATE_LIMIT_MAX_BUCKETS) {
-    for (const [key, value] of rateLimitBuckets) {
-      if (now - value.startedAt < RATE_LIMIT_WINDOW_MS) break;
-      rateLimitBuckets.delete(key);
-    }
-    while (rateLimitBuckets.size > RATE_LIMIT_MAX_BUCKETS) {
-      const oldestKey = rateLimitBuckets.keys().next().value;
-      if (oldestKey === undefined) break;
-      rateLimitBuckets.delete(oldestKey);
-    }
+  if (current) {
+    current.count += 1;
+    return false;
   }
 
+  if (rateLimitBuckets.size >= RATE_LIMIT_MAX_BUCKETS) {
+    const oldest = rateLimitBuckets.values().next().value;
+    const remainingMs = Math.max(1_000, RATE_LIMIT_WINDOW_MS - (now - oldest.startedAt));
+    res.setHeader('Retry-After', String(Math.ceil(remainingMs / 1_000)));
+    return true;
+  }
+
+  rateLimitBuckets.set(ip, { count: 1, startedAt: now });
   return false;
 }
 

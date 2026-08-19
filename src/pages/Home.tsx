@@ -74,7 +74,7 @@ export default function Home(): JSX.Element {
         </Container>
       </section>
 
-      <section id="practice-areas" className="section-shell bg-ivory" aria-label="Practice areas">
+      <section id="practice-areas" className="counsel-section section-shell" aria-label="Practice areas">
         <Container>
           <SectionHeading eyebrow="Capabilities" title="Counsel across the matters that shape what comes next." description="Murray Legal combines business-minded advice with disciplined risk analysis across transactions, disputes, property, creative rights, and private-client concerns." />
           <div className="counsel-grid mt-12 sm:grid-cols-2 lg:grid-cols-4">

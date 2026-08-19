@@ -44,6 +44,31 @@ test('mobile navigation exposes practice and industry links', async ({ page }, t
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
 });
 
+test('mobile overlay closes and restores the document across the desktop breakpoint', async ({ page }, testInfo) => {
+  test.skip(!testInfo.project.name.startsWith('mobile'), 'Mobile-to-desktop breakpoint contract');
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Open navigation' }).click();
+
+  const mobileNavigation = page.locator('#mobile-navigation');
+  await expect(mobileNavigation).toBeVisible();
+  await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe('hidden');
+  await expect(page.locator('#main-content')).toHaveAttribute('inert', '');
+  await expect(page.locator('footer')).toHaveAttribute('inert', '');
+
+  await page.setViewportSize({ width: 1024, height: 900 });
+
+  await expect(mobileNavigation).toHaveCount(0);
+  await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe('');
+  await expect(page.locator('#main-content')).not.toHaveAttribute('inert', '');
+  await expect(page.locator('footer')).not.toHaveAttribute('inert', '');
+
+  const desktopNavigation = page.getByRole('navigation', { name: 'Primary navigation' });
+  await expect(desktopNavigation).toBeVisible();
+  await desktopNavigation.getByRole('link', { name: 'About' }).click();
+  await expect(page).toHaveURL(/\/about$/);
+  await expect(page.getByRole('heading', { level: 1, name: 'About Murray Legal' })).toBeVisible();
+});
+
 test('current navigation links expose the current page', async ({ page }, testInfo) => {
   await page.goto('/about');
   if (testInfo.project.name.startsWith('mobile')) {

@@ -186,6 +186,26 @@ describe('intake API', () => {
     expect(fetchMock).toHaveBeenCalledTimes(6);
   });
 
+  it('evicts the oldest fresh IP bucket when saturation exceeds the hard maximum', async () => {
+    const oldestIp = '192.0.2.200';
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      const res = response();
+      await handler(request(validBody, { 'x-forwarded-for': oldestIp }), res);
+      expectGenericFailure(res, 500);
+    }
+
+    for (let index = 0; index < 1_000; index += 1) {
+      const res = response();
+      const uniqueIp = `198.18.${Math.floor(index / 256)}.${index % 256}`;
+      await handler(request(validBody, { 'x-forwarded-for': uniqueIp }), res);
+      expectGenericFailure(res, 500);
+    }
+
+    const afterSaturation = response();
+    await handler(request(validBody, { 'x-forwarded-for': oldestIp }), afterSaturation);
+    expectGenericFailure(afterSaturation, 500);
+  });
+
   it('delivers a validated request without exposing the API key', async () => {
     process.env.RESEND_API_KEY = 'test-key';
     const fetchMock = vi.fn().mockResolvedValue({ ok: true });

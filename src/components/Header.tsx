@@ -66,6 +66,16 @@ export default function Header(): JSX.Element {
   }, [pathname]);
 
   useEffect(() => {
+    const desktopQuery = window.matchMedia?.('(min-width: 1024px)');
+    if (!desktopQuery) return;
+    const closeMobileAtDesktop = (event: MediaQueryListEvent): void => {
+      if (event.matches) setMobileOpen(false);
+    };
+    desktopQuery.addEventListener('change', closeMobileAtDesktop);
+    return () => desktopQuery.removeEventListener('change', closeMobileAtDesktop);
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         const shouldRestoreFocus = mobileOpen;
